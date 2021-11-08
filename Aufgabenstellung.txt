@@ -1,4 +1,4 @@
-Finale Aufgabe
+Finale Aufgabe Gruppe 5: Luis, Fee und Yannik
 
 Das Programm soll eine Liste von Studenten verarbeiten
 
