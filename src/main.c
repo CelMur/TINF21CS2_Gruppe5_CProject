@@ -28,6 +28,26 @@ typedef struct List{
 }List;
 
 
+void addStudent(List *list, Student *node){
+
+  if(list->first_node == NULL){
+    list->first_node = node;
+    list->last_node = node;
+    list->length++;
+    return;
+  }
+
+
+  Student *tempNode = &(*list->last_node);
+  tempNode->next_node = node;
+  list->last_node = node;
+  node->prev_node = tempNode;
+
+  list->length++;
+}
+
+
+
 int main(){
-  
+
 }
