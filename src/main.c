@@ -35,8 +35,8 @@ int compareNodes(Student *node1, Student *node2){
   if (node1 == NULL) return 1;
   if (node2 == NULL) return 1;
 
-  int cmp = strcmp(node1->matrikelNr, node2->matrikelNr);
-  
+  int cmp = strcmp(node1->lastname, node2->lastname);
+
   return cmp;
 }
 
@@ -44,6 +44,9 @@ int compareNodes(Student *node1, Student *node2){
 void addStudent(List *list, Student *node){
 
   Student *currentNode = list->first_node;
+  Student *prevNode;
+  Student *nextNode;
+
   int currentCmpResult = 0;
   int prevCmpResult = 0;
 
@@ -58,16 +61,14 @@ void addStudent(List *list, Student *node){
     currentCmpResult = compareNodes(currentNode, node);
     
     if(currentCmpResult > 0 && prevCmpResult < 0){
-
-      Student *prevNode = currentNode->prev_node;
-      Student *nextNode = currentNode;
+      prevNode = currentNode->prev_node;
+      nextNode = currentNode;
 
       node->prev_node = prevNode;
       node->next_node = nextNode;
 
       prevNode->next_node = node;
       nextNode->prev_node = node;
-     
       break;
     }
     else if(currentNode->next_node == NULL){
