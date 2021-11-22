@@ -31,10 +31,24 @@ typedef struct List{
   int length;
 }List;
 
-/*//compareNodes//
-  
+/*//initList//
+  initializes 'list' if 'list' is not already initialized
 
-  returns the matrikelNr of 'node1' with 'node2'
+*/
+int initList(List *list){
+  list = (List *) malloc(sizeof(List));
+  if(list ==NULL){
+    return 0;
+  }
+  list->first_node = NULL;
+  list->last_node= NULL;
+  list->length = 0;
+
+  return 1;
+}
+
+/*//compareNodes//
+    returns the matrikelNr of 'node1' with 'node2'
 
   'node1'  > 'node2' = 1
   'node1'  < 'node2' = -1
@@ -314,7 +328,7 @@ void test_addStudent(List *list){
 
 */
 void test_deleteStudent(){
- 
+
 }
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(List *list){
