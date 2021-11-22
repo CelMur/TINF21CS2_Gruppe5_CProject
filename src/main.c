@@ -101,11 +101,27 @@ void addStudent(List *list, Student *node){
   list->length++;
 }
 
-/*//deleteStudent//
+/*//deleteStudent - NOT TESTED//
   removes a Student from 'list' by comparing its 'matrikelNr'
 */
-void deleteStudent(char *matrikelNr){
+void deleteStudent(List *list, char *matrikelNr){
+  Student *node = getStudentByMatrikelNr(list, matrikelNr);
+  Student *prevNode;
+  Student *nextNode;
 
+  if(node == NULL){
+    return;
+  }
+
+  prevNode = node->prev_node;
+  nextNode = node->next_node;
+
+  prevNode->next_node = nextNode;
+  nextNode->prev_node = prevNode;
+
+  list->length--;
+
+  free(node);
 }
 
 /*//inputStudent//
@@ -286,7 +302,7 @@ void test_addStudent(List *list){
 
 */
 void test_deleteStudent(){
-
+ 
 }
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(List *list){
