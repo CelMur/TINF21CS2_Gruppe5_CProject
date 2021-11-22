@@ -56,37 +56,6 @@ int initStudent(Student *student){
   student->prev_node = NULL;
 }
 
-/*//getDummyStudentData//
-  adds some test student data to 'list'
-*/
-void getDummyStudentData(List *list){
-  Student *s0 = (Student *) malloc(sizeof(Student));
-  strcpy(s0->matrikelNr, "test2");
-  s0->prev_node = NULL;
-  s0->next_node = NULL;
-
-  Student *s1 = (Student *) malloc(sizeof(Student));
-  strcpy(s1->matrikelNr, "test5");
-  s1->prev_node = NULL;
-  s1->next_node = NULL;
-
-  Student *s2 = (Student *) malloc(sizeof(Student));
-  strcpy(s2->matrikelNr, "test3");
-  s2->prev_node = NULL;
-  s2->next_node = NULL;
-
-  Student *s3 = (Student *) malloc(sizeof(Student));
-  strcpy(s3->matrikelNr, "test6");
-  s3->prev_node = NULL;
-  s3->next_node = NULL;
-
-
-  addStudent(list, s0);
-  addStudent(list, s1);
-  addStudent(list, s2);
-}
-
-
 /*//compareNodes//
     returns the matrikelNr of 'node1' with 'node2'
 
@@ -106,6 +75,41 @@ int compareNodes(Student *node1, Student *node2){
   return cmp;
 }
 
+
+/*//getStudentByMatrikelNr//
+  returns a Student from 'list' by comparing 'matrikelNr'
+
+  TESTS: 
+    test_getStudentByMatrikelNr_ExpectMatchingStudentFound
+    test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound
+*/
+Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
+/*Case1: matrikelNr not found*/
+  /*Case2: list == NULL*/
+
+  Student *currentStudent = list->first_node;
+  int cmpResult;
+  int hasNext = 0;
+
+  do{
+    cmpResult = strcmp(currentStudent->matrikelNr, matrikelNr);
+  
+    if(cmpResult == 0) {
+      return currentStudent;
+    }
+
+    if(currentStudent->next_node == NULL){
+      hasNext = 0;
+    }else{
+      hasNext = 1;
+    }
+
+    currentStudent = currentStudent->next_node;
+
+  }while(hasNext);
+
+  return NULL;
+}
 
 /*//addStudent//
   inserts 'node' at the alphabetically destined position
@@ -249,41 +253,6 @@ void deleteStudent(List *list, char *matrikelNr){
  return zwischenspeicher;
 }
 
-
-/*//getStudentByMatrikelNr//
-  returns a Student from 'list' by comparing 'matrikelNr'
-
-  TESTS: 
-    test_getStudentByMatrikelNr_ExpectMatchingStudentFound
-    test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound
-*/
-Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
-/*Case1: matrikelNr not found*/
-  /*Case2: list == NULL*/
-
-  Student *currentStudent = list->first_node;
-  int cmpResult;
-  int hasNext = 0;
-
-  do{
-    cmpResult = strcmp(currentStudent->matrikelNr, matrikelNr);
-  
-    if(cmpResult == 0) {
-      return currentStudent;
-    }
-
-    if(currentStudent->next_node == NULL){
-      hasNext = 0;
-    }else{
-      hasNext = 1;
-    }
-
-    currentStudent = currentStudent->next_node;
-
-  }while(hasNext);
-
-  return NULL;
-}
 
 /*//printStudent//
 
@@ -463,7 +432,7 @@ int main(){
   list->last_node = NULL;
   list->length = 0;
   
-  test_getStudentByMatrikelNr();
+  test_addStudent_isFirstNode();
  
   return 0;
 }
