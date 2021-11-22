@@ -325,27 +325,6 @@ void test_addStudent(){
   free(list);
 }
 
-/*//test_addStudent_isFirstNode//
-
-*/
-void test_addStudent_isFirstNode(){
-  List *list = (List *) malloc(sizeof(List));
-  initList(list);
-
-  Student *s0 = (Student *) malloc(sizeof(Student));
-
-  initStudent(s0);
-
-  strcpy(s0->matrikelNr, "test2");
-
-  addStudent(list, s0);
-
-  assert(list->first_node == s0);
-  assert(list->last_node == s0);
-  assert(list->length == 1);
-}
-
-
 /*//test_addStudent_isLastNode//
 
 */
@@ -413,6 +392,19 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
   assert(s2->next_node == s1);
   assert(s2->prev_node == s0);
 }
+
+
+/*//test_addStudent_isFirstNode//
+
+*/
+void test_addStudent_isFirstNode(){
+
+  test_addStudent_isFirstNode();
+  test_addStudent_isLastNode();
+  test_addStudent_isNotFirstNode_isNotLastNode();
+  
+}
+
 
 
 /*//test_deleteStudent//
@@ -496,8 +488,6 @@ void test_getStudentByMatrikelNr(){
 
 int main(){
  
-  test_addStudent_isFirstNode();
-  test_addStudent_isLastNode(); 
   
   return 0;
 }
