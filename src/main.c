@@ -417,7 +417,7 @@ void test_deleteStudent(){
 /*//test_deleteStudent_firstNode//
 
 */
-void test_deleteStudent_firstNode(){
+void test_deleteStudent_isFirstNode(){
   List *list = (List *) malloc(sizeof(List));
   initList(list);
   
