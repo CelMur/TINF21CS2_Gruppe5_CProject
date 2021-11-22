@@ -290,7 +290,11 @@ void test_deleteStudent(){
 
 
 int main(){
- 
+  List *list = (List *) malloc(sizeof(List));
+  list->first_node = NULL;
+  list->last_node = NULL;
+  list->length = 0;
+  
  
   return 0;
 }
