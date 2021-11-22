@@ -436,6 +436,9 @@ void test_addStudent_isFirstNode(){
 */
 void test_deleteStudent(){
   
+  test_deleteStudent_isFirstNode();
+  test_deleteStudent_isLastNode();
+  test_deleteStudent_isNotFirst_isNotLast();
 }
 
 /*//test_deleteStudent_isFirstNode//
@@ -590,8 +593,5 @@ void test_getStudentByMatrikelNr(){
 
 int main(){
  
-  
-  test_deleteStudent_isNotFirst_isNotLast();
-
   return 0;
 }
