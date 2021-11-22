@@ -30,7 +30,9 @@ typedef struct List{
   int length;
 }List;
 
+/*
 
+*/
 int compareNodes(Student *node1, Student *node2){
   if (node1 == NULL) return 1;
   if (node2 == NULL) return 1;
@@ -41,6 +43,9 @@ int compareNodes(Student *node1, Student *node2){
 }
 
 
+/*
+
+*/
 void addStudent(List *list, Student *node){
 
   Student *currentNode = list->first_node;
@@ -87,9 +92,12 @@ void addStudent(List *list, Student *node){
 }
 
 
+Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
+  
+}
 
-int main(){
 
+void test_addStudent(){
   List list;
   list.first_node = NULL;
   list.last_node = NULL;
@@ -120,6 +128,11 @@ int main(){
   addStudent(&list, s1);
   addStudent(&list, s2);
   addStudent(&list, s3);
+}
+
+int main(){
+
+  
  
   return 0;
 }
