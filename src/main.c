@@ -32,8 +32,7 @@ typedef struct List{
 }List;
 
 /*//initList//
-  initializes 'list' if 'list' is not already initialized
-
+  reserves memory and sets pointer to NULL
 */
 int initList(List *list){
   list = (List *) malloc(sizeof(List));
@@ -48,6 +47,14 @@ int initList(List *list){
 }
 
 
+/*//initStudent//
+  reserves memory and sets pointer to NULL
+*/
+int initStudent(Student *student){
+  student = (Student *) malloc(sizeof(Student));
+  student->next_node = NULL;
+  student->prev_node = NULL;
+}
 
 /*//getDummyStudentData//
   adds some test student data to 'list'
@@ -367,7 +374,7 @@ void test_addStudent(){
 
 */
 void test_deleteStudent(){
-
+  
 }
 
 /*//test_deleteStudent_firstNode//
