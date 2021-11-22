@@ -353,10 +353,12 @@ void test_deleteStudent(){
 
 */
 void test_deleteStudent_firstNode(){
-  List *list;
+  List *list = (List *) malloc(sizeof(List));
   initList(list);
   
-  Student *s0, *s1, *s2;
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
 
   initStudent(s0);
   strcpy(s0->matrikelNr, "test2");
