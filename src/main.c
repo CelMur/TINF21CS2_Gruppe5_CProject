@@ -252,7 +252,36 @@ void test_inputStudent(){
 
 */
 void test_addStudent(){
- 
+  List list;
+  list.first_node = NULL;
+  list.last_node = NULL;
+  list.length = 0;
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  strcpy(s0->matrikelNr, "test2");
+  s0->prev_node = NULL;
+  s0->next_node = NULL;
+
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  strcpy(s1->matrikelNr, "test5");
+  s1->prev_node = NULL;
+  s1->next_node = NULL;
+
+  Student *s2 = (Student *) malloc(sizeof(Student));
+  strcpy(s2->matrikelNr, "test3");
+  s2->prev_node = NULL;
+  s2->next_node = NULL;
+
+  Student *s3 = (Student *) malloc(sizeof(Student));
+  strcpy(s3->matrikelNr, "test6");
+  s3->prev_node = NULL;
+  s3->next_node = NULL;
+
+
+  addStudent(&list, s0);
+  addStudent(&list, s1);
+  addStudent(&list, s2);
+
 }
 
 /*//test_deleteStudent//
