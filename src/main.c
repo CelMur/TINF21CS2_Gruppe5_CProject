@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <assert.h>
 
 typedef struct Date{
   int day;
@@ -288,13 +289,36 @@ void test_deleteStudent(){
 
 }
 
-void test_getStudentByMatrikelNr(List *list){
+void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(List *list){
+  char *matrikelNr = "test5";
+  Student *st = getStudentByMatrikelNr(list, matrikelNr);
+
+  assert(st != NULL);
+  assert(st->matrikelNr == matrikelNr);
+}
+
+void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(List *list){
+  char *matrikelNr = "";
+  Student *st = getStudentByMatrikelNr(list, matrikelNr);
+
+  assert(st == NULL);
+}
+
+
+void test_getStudentByMatrikelNr(){
+
+  List *list;
+  list = (List *) malloc(sizeof(List));
+  //TODO: catch out list == NULL 
+
   test_addStudent(list);
 
-  Student *case1 = getStudentByMatrikelNr(list, "test5");
+  test_getStudentByMatrikelNr_ExpectMatchingStudentFound(list);
 
-  Student *case2 = getStudentByMatrikelNr(list, "test");
+  test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(list);
+ 
 }
+
 
 
 int main(){
@@ -303,7 +327,7 @@ int main(){
   list->last_node = NULL;
   list->length = 0;
   
-  test_getStudentByMatrikelNr(list);
+  test_getStudentByMatrikelNr();
  
   return 0;
 }
