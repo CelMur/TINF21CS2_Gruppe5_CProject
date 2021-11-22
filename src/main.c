@@ -377,7 +377,42 @@ void test_addStudent_isLastNode(){
 }
 
 
+/*//test_addStudent_isNotFirstNode_isNotLastNode//
 
+*/
+void test_addStudent_isNotFirstNode_isNotLastNode(){
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+  initStudent(s1);
+  initStudent(s2);
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s1->matrikelNr, "test5");
+  strcpy(s2->matrikelNr, "test3");
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
+
+  assert(list->first_node == s0);
+  assert(list->last_node == s1);
+  assert(list->length == 3);
+
+  assert(s0->next_node == s1);
+  assert(s0->prev_node == NULL);
+
+  assert(s1->next_node == NULL);
+  assert(s1->prev_node == s1);
+
+  assert(s2->next_node == s1);
+  assert(s2->prev_node == s0);
+}
 
 
 /*//test_deleteStudent//
