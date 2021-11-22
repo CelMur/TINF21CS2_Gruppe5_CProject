@@ -367,10 +367,12 @@ void test_addStudent(){
 
 */
 void test_deleteStudent(){
- 
 
 }
 
+/*//test_deleteStudent_firstNode//
+
+*/
 void test_deleteStudent_firstNode(){
   List *list;
   initList(list);
