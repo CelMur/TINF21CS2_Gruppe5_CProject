@@ -30,21 +30,30 @@ typedef struct List{
   int length;
 }List;
 
-/*
+/*//compareNodes//
+  
 
+  returns the matrikelNr of 'node1' with 'node2'
+
+  'node1'  > 'node2' = 1
+  'node1'  < 'node2' = -1
+  'node1' == 'node2' = 0
+
+  'node1' == NULL = 1
+  'node2' == NULL = 1
 */
 int compareNodes(Student *node1, Student *node2){
   if (node1 == NULL) return 1;
   if (node2 == NULL) return 1;
 
-  int cmp = strcmp(node1->lastname, node2->lastname);
+  int cmp = strcmp(node1->matrikelNr, node2->matrikelNr);
 
   return cmp;
 }
 
 
-/*
-
+/*//addStudent//
+  inserts 'node' at the alphabetically destined position
 */
 void addStudent(List *list, Student *node){
 
@@ -91,11 +100,16 @@ void addStudent(List *list, Student *node){
   list->length++;
 }
 
-
+/*//deleteStudent//
+  removes a Student from 'list' by comparing its 'matrikelNr'
+*/
 void deleteStudent(char *matrikelNr){
 
 }
 
+/*//inputStudent//
+  requests userinput for student data and returns it as 'Student'
+*/
  Student inputStudent(){
   Student zwischenspeicher;
 
@@ -156,47 +170,72 @@ void deleteStudent(char *matrikelNr){
 }
 
 
+/*//getStudentByMatrikelNr//
+  returns a Student from 'list' by comparing 'matrikelNr'
 
-Student *getStudentByMatrikelNr(char *matrikelNr){
+*/
+Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
 
 }
 
+/*//printStudent//
+
+*/
 void printStudent(char *matrikelNr){
 
 }
 
 
+/*//printAllStudents//
+
+*/
 void printAllStudents(char *matrikelNr){
 
 }
 
+/*//menue//
+
+*/
 void menue(){
 
 }
 
+/*//save//
 
+*/
 void save(List *list){
 
 }
 
+
+/*//read//
+
+*/
 void read(List *List){
 
 }
 
 
+/*//test_inputStudent//
 
+*/
 void test_inputStudent(){
   Student s0 = inputStudent();
   
 }
 
+/*//test_addStudent//
 
+*/
 void test_addStudent(){
 
 }
 
+/*//test_deleteStudent//
+
+*/
 void test_deleteStudent(){
-  
+
 }
 
 
