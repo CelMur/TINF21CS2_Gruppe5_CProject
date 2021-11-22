@@ -49,10 +49,10 @@ int initList(List *list){
 
 
 
-/*//getDummyData//
+/*//getDummyStudentData//
   adds some test student data to 'list'
 */
-void getDummyData(List *list){
+void getDummyStudentData(List *list){
   Student *s0 = (Student *) malloc(sizeof(Student));
   strcpy(s0->matrikelNr, "test2");
   s0->prev_node = NULL;
@@ -369,7 +369,6 @@ void test_addStudent(){
 void test_deleteStudent(){
   List *list;
   initList(list);
-
 
 
 }
