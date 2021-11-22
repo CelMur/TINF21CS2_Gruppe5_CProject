@@ -294,8 +294,9 @@ void test_inputStudent(){
 /*//test_addStudent//
 
 */
-void test_addStudent(List *list){
-  
+void test_addStudent(){
+  List *list;
+  initList(list);
 
   Student *s0 = (Student *) malloc(sizeof(Student));
   strcpy(s0->matrikelNr, "test2");
@@ -322,6 +323,11 @@ void test_addStudent(List *list){
   addStudent(list, s1);
   addStudent(list, s2);
 
+  free(s0);
+  free(s1);
+  free(s2);
+  free(s3);
+  free(list);
 }
 
 /*//test_deleteStudent//
