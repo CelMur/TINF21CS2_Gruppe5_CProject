@@ -367,10 +367,24 @@ void test_addStudent(){
 
 */
 void test_deleteStudent(){
+ 
+
+}
+
+void test_deleteStudent_firstNode(){
   List *list;
   initList(list);
+  getDummyStudentData(list);
+  
+  char *matrikelNr = "test2";
+  Student *node = getStudentByMatrikelNr(list, matrikelNr);
+  Student *nextNode = node->next_node;
 
 
+  deleteStudent(list, matrikelNr);
+
+  assert(list->first_node == nextNode);
+  assert(list->length == 2);
 }
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(List *list){
