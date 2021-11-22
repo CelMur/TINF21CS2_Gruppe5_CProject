@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdio.h>
 
 typedef struct Date{
   int day;
@@ -91,48 +91,78 @@ void addStudent(List *list, Student *node){
   list->length++;
 }
 
+ Student inputStudent(){
+  Student zwischenspeicher;
 
-Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
+  printf_s("***********************************\n");
+  printf_s("Nachname\n");
+  printf_s("***********************************\n");
   
+  printf_s("Bitte geben sie den Nachnamen ein:\n");
+  scanf_s("%s", zwischenspeicher.lastname);
+
+  printf_s("***********************************\n");
+  printf_s("Matrikelnummer\n");
+  printf_s("***********************************\n");
+
+  printf_s("Bitte geben sie die Matrikelnummer ein:\n");
+  scanf_s("%i", zwischenspeicher.matrikelNr);
+
+  printf_s("***********************************\n");
+  printf_s("Geburtsdatum\n");
+  printf_s("***********************************\n");
+
+  printf_s("Bitte geben sie den Geburtstag ein:\n");
+  scanf_s("%i", &zwischenspeicher.birthday.day);
+
+  printf_s("Bitte geben sie den Geburtmonat ein:\n");
+  scanf_s("%i", &zwischenspeicher.birthday.month);
+
+  printf_s("Bitte geben sie das Geburtsjahr ein:\n");
+  scanf_s("%i", &zwischenspeicher.birthday.year);
+
+  printf_s("***********************************\n");
+  printf_s("Startdatum\n");
+  printf_s("***********************************\n");
+
+  printf_s("Bitte geben sie den Starttag ein ein:\n");
+  scanf_s("%i", &zwischenspeicher.start.day);
+
+  printf_s("Bitte geben sie den Startmonat ein:\n");
+  scanf_s("%i", &zwischenspeicher.start.month);
+
+  printf_s("Bitte geben sie das Startjahr ein:\n");
+  scanf_s("%i", &zwischenspeicher.start.month);
+
+  printf_s("***********************************\n");
+  printf_s("Enddatum\n");
+  printf_s("***********************************\n");
+
+  printf_s("Bitte geben sie den Endtag ein ein:\n");
+  scanf_s("%i", &zwischenspeicher.end.day);
+
+  printf_s("Bitte geben sie den Endmonat ein:\n");
+  scanf_s("%i", &zwischenspeicher.end.month);
+
+  printf_s("Bitte geben sie das Endjahr ein:\n");
+  scanf_s("%i", &zwischenspeicher.end.month);
+
+ return zwischenspeicher;
 }
 
-
-void test_addStudent(){
-  List list;
-  list.first_node = NULL;
-  list.last_node = NULL;
-  list.length = 0;
-
-  Student * s0 = (Student*) malloc(sizeof(Student));
-  strcpy(s0->lastname, "testperson1");
-  s0->prev_node = NULL;
-  s0->next_node = NULL;
-
-  Student * s1 = (Student*) malloc(sizeof(Student));
-  strcpy(s1->lastname, "testperson5");
-  s1->prev_node = NULL;
-  s1->next_node = NULL;
-
-  Student * s2 = (Student*) malloc(sizeof(Student));
-  strcpy(s2->lastname, "testperson3");
-  s2->prev_node = NULL;
-  s2->next_node = NULL;
-
-  Student * s3 = (Student*) malloc(sizeof(Student));
-  strcpy(s3->lastname, "testperson6");
-  s3->prev_node = NULL;
-  s3->next_node = NULL;
+void test_inputStudent(){
+Student s0 = inputStudent();
 
 
-  addStudent(&list, s0);
-  addStudent(&list, s1);
-  addStudent(&list, s2);
-  addStudent(&list, s3);
 }
+
 
 int main(){
 
   
+  test_inputStudent();
+  
+
  
   return 0;
 }
