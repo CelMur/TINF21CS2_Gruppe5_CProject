@@ -91,6 +91,11 @@ void addStudent(List *list, Student *node){
   list->length++;
 }
 
+
+void deleteStudent(char *matrikelNr){
+
+}
+
  Student inputStudent(){
   Student zwischenspeicher;
 
@@ -150,10 +155,48 @@ void addStudent(List *list, Student *node){
  return zwischenspeicher;
 }
 
+
+
+Student *getStudentByMatrikelNr(char *matrikelNr){
+
+}
+
+void printStudent(char *matrikelNr){
+
+}
+
+
+void printAllStudents(char *matrikelNr){
+
+}
+
+void menue(){
+
+}
+
+
+void save(List *list){
+
+}
+
+void read(List *List){
+
+}
+
+
+
 void test_inputStudent(){
-Student s0 = inputStudent();
+  Student s0 = inputStudent();
+  
+}
 
 
+void test_addStudent(){
+
+}
+
+void test_deleteStudent(){
+  
 }
 
 
