@@ -34,16 +34,10 @@ typedef struct List{
 /*//initList//
   reserves memory and sets pointer to NULL
 */
-int initList(List *list){
-  list = (List *) malloc(sizeof(List));
-  if(list ==NULL){
-    return 0;
-  }
+void initList(List *list){
   list->first_node = NULL;
   list->last_node= NULL;
   list->length = 0;
-
-  return 1;
 }
 
 
@@ -51,7 +45,6 @@ int initList(List *list){
   reserves memory and sets pointer to NULL
 */
 int initStudent(Student *student){
-  student = (Student *) malloc(sizeof(Student));
   student->next_node = NULL;
   student->prev_node = NULL;
 }
@@ -119,19 +112,19 @@ Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
 */
 void addStudent(List *list, Student *node){
 
-  Student *currentNode = list->first_node;
-  Student *prevNode;
-  Student *nextNode;
-
-  int currentCmpResult = 0;
-  int prevCmpResult = 0;
-
   if(list->first_node == NULL){
       list->first_node = node;
       list->last_node = node;
       list->length++;
       return;
   }
+
+  Student *currentNode = list->first_node;
+  Student *prevNode;
+  Student *nextNode;
+
+  int currentCmpResult = 0;
+  int prevCmpResult = 0;
 
   do{
     currentCmpResult = compareNodes(currentNode, node);
@@ -336,10 +329,10 @@ void test_addStudent(){
 
 */
 void test_addStudent_isFirstNode(){
-  List *list;
+  List *list = (List *) malloc(sizeof(List));
   initList(list);
 
-  Student *s0;
+  Student *s0 = (Student *) malloc(sizeof(Student));
   initStudent(s0);
 
   addStudent(list, s0);
@@ -427,12 +420,8 @@ void test_getStudentByMatrikelNr(){
 
 
 int main(){
-  List *list = (List *) malloc(sizeof(List));
-  list->first_node = NULL;
-  list->last_node = NULL;
-  list->length = 0;
-  
-  test_addStudent_isFirstNode();
  
+  test_addStudent_isFirstNode();
+  
   return 0;
 }
