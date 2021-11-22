@@ -333,7 +333,10 @@ void test_addStudent_isFirstNode(){
   initList(list);
 
   Student *s0 = (Student *) malloc(sizeof(Student));
+
   initStudent(s0);
+
+  strcpy(s0->matrikelNr, "test2");
 
   addStudent(list, s0);
 
@@ -356,6 +359,9 @@ void test_addStudent_isLastNode(){
   initStudent(s0);
   initStudent(s1);
 
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s1->matrikelNr, "test5");
+
   addStudent(list, s0);
   addStudent(list, s1);
 
@@ -369,6 +375,10 @@ void test_addStudent_isLastNode(){
   assert(s1->next_node == NULL);
   assert(s1->prev_node == s0);
 }
+
+
+
+
 
 /*//test_deleteStudent//
 
