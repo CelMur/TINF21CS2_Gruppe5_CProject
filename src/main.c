@@ -363,6 +363,23 @@ void test_addStudent(){
   free(list);
 }
 
+/*//test_addStudent_isFirstNode//
+
+*/
+void test_addStudent_isFirstNode(){
+  List *list;
+  initList(list);
+
+  Student *s0;
+  initStudent(s0);
+
+  addStudent(list, s0);
+
+  assert(list->first_node == s0);
+  assert(list->last_node == s0);
+  assert(list->length == 1);
+}
+
 /*//test_deleteStudent//
 
 */
