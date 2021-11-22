@@ -383,17 +383,36 @@ void test_deleteStudent(){
 void test_deleteStudent_firstNode(){
   List *list;
   initList(list);
-  getDummyStudentData(list);
   
-  char *matrikelNr = "test2";
-  Student *node = getStudentByMatrikelNr(list, matrikelNr);
-  Student *nextNode = node->next_node;
+  Student *s0, *s1, *s2;
 
+  initStudent(s0);
+  strcpy(s0->matrikelNr, "test2");
 
-  deleteStudent(list, matrikelNr);
+  initStudent(s1);
+  strcpy(s1->matrikelNr, "test3");
 
-  assert(list->first_node == nextNode);
+  initStudent(s2);
+  strcpy(s1->matrikelNr, "test5");
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+
+  
+  char *targetMatrikelNr = "test2";
+
+  deleteStudent(list, targetMatrikelNr);
+
+  assert(list->first_node == s1);
+  assert(list->last_node == s2);
   assert(list->length == 2);
+
+  assert(s1->prev_node == NULL);
+  assert(s1->next_node == s2);
+  
+  assert(s2->prev_node == s1);
+  assert(s2->next_node == NULL);
+
 }
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(List *list){
