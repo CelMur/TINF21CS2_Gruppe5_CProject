@@ -529,16 +529,16 @@ void test_deleteStudent_isNotFirst_isNotLast(){
   Student *s2 = (Student *) malloc(sizeof(Student));
 
   initStudent(s0);
-  strcpy(s0->matrikelNr, "test2");
-
   initStudent(s1);
-  strcpy(s1->matrikelNr, "test3");
-
   initStudent(s2);
-  strcpy(s1->matrikelNr, "test5");
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s1->matrikelNr, "test3");
+  strcpy(s2->matrikelNr, "test5");
 
   addStudent(list, s0);
   addStudent(list, s1);
+  addStudent(list, s2);
 
   
   char *targetMatrikelNr = "test3";
@@ -591,7 +591,7 @@ void test_getStudentByMatrikelNr(){
 int main(){
  
   
-  test_deleteStudent_isLastNode();
+  test_deleteStudent_isNotFirst_isNotLast();
 
   return 0;
 }
