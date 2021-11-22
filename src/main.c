@@ -55,6 +55,9 @@ int compareNodes(Student *node1, Student *node2){
 
 /*//addStudent//
   inserts 'node' at the alphabetically destined position
+
+  TESTS:
+    test_addStudent
 */
 void addStudent(List *list, Student *node){
 
@@ -101,8 +104,11 @@ void addStudent(List *list, Student *node){
   list->length++;
 }
 
-/*//deleteStudent - NOT TESTED//
+/*//deleteStudent//
   removes a Student from 'list' by comparing its 'matrikelNr'
+
+  TESTS: 
+    NONE
 */
 void deleteStudent(List *list, char *matrikelNr){
   Student *node = getStudentByMatrikelNr(list, matrikelNr);
@@ -126,6 +132,9 @@ void deleteStudent(List *list, char *matrikelNr){
 
 /*//inputStudent//
   requests userinput for student data and returns it as 'Student'
+
+  TESTS:
+    test_inputStudent
 */
  Student inputStudent(){
   Student zwischenspeicher;
@@ -190,6 +199,9 @@ void deleteStudent(List *list, char *matrikelNr){
 /*//getStudentByMatrikelNr//
   returns a Student from 'list' by comparing 'matrikelNr'
 
+  TESTS: 
+    test_getStudentByMatrikelNr_ExpectMatchingStudentFound
+    test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound
 */
 Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
 /*Case1: matrikelNr not found*/
