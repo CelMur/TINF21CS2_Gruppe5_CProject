@@ -288,6 +288,14 @@ void test_deleteStudent(){
 
 }
 
+void test_getStudentByMatrikelNr(List *list){
+  test_addStudent(list);
+
+  Student *case1 = getStudentByMatrikelNr(list, "test5");
+
+  Student *case2 = getStudentByMatrikelNr(list, "test");
+}
+
 
 int main(){
   List *list = (List *) malloc(sizeof(List));
@@ -295,6 +303,7 @@ int main(){
   list->last_node = NULL;
   list->length = 0;
   
+  test_getStudentByMatrikelNr(list);
  
   return 0;
 }
