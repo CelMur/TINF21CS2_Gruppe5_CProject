@@ -454,6 +454,44 @@ void test_deleteStudent_isFirstNode(){
 }
 
 
+/*//test_deleteStudent_isLastNode//
+
+*/
+void test_deleteStudent_isLastNode(){
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+  
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+  strcpy(s0->matrikelNr, "test2");
+
+  initStudent(s1);
+  strcpy(s1->matrikelNr, "test3");
+
+  initStudent(s2);
+  strcpy(s1->matrikelNr, "test5");
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+
+  
+  char *targetMatrikelNr = "test5";
+
+  deleteStudent(list, targetMatrikelNr);
+
+  assert(list->first_node == s0);
+  assert(list->last_node == s1);
+  assert(list->length == 2);
+
+  assert(s0->prev_node == NULL);
+  assert(s0->next_node == s1);
+
+  assert(s1->prev_node == s0);
+  assert(s1->next_node == NULL);
+}
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(List *list){
   char *matrikelNr = "test5";
