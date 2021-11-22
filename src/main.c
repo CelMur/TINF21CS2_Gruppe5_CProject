@@ -338,26 +338,19 @@ void test_addStudent(){
   List *list;
   initList(list);
 
-  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s0, *s1, *s2, *s3;
+
+  initStudent(s0);
   strcpy(s0->matrikelNr, "test2");
-  s0->prev_node = NULL;
-  s0->next_node = NULL;
 
-  Student *s1 = (Student *) malloc(sizeof(Student));
+  initStudent(s1);
   strcpy(s1->matrikelNr, "test5");
-  s1->prev_node = NULL;
-  s1->next_node = NULL;
 
-  Student *s2 = (Student *) malloc(sizeof(Student));
+  initStudent(s2);
   strcpy(s2->matrikelNr, "test3");
-  s2->prev_node = NULL;
-  s2->next_node = NULL;
 
-  Student *s3 = (Student *) malloc(sizeof(Student));
+  initStudent(s3);
   strcpy(s3->matrikelNr, "test6");
-  s3->prev_node = NULL;
-  s3->next_node = NULL;
-
 
   addStudent(list, s0);
   addStudent(list, s1);
@@ -409,7 +402,7 @@ void test_deleteStudent_firstNode(){
 
   assert(s1->prev_node == NULL);
   assert(s1->next_node == s2);
-  
+
   assert(s2->prev_node == s1);
   assert(s2->next_node == NULL);
 
