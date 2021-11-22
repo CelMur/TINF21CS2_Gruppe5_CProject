@@ -357,6 +357,7 @@ void test_addStudent_isLastNode(){
 
   Student *s0 = (Student *) malloc(sizeof(Student));
   Student *s1 = (Student *) malloc(sizeof(Student));
+  
 
   initStudent(s0);
   initStudent(s1);
@@ -489,6 +490,45 @@ void test_deleteStudent_isLastNode(){
   Student *s2 = (Student *) malloc(sizeof(Student));
 
   initStudent(s0);
+  initStudent(s1);
+  initStudent(s2);
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s1->matrikelNr, "test5");
+  strcpy(s2->matrikelNr, "test3");
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
+
+  char *targetMatrikelNr = "test5";
+
+  deleteStudent(list, targetMatrikelNr);
+
+  assert(list->first_node == s0);
+  assert(list->last_node == s2);
+  assert(list->length == 2);
+
+  assert(s0->prev_node == NULL);
+  assert(s0->next_node == s2);
+
+  assert(s2->prev_node == s0);
+  assert(s2->next_node == NULL);
+}
+
+
+/*//test_deleteStudent_isNotFirst_isNotLast//
+
+*/
+void test_deleteStudent_isNotFirst_isNotLast(){
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+  
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
   strcpy(s0->matrikelNr, "test2");
 
   initStudent(s1);
@@ -501,19 +541,19 @@ void test_deleteStudent_isLastNode(){
   addStudent(list, s1);
 
   
-  char *targetMatrikelNr = "test5";
+  char *targetMatrikelNr = "test3";
 
   deleteStudent(list, targetMatrikelNr);
 
   assert(list->first_node == s0);
-  assert(list->last_node == s1);
+  assert(list->last_node == s2);
   assert(list->length == 2);
 
   assert(s0->prev_node == NULL);
-  assert(s0->next_node == s1);
+  assert(s0->next_node == s2);
 
-  assert(s1->prev_node == s0);
-  assert(s1->next_node == NULL);
+  assert(s2->prev_node == s0);
+  assert(s2->next_node == NULL);
 }
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(List *list){
@@ -550,7 +590,8 @@ void test_getStudentByMatrikelNr(){
 
 int main(){
  
-  test_deleteStudent_isFirstNode();
+  
+  test_deleteStudent_isLastNode();
 
   return 0;
 }
