@@ -251,11 +251,8 @@ void test_inputStudent(){
 /*//test_addStudent//
 
 */
-void test_addStudent(){
-  List list;
-  list.first_node = NULL;
-  list.last_node = NULL;
-  list.length = 0;
+void test_addStudent(List *list){
+  
 
   Student *s0 = (Student *) malloc(sizeof(Student));
   strcpy(s0->matrikelNr, "test2");
@@ -278,9 +275,9 @@ void test_addStudent(){
   s3->next_node = NULL;
 
 
-  addStudent(&list, s0);
-  addStudent(&list, s1);
-  addStudent(&list, s2);
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
 
 }
 
@@ -293,11 +290,7 @@ void test_deleteStudent(){
 
 
 int main(){
-
-  
-  test_inputStudent();
-  
-
+ 
  
   return 0;
 }
