@@ -161,24 +161,47 @@ void addStudent(List *list, Student *node){
   TESTS: 
     NONE
 */
-void deleteStudent(List *list, char *matrikelNr){
+int deleteStudent(List *list, char *matrikelNr){
   Student *node = getStudentByMatrikelNr(list, matrikelNr);
-  Student *prevNode;
-  Student *nextNode;
+  Student *prevNode = NULL;
+  Student *nextNode = NULL;
 
   if(node == NULL){
-    return;
+    return 0;
   }
 
-  prevNode = node->prev_node;
-  nextNode = node->next_node;
+  if(list->length == 1){
 
-  prevNode->next_node = nextNode;
-  nextNode->prev_node = prevNode;
+    list->first_node == NULL;
+    list->last_node == NULL;
+
+
+  }else if(list->first_node == node){
+
+    nextNode = node->next_node;
+    nextNode->prev_node = NULL;
+    list->first_node = nextNode;
+    
+
+  }else if(list->last_node == node){
+
+    prevNode = node->prev_node;
+    prevNode->next_node = NULL;
+    list->last_node = prevNode;
+
+
+  }else{
+    prevNode = node->prev_node;
+    nextNode = node->next_node;
+
+    prevNode->next_node = nextNode;
+    nextNode->prev_node = prevNode;
+  }
 
   list->length--;
 
   free(node);
+  return 1;
 }
 
 /*//inputStudent//
@@ -527,6 +550,7 @@ void test_getStudentByMatrikelNr(){
 
 int main(){
  
-  
+  test_deleteStudent_isFirstNode();
+
   return 0;
 }
