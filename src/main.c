@@ -175,7 +175,31 @@ void deleteStudent(char *matrikelNr){
 
 */
 Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
+/*Case1: matrikelNr not found*/
+  /*Case2: list == NULL*/
 
+  Student *currentStudent = list->first_node;
+  int cmpResult;
+  int hasNext = 0;
+
+  do{
+    cmpResult = strcmp(currentStudent->matrikelNr, matrikelNr);
+  
+    if(cmpResult == 0) {
+      return currentStudent;
+    }
+
+    if(currentStudent->next_node == NULL){
+      hasNext = 0;
+    }else{
+      hasNext = 1;
+    }
+
+    currentStudent = currentStudent->next_node;
+
+  }while(hasNext);
+
+  return NULL;
 }
 
 /*//printStudent//
@@ -228,7 +252,7 @@ void test_inputStudent(){
 
 */
 void test_addStudent(){
-
+ 
 }
 
 /*//test_deleteStudent//
