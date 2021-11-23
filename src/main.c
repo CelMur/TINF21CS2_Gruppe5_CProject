@@ -601,8 +601,6 @@ void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(){
 
 
 void test_getStudentByMatrikelNr(){
-  List *list = (List *) malloc(sizeof(List));
-
   test_getStudentByMatrikelNr_ExpectMatchingStudentFound();
 
   test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound();
