@@ -702,6 +702,8 @@ void test_getStudentByMatrikelNr(){
 
 */
 void test_printStudent(){
+  printf("TEST::%s\n", __func__);
+
   List *list = (List *) malloc(sizeof(Student));
   initList(list);
 
@@ -717,7 +719,17 @@ void test_printStudent(){
 
   char *targetMatrikelNr = "test5";
 
+  node = getStudentByMatrikelNr(list, targetMatrikelNr);
+
   printStudent(list, targetMatrikelNr);
+
+  assert(node == s1);
+
+  free(s0);
+  free(s1);
+  free(list);
+
+  printf("END_TEST::%s::success\n\n", __func__);
 }
 
 void test_printAllStudent(){
