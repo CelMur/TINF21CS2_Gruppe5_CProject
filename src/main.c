@@ -58,6 +58,8 @@ int initStudent(Student *student){
     https://docs.microsoft.com/de-de/office/troubleshoot/excel/determine-a-leap-year 11/23/2021 09:27pm
 */
 int DateIsLeapYear(int year){
+  if(year < 0) return 0;
+  
   if(year % 4 == 0){
     if(year % 100 == 0){
       if(year % 400 == 0){
@@ -848,9 +850,12 @@ void test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1(){
 
   int years[16] = {1904, 1920, 1984, 1992, 1996, 2000, 2004, 2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044};
   int yearsLen = sizeof(years) / sizeof(int);
+  int isLeapYear;
 
   for(int i = 0; i< yearsLen; i++){
-    assert(DateIsLeapYear(years[i]) == 1);
+
+    isLeapYear = DateIsLeapYear(years[i]);
+    assert(isLeapYear == 1);
   }
 
   printf("success");
@@ -866,10 +871,28 @@ void test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0(){
 
   int years[16] = {1909, 1910, 1950, 1966, 1997, 1999, 2010, 2021, 2022, 2023, 2025, 2026, 2027, 2029, 2043, 2045};
   int yearsLen = sizeof(years) / sizeof(int);
+  int isLeapYear;
 
   for(int i = 0; i< yearsLen; i++){
-    assert(DateIsLeapYear(years[i]) == 0);
+
+    isLeapYear = DateIsLeapYear(years[i]);
+    assert(isLeapYear == 0);
   }
+
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_DateIsLeapYear_IfYearIsNegative_ShouldReturn_0
+
+*/
+void test_DateIsLeapYear_IfYearIsNegative_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+
+  int year = -1904;
+  int isLeapYear = DateIsLeapYear(year);
+
+  assert(isLeapYear == 0);
 
   printf("success");
   fflush(stdout);
@@ -886,6 +909,9 @@ void test_DateIsLeapYear(){
   printf("\n");
 
   test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1();
+  printf("\n");
+
+  test_DateIsLeapYear_IfYearIsNegative_ShouldReturn_0();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);  
