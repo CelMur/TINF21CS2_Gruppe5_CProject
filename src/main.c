@@ -87,8 +87,9 @@ int compareNodes(Student *node1, Student *node2){
     test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound
 */
 Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
-/*Case1: matrikelNr not found*/
-  /*Case2: list == NULL*/
+
+  if(list == NULL) return NULL;   /*Case0: list == NULL*/
+  if(list->first_node == NULL) return NULL;   /*Case1: list has no nodes*/
 
   Student *currentStudent = list->first_node;
   int cmpResult;
@@ -98,7 +99,7 @@ Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
     cmpResult = strcmp(currentStudent->matrikelNr, matrikelNr);
   
     if(cmpResult == 0) {
-      return currentStudent;
+      return currentStudent;    /*Case2: matrikelNr found*/
     }
 
     if(currentStudent->next_node == NULL){
@@ -111,7 +112,7 @@ Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
 
   }while(hasNext);
 
-  return NULL;
+  return NULL;    /*Case3: matrikelNr not found*/
 }
 
 /*//addStudent//
