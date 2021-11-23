@@ -748,7 +748,9 @@ void test_printStudent(){
 
   strcpy(s1->matrikelNr, "test5");
   strcpy(s1->lastname, "mustermann");
-  
+  setDate(&s1->birthday, 10, 11, 2000);
+  setDate(&s1->start, 1, 10, 2000);
+  setDate(&s1->end, 31, 9, 2000);
 
   
 
@@ -756,7 +758,7 @@ void test_printStudent(){
 
   node = getStudentByMatrikelNr(list, targetMatrikelNr);
 
-  printStudent(list, targetMatrikelNr);
+  printSuccessfull = printStudent(list, targetMatrikelNr);
 
   assert(printSuccessfull == 1);
 
