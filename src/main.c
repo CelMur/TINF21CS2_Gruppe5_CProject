@@ -344,7 +344,7 @@ void test_addStudent_isFirstNode(){
   free(list);
 
   printf("success");
-  fflush(stdout);
+  fflush(stdout);  
 }
 
 /*//test_addStudent_isLastNode//
@@ -378,6 +378,10 @@ void test_addStudent_isLastNode(){
 
   assert(s1->next_node == NULL);
   assert(s1->prev_node == s0);
+
+  free(s0);
+  free(s1);
+  free(list);
 
   printf("success");
   fflush(stdout);
@@ -421,6 +425,11 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
 
   assert(s2->next_node == NULL);
   assert(s2->prev_node == s1);
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
   
   printf("success");
   fflush(stdout);
@@ -486,6 +495,11 @@ void test_deleteStudent_isFirstNode(){
 
   assert(s2->prev_node == s1);
   assert(s2->next_node == NULL);
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
  
   printf("success");
   fflush(stdout);
@@ -531,6 +545,11 @@ void test_deleteStudent_isLastNode(){
   assert(s2->prev_node == s0);
   assert(s2->next_node == NULL);
 
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
+
   printf("success");
   fflush(stdout);
 }
@@ -575,6 +594,11 @@ void test_deleteStudent_isNotFirst_isNotLast(){
 
   assert(s2->prev_node == s0);
   assert(s2->next_node == NULL);
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
   
   printf("success");
   fflush(stdout);
