@@ -804,18 +804,49 @@ void test_getStudentByMatrikelNr(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
-/*//test_printStudent//
+
+/*//test_printStudent_IfListIsNULL_ShouldReturn_Minus1//
 
 */
-void test_printStudent(){
-  printf("TEST::%s\n", __func__);
+void test_printStudent_IfListIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2//
+
+*/
+void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
+  printf("-->%s::", __func__);
+
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_printStudent_IfDateIsInvalid_ShouldReturn_0//
+
+*/
+void test_printStudent_IfDateIsInvalid_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_printStudent_IfStudentExists_ShouldReturn_1//
+
+*/
+void test_printStudent_IfStudentExists_ShouldReturn_1(){
+  printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(Student));
   initList(list);
 
   Student *s0 = (Student *) malloc(sizeof(Student));
   Student *s1 = (Student *) malloc(sizeof(Student));
-  Student *node;
+  Student *node = NULL;
   int printSuccessfull = 0;
 
   initStudent(s0);
@@ -829,19 +860,41 @@ void test_printStudent(){
   setDate(&s1->start, 1, 10, 2000);
   setDate(&s1->end, 31, 9, 2000);
 
-  
-
   char *targetMatrikelNr = "test5";
 
   node = getStudentByMatrikelNr(list, targetMatrikelNr);
 
   printSuccessfull = printStudent(list, targetMatrikelNr);
 
+  assert(node == s1);
   assert(printSuccessfull == 1);
 
   free(s0);
   free(s1);
   free(list);
+
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_printStudent//
+
+*/
+void test_printStudent(){
+  printf("TEST::%s\n", __func__);
+
+
+  test_printStudent_IfStudentExists_ShouldReturn_1();
+  printf("\n");
+
+  test_printStudent_IfDateIsInvalid_ShouldReturn_0();
+  printf("\n");
+
+  test_printStudent_IfListIsNULL_ShouldReturn_Minus1();
+  printf("\n");
+
+  test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2();
+  printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);
 }
@@ -866,7 +919,7 @@ void test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1(){
     isLeapYear = DateIsLeapYear(years[i]);
     assert(isLeapYear == 1);
   }
-
+  
   printf("success");
   fflush(stdout);
 }
@@ -1106,7 +1159,7 @@ void test_all(){
   test_addStudent();
   test_getStudentByMatrikelNr();
   test_deleteStudent();
-  //test_printStudent();
+  test_printStudent();
 }
 
 int main(){
