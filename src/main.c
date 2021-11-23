@@ -87,12 +87,12 @@ int DateIsValid(int day, int month, int year){
 
   if(month == 2){
     if(DateIsLeapYear(year)){
-      if(day <= 28){
+      if(day <= 29){
         return 1;
       }
       return 0;
     }
-    if(day <= 29){
+    if(day <= 28){
       return 1;
     }
     return 0;
@@ -925,8 +925,15 @@ void test_DateIsValid_IfDayNotInRange_ShouldReturn_0(){
   printf("-->%s::", __func__);
   
   
-  Date dates[3] = {
-    {0,10,2021}
+  Date dates[8] = {
+    {0,10,2021},
+    {31,4,2021},
+    {31,6,2021},
+    {31,9,2021},
+    {31,11,2021},
+    {0,2,2021},
+    {29,2,2021},
+    {45,3,2021}
   };
 
   int datesLen = sizeof(dates) / sizeof(Date);
@@ -947,7 +954,7 @@ void test_DateIsValid_IfDayNotInRange_ShouldReturn_0(){
 */
 void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("success");
+  printf("not implemented");
   fflush(stdout);
 }
 
@@ -956,7 +963,7 @@ void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
 */
 void test_DateIsValid_IfYearNotInRange_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("success");
+  printf("not implemented");
   fflush(stdout);
 }
 
