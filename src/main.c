@@ -1028,12 +1028,67 @@ void test_DateIsValid(){
 }
 
 
+/*//test_setDate_IfDateIsNULL_ShouldReturn_Minus1//
+
+*/
+void test_setDate_IfDateIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+
+  Date *date = NULL;
+  int returnValue = setDate(date, 23, 11, 2021);
+
+  assert(returnValue == -1);
+  
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_setDate_IfDateInvalid_ShouldReturn_0//
+
+*/
+void test_setDate_IfDateInvalid_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_setDate_IfDateValid_ShouldReturn_1//
+
+*/
+void test_setDate_IfDateValid_ShouldReturn_1(){
+  printf("-->%s::", __func__);
+
+  printf("not implemented");
+  fflush(stdout);
+}
+
+
+/*//test_setDate//
+
+*/
+void test_setDate(){
+  printf("TEST::%s\n", __func__);
+
+  test_setDate_IfDateIsNULL_ShouldReturn_Minus1();
+  printf("\n");
+
+  test_setDate_IfDateInvalid_ShouldReturn_0();
+  printf("\n");
+
+  test_setDate_IfDateValid_ShouldReturn_1();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);  
+}
+
 /*//test_all//
 
 */
 void test_all(){
   test_DateIsLeapYear();
   test_DateIsValid();
+  test_setDate();
 
   test_addStudent();
   test_getStudentByMatrikelNr();
