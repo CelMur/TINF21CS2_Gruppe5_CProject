@@ -136,12 +136,12 @@ int setDate(Date *date, int day, int month, int year){
 /*//compareNodes//
     returns the matrikelNr of 'node1' with 'node2'
 
-  'node1'  > 'node2' = 1
-  'node1'  < 'node2' = -1
-  'node1' == 'node2' = 0
+  'node1'  > 'node2' return 1
+  'node1'  < 'node2' return -1
+  'node1' == 'node2' return 0
 
-  'node1' == NULL = 1
-  'node2' == NULL = 1
+  'node1' == NULL return 1
+  'node2' == NULL return 1
 */
 int compareNodes(Student *node1, Student *node2){
   if (node1 == NULL) return 1;
