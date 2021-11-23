@@ -273,8 +273,27 @@ int deleteStudent(List *list, char *matrikelNr){
 /*//printStudent//
 
 */
-void printStudent(List *list, char *matrikelNr){
+int printStudent(List *list, char *matrikelNr){
+  Student *node = getStudentByMatrikelNr(list, matrikelNr);
 
+  if(node == NULL){
+    return 0;
+  }
+
+
+
+  printf("###################");
+  printf("Student");
+  printf("{");
+  printf("  'matrikelNr' = '%s',", node->matrikelNr);
+  printf("  'lastname' = '%s',", node->lastname);
+  printf("  'birthday' = '%0i/%0i/%i',", node->birthday.month, node->birthday.day, node->birthday.year);
+  printf("  'studyStart' = '%i.%i.%i',", node->start.month, node->start.day, node->start.year);
+  printf("  'studyEnd' = '%i.%i.%i',", node->end.month, node->end.day, node->end.year);
+  printf("}");
+
+
+  return 1;
 }
 
 
@@ -710,12 +729,16 @@ void test_printStudent(){
   Student *s0 = (Student *) malloc(sizeof(Student));
   Student *s1 = (Student *) malloc(sizeof(Student));
   Student *node;
+  int printSuccessfull = 0;
 
   initStudent(s0);
   initStudent(s1);
 
   strcpy(s0->matrikelNr, "test2");
+
   strcpy(s1->matrikelNr, "test5");
+  strcpy(s1->lastname, "mustermann");
+  
 
   char *targetMatrikelNr = "test5";
 
@@ -723,7 +746,7 @@ void test_printStudent(){
 
   printStudent(list, targetMatrikelNr);
 
-  assert(node == s1);
+  assert(printSuccessfull == 1);
 
   free(s0);
   free(s1);
@@ -742,6 +765,7 @@ int main(){
   test_addStudent();
   test_getStudentByMatrikelNr();
   test_deleteStudent();
+  test_printStudent();
 
   return 0;
 }
