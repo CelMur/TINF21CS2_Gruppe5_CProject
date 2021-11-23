@@ -575,7 +575,7 @@ void test_deleteStudent_isNotFirst_isNotLast(){
 
   assert(s2->prev_node == s0);
   assert(s2->next_node == NULL);
-
+  
   printf("success");
   fflush(stdout);
 }
@@ -601,11 +601,13 @@ void test_deleteStudent(){
 
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(){
+  printf("-->%s::", __func__);
+  
   List *list = (List *) malloc(sizeof(List));
   initList(list);
 
-  Student *s0;
-  Student *s1;
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
 
   initStudent(s0);
   initStudent(s1);
@@ -613,22 +615,37 @@ void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(){
   strcpy(s0->matrikelNr, "test2");
   strcpy(s1->matrikelNr, "test5");
 
+  addStudent(list, s0);
+  addStudent(list, s1);
+
   char *targetMatrikelNr = "test5";
   Student *node = getStudentByMatrikelNr(list, targetMatrikelNr);
 
   assert(node != NULL);
   assert(node == s1);
+
+  free(s0);
+  free(s1);
+  free(list);
+
+  printf("success");
+  fflush(stdout);
 }
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(){
+  printf("-->%s::", __func__);
+  
   List *list = (List *) malloc(sizeof(List));
   initList(list);
 
-  Student *s0;
-  Student *s1;
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
 
   initStudent(s0);
   initStudent(s1);
+
+  addStudent(list, s0);
+  addStudent(list, s1);
 
   strcpy(s0->matrikelNr, "test2");
   strcpy(s1->matrikelNr, "test5");
@@ -638,14 +655,26 @@ void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(){
   Student *node = getStudentByMatrikelNr(list, targetMatrikelNr);
 
   assert(node == NULL);
+
+  free(s0);
+  free(s1);
+  free(list);
+
+  printf("success");
+  fflush(stdout);
 }
 
 
 void test_getStudentByMatrikelNr(){
+  printf("TEST::%s\n", __func__);
+
   test_getStudentByMatrikelNr_ExpectMatchingStudentFound();
+  printf("\n");
 
   test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound();
+  printf("\n");
 
+  printf("END_TEST::%s::success\n\n", __func__);
 }
 
 
@@ -653,6 +682,8 @@ void test_getStudentByMatrikelNr(){
 int main(){
  
   test_addStudent();
+  test_getStudentByMatrikelNr();
+  test_deleteStudent();
 
   return 0;
 }
