@@ -320,6 +320,8 @@ void test_inputStudent(){
 
 */
 void test_addStudent_isFirstNode(){
+  printf("TEST::%s::", __func__);
+
   List *list = (List *) malloc(sizeof(List));
   initList(list);
 
@@ -337,6 +339,12 @@ void test_addStudent_isFirstNode(){
 
   assert(s0->next_node == NULL);
   assert(s0->prev_node == NULL);
+
+  free(s0);
+  free(list);
+
+  printf("\rsucess");
+  fflush(stdout);
 }
 
 /*//test_addStudent_isLastNode//
@@ -467,7 +475,7 @@ void test_deleteStudent_isFirstNode(){
 
   assert(s2->prev_node == s1);
   assert(s2->next_node == NULL);
-
+ 
 }
 
 
@@ -601,5 +609,7 @@ void test_getStudentByMatrikelNr(){
 
 int main(){
  
+  test_addStudent_isFirstNode();
+
   return 0;
 }
