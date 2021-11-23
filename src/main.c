@@ -811,7 +811,14 @@ void test_getStudentByMatrikelNr(){
 void test_printStudent_IfListIsNULL_ShouldReturn_Minus1(){
   printf("-->%s::", __func__);
 
-  printf("not implemented");
+  List *list = NULL;
+  char *targetMatrikelNr = "test5";
+
+  int returnValue = printStudent(list, targetMatrikelNr);
+
+  assert(returnValue == -1);
+
+  printf("successfull");
   fflush(stdout);
 }
 
@@ -821,17 +828,44 @@ void test_printStudent_IfListIsNULL_ShouldReturn_Minus1(){
 void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
   printf("-->%s::", __func__);
 
-  printf("not implemented");
+  List *list = (List *) malloc(sizeof(List));
+  char *targetMatrikelNr = "test5";
+  
+  int returnValue = printStudent(list, targetMatrikelNr);
+
+  assert(returnValue == -2);
+
+  free(list);
+
+  printf("successfull");
   fflush(stdout);
 }
 
-/*//test_printStudent_IfDateIsInvalid_ShouldReturn_0//
+/*//test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0//
 
 */
-void test_printStudent_IfDateIsInvalid_ShouldReturn_0(){
+void test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
-  printf("not implemented");
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  initStudent(s0);
+  strcpy(s0->matrikelNr, "test5");
+
+  addStudent(list, s0);
+
+  char *targetMatrikelNr = "test5";
+
+  int returnValue = printStudent(list, targetMatrikelNr);
+
+  assert(returnValue == 0);
+
+  free(s0);
+  free(list);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -891,7 +925,7 @@ void test_printStudent(){
   test_printStudent_IfStudentExists_ShouldReturn_1();
   printf("\n");
 
-  test_printStudent_IfDateIsInvalid_ShouldReturn_0();
+  test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0();
   printf("\n");
 
   test_printStudent_IfListIsNULL_ShouldReturn_Minus1();
