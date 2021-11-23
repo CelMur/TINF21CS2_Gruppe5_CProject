@@ -1049,7 +1049,12 @@ void test_setDate_IfDateIsNULL_ShouldReturn_Minus1(){
 void test_setDate_IfDateInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
-  printf("not implemented");
+  Date date = {};
+  int returnValue = setDate(&date, 0, 11, 2021);
+  
+  assert(returnValue == 0);
+  
+  printf("success");
   fflush(stdout);
 }
 
