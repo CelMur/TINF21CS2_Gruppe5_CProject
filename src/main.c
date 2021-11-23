@@ -77,10 +77,17 @@ int dateIsLeapYear(int year){
 
 
 /*//dateIsValid//
-  return 1 if the date is valid
-  returns 0 if the date is invalid
+  return 1 if date is valid
+  returns 0 if date is invalid
+  returns -1 if date == NULL
 */
-int dateIsValid(int day, int month, int year){
+int dateIsValid(Date *date){
+
+  if(date == NULL) return -1;
+
+  int day = date->day;
+  int month = date->month;
+  int year = date->year;
 
   if(year < MIN_YEAR || year > MAX_YEAR) return 0;   
   if(month < 1 || month > 12) return 0;    
@@ -113,6 +120,14 @@ int dateIsValid(int day, int month, int year){
 */
 int studentIsValid(Student *student){
   if(student == NULL) return -1;
+
+  if(student->lastname == "") return 0;
+  if(student->matrikelNr == "") return 0;
+  if(dateIsValid(&student->birthday) == 0) return 0;
+  if(dateIsValid(&student->start) == 0) return 0;
+  if(dateIsValid(&student->end) == 0) return 0;
+
+  return 1;
 }
 
 
@@ -124,7 +139,8 @@ int studentIsValid(Student *student){
 int setDate(Date *date, int day, int month, int year){
 
   if(date == NULL) return -1;
-  if(dateIsValid(day, month, year) == 0) return 0;
+  Date tempDate = {day, month, year};
+  if(dateIsValid(&tempDate) == 0) return 0;
 
   date->day = day;
   date->month = month;
@@ -1048,7 +1064,7 @@ void test_dateIsValid_IfDayNotInRange_ShouldReturn_0(){
 
   for(int i = 0; i< datesLen; i++){
 
-    isValid = dateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    isValid = dateIsValid(&dates[i]);
     assert(isValid == 0);
   }
 
@@ -1073,7 +1089,7 @@ void test_dateIsValid_IfMonthNotInRange_ShouldReturn_0(){
 
   for(int i = 0; i< datesLen; i++){
 
-    isValid = dateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    isValid = dateIsValid(&dates[i]);
     assert(isValid == 0);
   }
 
@@ -1098,7 +1114,7 @@ void test_dateIsValid_IfYearNotInRange_ShouldReturn_0(){
 
   for(int i = 0; i< datesLen; i++){
 
-    isValid = dateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    isValid = dateIsValid(&dates[i]);
     assert(isValid == 0);
   }
 
