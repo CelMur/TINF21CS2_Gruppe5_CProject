@@ -839,6 +839,22 @@ void test_printAllStudent(){
 }
 
 
+
+/*//test_DateIsLeapYear
+
+*/
+void test_DateIsLeapYear(){
+  printf("TEST::%s\n", __func__);
+
+  
+
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);  
+}
+
+
+
 int main(){
  
   test_addStudent();
