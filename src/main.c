@@ -108,6 +108,13 @@ int DateIsValid(int day, int month, int year){
 }
 
 
+/*//studentIsValid//
+  returns -1 if student is NULL
+*/
+int studentIsValid(Student *student){
+  if(student == NULL) return -1;
+}
+
 
 /*//setDate//
   returns 1 if successful
