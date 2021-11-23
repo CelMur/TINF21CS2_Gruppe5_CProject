@@ -1038,6 +1038,7 @@ void test_setDate_IfDateIsNULL_ShouldReturn_Minus1(){
   int returnValue = setDate(date, 23, 11, 2021);
 
   assert(returnValue == -1);
+  assert(date == NULL);
   
   printf("success");
   fflush(stdout);
@@ -1049,10 +1050,11 @@ void test_setDate_IfDateIsNULL_ShouldReturn_Minus1(){
 void test_setDate_IfDateInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
-  Date date = {};
+  Date date;
   int returnValue = setDate(&date, 0, 11, 2021);
-  
+
   assert(returnValue == 0);
+  assert(date.day != 0 && date.month != 11 && date.year != 2021);
   
   printf("success");
   fflush(stdout);
@@ -1064,7 +1066,13 @@ void test_setDate_IfDateInvalid_ShouldReturn_0(){
 void test_setDate_IfDateValid_ShouldReturn_1(){
   printf("-->%s::", __func__);
 
-  printf("not implemented");
+  Date date = {};
+  int returnValue = setDate(&date, 23, 11, 2021);
+  
+  assert(returnValue == 1);
+  assert(date.day == 23 && date.month == 11 && date.year == 2021);
+
+  printf("success");
   fflush(stdout);
 }
 
