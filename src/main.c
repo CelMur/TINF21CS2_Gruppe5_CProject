@@ -980,14 +980,21 @@ void test_DateIsValid(){
 }
 
 
-int main(){
- 
+/*//test_all//
+
+*/
+void test_all(){
   test_addStudent();
   test_getStudentByMatrikelNr();
   test_deleteStudent();
   test_DateIsLeapYear();
   test_DateIsValid();
   //test_printStudent();
+}
+
+int main(){
+ 
+  test_all();
 
   return 0;
 }
