@@ -715,6 +715,25 @@ void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(){
   fflush(stdout);
 }
 
+/*//test_getStudentByMatrikelNr_IfListIsNULL_ShouldReturnNULL//
+
+*/
+void test_getStudentByMatrikelNr_IfListIsNULL_ShouldReturnNULL(){
+  printf("-->%s::", __func__);
+
+  List *list;
+  Student *node;
+
+  char *targetMatrikelNr = "test5";
+
+  node = getStudentByMatrikelNr(list, targetMatrikelNr);
+
+  assert(node == NULL);
+
+  printf("success");
+  fflush(stdout);
+}
+
 
 void test_getStudentByMatrikelNr(){
   printf("TEST::%s\n", __func__);
