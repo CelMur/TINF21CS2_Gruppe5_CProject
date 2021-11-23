@@ -316,36 +316,27 @@ void test_inputStudent(){
   
 }
 
-/*//test_addStudent//
+/*//test_addStudent_isFistNode//
 
 */
-void test_addStudent(){
-  List *list;
+void test_addStudent_isFirstNode(){
+  List *list = (List *) malloc(sizeof(List));
   initList(list);
 
-  Student *s0, *s1, *s2, *s3;
+  Student *s0 = (Student *) malloc(sizeof(Student));
 
   initStudent(s0);
+
   strcpy(s0->matrikelNr, "test2");
 
-  initStudent(s1);
-  strcpy(s1->matrikelNr, "test5");
-
-  initStudent(s2);
-  strcpy(s2->matrikelNr, "test3");
-
-  initStudent(s3);
-  strcpy(s3->matrikelNr, "test6");
-
   addStudent(list, s0);
-  addStudent(list, s1);
-  addStudent(list, s2);
 
-  free(s0);
-  free(s1);
-  free(s2);
-  free(s3);
-  free(list);
+  assert(list->first_node == s0);
+  assert(list->last_node == s0);
+  assert(list->length == 1);
+
+  assert(s0->next_node == NULL);
+  assert(s0->prev_node == NULL);
 }
 
 /*//test_addStudent_isLastNode//
@@ -418,15 +409,14 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
 }
 
 
-/*//test_addStudent_isFirstNode//
+/*//test_addStudent//
 
 */
-void test_addStudent_isFirstNode(){
+void test_addStudent(){
 
   test_addStudent_isFirstNode();
   test_addStudent_isLastNode();
   test_addStudent_isNotFirstNode_isNotLastNode();
-  
 }
 
 
