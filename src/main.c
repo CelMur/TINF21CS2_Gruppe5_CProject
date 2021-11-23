@@ -110,12 +110,20 @@ int DateIsValid(int day, int month, int year){
 
 
 /*//setDate//
-  
+  returns 1 if successful
+  returns 0 if one or more values invalid
+  return -1 if date == NULL
 */
-void setDate(Date *date, int day, int month, int year){
+int setDate(Date *date, int day, int month, int year){
+
+  if(date == NULL) return -1;
+  if(DateIsValid(day, month, year) == 0) return 0;
+
   date->day = day;
   date->month = month;
   date->year = year;
+
+  return 1;
 }
 
 /*//compareNodes//
@@ -1024,11 +1032,12 @@ void test_DateIsValid(){
 
 */
 void test_all(){
+  test_DateIsLeapYear();
+  test_DateIsValid();
+
   test_addStudent();
   test_getStudentByMatrikelNr();
   test_deleteStudent();
-  test_DateIsLeapYear();
-  test_DateIsValid();
   //test_printStudent();
 }
 
