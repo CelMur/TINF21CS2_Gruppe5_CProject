@@ -53,14 +53,14 @@ int initStudent(Student *student){
 }
 
 
-/*//DateIsLeapYear//
+/*//dateIsLeapYear//
   return 1 if the date is valid
   returns 0 if the date is invalid
 
   reference for leapyear-calculation:
     https://docs.microsoft.com/de-de/office/troubleshoot/excel/determine-a-leap-year 11/23/2021 09:27pm
 */
-int DateIsLeapYear(int year){
+int dateIsLeapYear(int year){
   if(year < 0) return 0;
 
   if(year % 4 == 0){
@@ -76,18 +76,18 @@ int DateIsLeapYear(int year){
 }
 
 
-/*//DateIsValid//
+/*//dateIsValid//
   return 1 if the date is valid
   returns 0 if the date is invalid
 */
-int DateIsValid(int day, int month, int year){
+int dateIsValid(int day, int month, int year){
 
   if(year < MIN_YEAR || year > MAX_YEAR) return 0;   
   if(month < 1 || month > 12) return 0;    
   if(day < 1 || day > 31) return 0;    
 
   if(month == 2){
-    if(DateIsLeapYear(year)){
+    if(dateIsLeapYear(year)){
       if(day <= 29){
         return 1;
       }
@@ -124,7 +124,7 @@ int studentIsValid(Student *student){
 int setDate(Date *date, int day, int month, int year){
 
   if(date == NULL) return -1;
-  if(DateIsValid(day, month, year) == 0) return 0;
+  if(dateIsValid(day, month, year) == 0) return 0;
 
   date->day = day;
   date->month = month;
@@ -949,10 +949,10 @@ void test_printAllStudent(){
 }
 
 
-/*//test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1
+/*//test_dateIsLeapYear_IfIsLeapYear_ShouldReturn_1
 
 */
-void test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1(){
+void test_dateIsLeapYear_IfIsLeapYear_ShouldReturn_1(){
   printf("-->%s::", __func__);
 
   int years[16] = {1904, 1920, 1984, 1992, 1996, 2000, 2004, 2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044};
@@ -961,7 +961,7 @@ void test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1(){
 
   for(int i = 0; i< yearsLen; i++){
 
-    isLeapYear = DateIsLeapYear(years[i]);
+    isLeapYear = dateIsLeapYear(years[i]);
     assert(isLeapYear == 1);
   }
   
@@ -970,10 +970,10 @@ void test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1(){
 }
 
 
-/*//test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0
+/*//test_dateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0
 
 */
-void test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0(){
+void test_dateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
   int years[16] = {1909, 1910, 1950, 1966, 1997, 1999, 2010, 2021, 2022, 2023, 2025, 2026, 2027, 2029, 2043, 2045};
@@ -982,7 +982,7 @@ void test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0(){
 
   for(int i = 0; i< yearsLen; i++){
 
-    isLeapYear = DateIsLeapYear(years[i]);
+    isLeapYear = dateIsLeapYear(years[i]);
     assert(isLeapYear == 0);
   }
 
@@ -990,14 +990,14 @@ void test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0(){
   fflush(stdout);
 }
 
-/*//test_DateIsLeapYear_IfYearIsNegative_ShouldReturn_0
+/*//test_dateIsLeapYear_IfYearIsNegative_ShouldReturn_0
 
 */
-void test_DateIsLeapYear_IfYearIsNegative_ShouldReturn_0(){
+void test_dateIsLeapYear_IfYearIsNegative_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
   int year = -1904;
-  int isLeapYear = DateIsLeapYear(year);
+  int isLeapYear = dateIsLeapYear(year);
 
   assert(isLeapYear == 0);
 
@@ -1005,30 +1005,30 @@ void test_DateIsLeapYear_IfYearIsNegative_ShouldReturn_0(){
   fflush(stdout);
 }
 
-/*//test_DateIsLeapYear
+/*//test_dateIsLeapYear
 
 */
-void test_DateIsLeapYear(){
+void test_dateIsLeapYear(){
   printf("TEST::%s\n", __func__);
 
   
-  test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0();
+  test_dateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0();
   printf("\n");
 
-  test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1();
+  test_dateIsLeapYear_IfIsLeapYear_ShouldReturn_1();
   printf("\n");
 
-  test_DateIsLeapYear_IfYearIsNegative_ShouldReturn_0();
+  test_dateIsLeapYear_IfYearIsNegative_ShouldReturn_0();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);  
 }
 
 
-/*//test_DateIsValid_IfDayNotInRange_ShouldReturn_0//
+/*//test_dateIsValid_IfDayNotInRange_ShouldReturn_0//
 
 */
-void test_DateIsValid_IfDayNotInRange_ShouldReturn_0(){
+void test_dateIsValid_IfDayNotInRange_ShouldReturn_0(){
   printf("-->%s::", __func__);
   
   
@@ -1048,7 +1048,7 @@ void test_DateIsValid_IfDayNotInRange_ShouldReturn_0(){
 
   for(int i = 0; i< datesLen; i++){
 
-    isValid = DateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    isValid = dateIsValid(dates[i].day, dates[i].month, dates[i].year);
     assert(isValid == 0);
   }
 
@@ -1056,10 +1056,10 @@ void test_DateIsValid_IfDayNotInRange_ShouldReturn_0(){
   fflush(stdout);
 }
 
-/*//test_DateIsValid_IfDayNotInRange_ShouldReturn_0//
+/*//test_dateIsValid_IfDayNotInRange_ShouldReturn_0//
 
 */
-void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
+void test_dateIsValid_IfMonthNotInRange_ShouldReturn_0(){
    printf("-->%s::", __func__);
   
   
@@ -1073,7 +1073,7 @@ void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
 
   for(int i = 0; i< datesLen; i++){
 
-    isValid = DateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    isValid = dateIsValid(dates[i].day, dates[i].month, dates[i].year);
     assert(isValid == 0);
   }
 
@@ -1081,10 +1081,10 @@ void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
   fflush(stdout);
 }
 
-/*//test_DateIsValid_IfDayNotInRange_ShouldReturn_0//
+/*//test_dateIsValid_IfDayNotInRange_ShouldReturn_0//
 
 */
-void test_DateIsValid_IfYearNotInRange_ShouldReturn_0(){
+void test_dateIsValid_IfYearNotInRange_ShouldReturn_0(){
    printf("-->%s::", __func__);
   
   
@@ -1098,7 +1098,7 @@ void test_DateIsValid_IfYearNotInRange_ShouldReturn_0(){
 
   for(int i = 0; i< datesLen; i++){
 
-    isValid = DateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    isValid = dateIsValid(dates[i].day, dates[i].month, dates[i].year);
     assert(isValid == 0);
   }
 
@@ -1107,19 +1107,19 @@ void test_DateIsValid_IfYearNotInRange_ShouldReturn_0(){
 }
 
 
-/*//test_DateIsValid//
+/*//test_dateIsValid//
 
 */
-void test_DateIsValid(){
+void test_dateIsValid(){
   printf("TEST::%s\n", __func__);
 
-  test_DateIsValid_IfDayNotInRange_ShouldReturn_0();
+  test_dateIsValid_IfDayNotInRange_ShouldReturn_0();
   printf("\n");
 
-  test_DateIsValid_IfMonthNotInRange_ShouldReturn_0();
+  test_dateIsValid_IfMonthNotInRange_ShouldReturn_0();
   printf("\n");
 
-  test_DateIsValid_IfYearNotInRange_ShouldReturn_0();
+  test_dateIsValid_IfYearNotInRange_ShouldReturn_0();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);  
@@ -1196,8 +1196,8 @@ void test_setDate(){
 
 */
 void test_all(){
-  test_DateIsLeapYear();
-  test_DateIsValid();
+  test_dateIsLeapYear();
+  test_dateIsValid();
   test_setDate();
 
   test_addStudent();
