@@ -429,15 +429,6 @@ void test_addStudent(){
 
 
 
-/*//test_deleteStudent//
-
-*/
-void test_deleteStudent(){
-  
-  test_deleteStudent_isFirstNode();
-  test_deleteStudent_isLastNode();
-  test_deleteStudent_isNotFirst_isNotLast();
-}
 
 /*//test_deleteStudent_isFirstNode//
 
@@ -556,6 +547,18 @@ void test_deleteStudent_isNotFirst_isNotLast(){
   assert(s2->prev_node == s0);
   assert(s2->next_node == NULL);
 }
+
+
+/*//test_deleteStudent//
+
+*/
+void test_deleteStudent(){
+  
+  test_deleteStudent_isFirstNode();
+  test_deleteStudent_isLastNode();
+  test_deleteStudent_isNotFirst_isNotLast();
+}
+
 
 void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(){
   List *list = (List *) malloc(sizeof(List));
