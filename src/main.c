@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <assert.h>
 
+const int MIN_YEAR = 1900;
+const int MAX_YEAR = 2100;
+
 typedef struct Date{
   int day;
   int month;
@@ -78,10 +81,8 @@ int DateIsLeapYear(int year){
   returns 0 if the date is invalid
 */
 int DateIsValid(int day, int month, int year){
-  int minYear = 1900;
-  int maxYear = 2100;
 
-  if(year < minYear || year > maxYear) return 0;   
+  if(year < MIN_YEAR || year > MAX_YEAR) return 0;   
   if(month < 1 || month > 12) return 0;    
   if(day < 1 || day > 31) return 0;    
 
@@ -953,8 +954,24 @@ void test_DateIsValid_IfDayNotInRange_ShouldReturn_0(){
 
 */
 void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
-  printf("-->%s::", __func__);
-  printf("not implemented");
+   printf("-->%s::", __func__);
+  
+  
+  Date dates[2] = {
+    {1,0,2021},
+    {1,13,2021}
+  };
+
+  int datesLen = sizeof(dates) / sizeof(Date);
+  int isValid;
+
+  for(int i = 0; i< datesLen; i++){
+
+    isValid = DateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    assert(isValid == 0);
+  }
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -962,8 +979,24 @@ void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
 
 */
 void test_DateIsValid_IfYearNotInRange_ShouldReturn_0(){
-  printf("-->%s::", __func__);
-  printf("not implemented");
+   printf("-->%s::", __func__);
+  
+  
+  Date dates[2] = {
+    {1,0, MIN_YEAR - 1},
+    {1,13,MAX_YEAR + 1}
+  };
+
+  int datesLen = sizeof(dates) / sizeof(Date);
+  int isValid;
+
+  for(int i = 0; i< datesLen; i++){
+
+    isValid = DateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    assert(isValid == 0);
+  }
+
+  printf("success");
   fflush(stdout);
 }
 
