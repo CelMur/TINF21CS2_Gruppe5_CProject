@@ -59,7 +59,7 @@ int initStudent(Student *student){
 */
 int DateIsLeapYear(int year){
   if(year < 0) return 0;
-  
+
   if(year % 4 == 0){
     if(year % 100 == 0){
       if(year % 400 == 0){
@@ -918,6 +918,67 @@ void test_DateIsLeapYear(){
 }
 
 
+/*//test_DateIsValid_IfDayNotInRange_ShouldReturn_0//
+
+*/
+void test_DateIsValid_IfDayNotInRange_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  
+  
+  Date dates[3] = {
+    {0,10,2021}
+  };
+
+  int datesLen = sizeof(dates) / sizeof(Date);
+  int isValid;
+
+  for(int i = 0; i< datesLen; i++){
+
+    isValid = DateIsValid(dates[i].day, dates[i].month, dates[i].year);
+    assert(isValid == 0);
+  }
+
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_DateIsValid_IfDayNotInRange_ShouldReturn_0//
+
+*/
+void test_DateIsValid_IfMonthNotInRange_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_DateIsValid_IfDayNotInRange_ShouldReturn_0//
+
+*/
+void test_DateIsValid_IfYearNotInRange_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("success");
+  fflush(stdout);
+}
+
+
+/*//test_DateIsValid//
+
+*/
+void test_DateIsValid(){
+  printf("TEST::%s\n", __func__);
+
+  test_DateIsValid_IfDayNotInRange_ShouldReturn_0();
+  printf("\n");
+
+  test_DateIsValid_IfMonthNotInRange_ShouldReturn_0();
+  printf("\n");
+
+  test_DateIsValid_IfYearNotInRange_ShouldReturn_0();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);  
+}
+
 
 int main(){
  
@@ -925,6 +986,7 @@ int main(){
   test_getStudentByMatrikelNr();
   test_deleteStudent();
   test_DateIsLeapYear();
+  test_DateIsValid();
   //test_printStudent();
 
   return 0;
