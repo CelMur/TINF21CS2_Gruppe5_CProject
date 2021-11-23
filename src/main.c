@@ -388,6 +388,8 @@ void test_addStudent_isLastNode(){
 
 */
 void test_addStudent_isNotFirstNode_isNotLastNode(){
+  printf("%s-->", __func__);
+
   List *list = (List *) malloc(sizeof(List));
   initList(list);
 
@@ -419,6 +421,9 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
 
   assert(s2->next_node == s1);
   assert(s2->prev_node == s0);
+
+  printf("success");
+  fflush(stdout);
 }
 
 
