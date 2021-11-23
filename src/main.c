@@ -81,10 +81,6 @@ int compareNodes(Student *node1, Student *node2){
 
 /*//getStudentByMatrikelNr//
   returns a Student from 'list' by comparing 'matrikelNr'
-
-  TESTS: 
-    test_getStudentByMatrikelNr_ExpectMatchingStudentFound
-    test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound
 */
 Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
 
@@ -118,8 +114,6 @@ Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
 /*//addStudent//
   inserts 'node' at the alphabetically destined position
 
-  TESTS:
-    test_addStudent
 */
 void addStudent(List *list, Student *node){
 
@@ -169,8 +163,6 @@ void addStudent(List *list, Student *node){
 /*//deleteStudent//
   removes a Student from 'list' by comparing its 'matrikelNr'
 
-  TESTS: 
-    NONE
 */
 int deleteStudent(List *list, char *matrikelNr){
   Student *node = getStudentByMatrikelNr(list, matrikelNr);
@@ -218,8 +210,6 @@ int deleteStudent(List *list, char *matrikelNr){
 /*//inputStudent//
   requests userinput for student data and returns it as 'Student'
 
-  TESTS:
-    test_inputStudent
 */
  Student inputStudent(){
   Student zwischenspeicher;
@@ -651,7 +641,7 @@ void test_deleteStudent(){
 }
 
 
-void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(){
+void test_getStudentByMatrikelNr_IfStudentFoundExpectPointer(){
   printf("-->%s::", __func__);
   
   List *list = (List *) malloc(sizeof(List));
@@ -683,7 +673,7 @@ void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(){
   fflush(stdout);
 }
 
-void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(){
+void test_getStudentByMatrikelNr_IfStudentNotFound_ShouldReturnNULL(){
   printf("-->%s::", __func__);
   
   List *list = (List *) malloc(sizeof(List));
@@ -738,10 +728,10 @@ void test_getStudentByMatrikelNr_IfListIsNULL_ShouldReturnNULL(){
 void test_getStudentByMatrikelNr(){
   printf("TEST::%s\n", __func__);
 
-  test_getStudentByMatrikelNr_ExpectMatchingStudentFound();
+  test_getStudentByMatrikelNr_IfStudentFoundExpectPointer();
   printf("\n");
 
-  test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound();
+  test_getStudentByMatrikelNr_IfStudentNotFound_ShouldReturnNULL();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);
