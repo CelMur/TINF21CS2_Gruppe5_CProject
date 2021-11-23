@@ -349,16 +349,14 @@ int printStudent(List *list, char *matrikelNr){
   }
 
 
-
-  printf("###################");
-  printf("Student");
-  printf("{");
-  printf("  'matrikelNr' = '%s',", node->matrikelNr);
-  printf("  'lastname' = '%s',", node->lastname);
-  printf("  'birthday' = '%0i/%0i/%i',", node->birthday.month, node->birthday.day, node->birthday.year);
-  printf("  'studyStart' = '%i.%i.%i',", node->start.month, node->start.day, node->start.year);
-  printf("  'studyEnd' = '%i.%i.%i',", node->end.month, node->end.day, node->end.year);
-  printf("}");
+  printf("'Student'=\n");
+  printf("  {\n");
+  printf("    'matrikelNr' = '%s',\n", node->matrikelNr);
+  printf("    'lastname' = '%s',\n", node->lastname);
+  printf("    'birthday' = '%02i/%02i/%i',\n", node->birthday.month, node->birthday.day, node->birthday.year);
+  printf("    'studyStart' = '%02i/%02i/%i',\n", node->start.month, node->start.day, node->start.year);
+  printf("    'studyEnd' = '%02i/%02i/%i',\n", node->end.month, node->end.day, node->end.year);
+  printf("  }");
 
 
   return 1;
@@ -840,6 +838,7 @@ void test_printStudent_IfDateIsInvalid_ShouldReturn_0(){
 */
 void test_printStudent_IfStudentExists_ShouldReturn_1(){
   printf("-->%s::", __func__);
+  printf("\n");
 
   List *list = (List *) malloc(sizeof(Student));
   initList(list);
@@ -858,7 +857,10 @@ void test_printStudent_IfStudentExists_ShouldReturn_1(){
   strcpy(s1->lastname, "mustermann");
   setDate(&s1->birthday, 10, 11, 2000);
   setDate(&s1->start, 1, 10, 2000);
-  setDate(&s1->end, 31, 9, 2000);
+  setDate(&s1->end, 30, 9, 2000);
+
+  addStudent(list, s0);
+  addStudent(list, s1);
 
   char *targetMatrikelNr = "test5";
 
@@ -873,7 +875,8 @@ void test_printStudent_IfStudentExists_ShouldReturn_1(){
   free(s1);
   free(list);
 
-  printf("not implemented");
+  printf("\n");
+  printf("success");
   fflush(stdout);
 }
 
@@ -882,7 +885,6 @@ void test_printStudent_IfStudentExists_ShouldReturn_1(){
 */
 void test_printStudent(){
   printf("TEST::%s\n", __func__);
-
 
   test_printStudent_IfStudentExists_ShouldReturn_1();
   printf("\n");
@@ -1107,7 +1109,6 @@ void test_setDate_IfDateInvalid_ShouldReturn_0(){
   int returnValue = setDate(&date, 0, 11, 2021);
 
   assert(returnValue == 0);
-  assert(date.day != 0 && date.month != 11 && date.year != 2021);
   
   printf("success");
   fflush(stdout);
