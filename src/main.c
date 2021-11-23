@@ -698,7 +698,27 @@ void test_getStudentByMatrikelNr(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
+/*//test_printStudent//
 
+*/
+void test_printStudent(){
+  List *list = (List *) malloc(sizeof(Student));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *node;
+
+  initStudent(s0);
+  initStudent(s1);
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s1->matrikelNr, "test5");
+
+  char *targetMatrikelNr = "test5";
+
+  printStudent(list, targetMatrikelNr);
+}
 
 void test_printAllStudent(){
 
