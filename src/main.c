@@ -496,7 +496,6 @@ void test_deleteStudent_isFirstNode(){
   assert(s2->prev_node == s1);
   assert(s2->next_node == NULL);
 
-  free(s0);
   free(s1);
   free(s2);
   free(list);
@@ -546,7 +545,6 @@ void test_deleteStudent_isLastNode(){
   assert(s2->next_node == NULL);
 
   free(s0);
-  free(s1);
   free(s2);
   free(list);
 
@@ -596,7 +594,6 @@ void test_deleteStudent_isNotFirst_isNotLast(){
   assert(s2->next_node == NULL);
 
   free(s0);
-  free(s1);
   free(s2);
   free(list);
   
