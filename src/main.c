@@ -579,11 +579,24 @@ void test_getStudentByMatrikelNr_ExpectMatchingStudentFound(){
   assert(node == s1);
 }
 
-void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(List *list){
-  char *matrikelNr = "";
-  Student *st = getStudentByMatrikelNr(list, matrikelNr);
+void test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(){
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
 
-  assert(st == NULL);
+  Student *s0;
+  Student *s1;
+
+  initStudent(s0);
+  initStudent(s1);
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s1->matrikelNr, "test5");
+
+  char *targetMatrikelNr = "test3";
+
+  Student *node = getStudentByMatrikelNr(list, targetMatrikelNr);
+
+  assert(node == NULL);
 }
 
 
@@ -592,8 +605,8 @@ void test_getStudentByMatrikelNr(){
 
   test_getStudentByMatrikelNr_ExpectMatchingStudentFound();
 
-  test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound(list);
- 
+  test_getStudentByMatrikelNr_ExpectMatchingStudentNotFound();
+
 }
 
 
