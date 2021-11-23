@@ -273,7 +273,7 @@ int deleteStudent(List *list, char *matrikelNr){
 /*//printStudent//
 
 */
-void printStudent(char *matrikelNr){
+void printStudent(List *list, char *matrikelNr){
 
 }
 
@@ -698,6 +698,11 @@ void test_getStudentByMatrikelNr(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
+
+
+void test_printAllStudent(){
+
+}
 
 
 int main(){
