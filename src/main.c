@@ -53,10 +53,19 @@ int initStudent(Student *student){
 /*//DateIsLeapYear//
   return 1 if the date is valid
   returns 0 if the date is invalid
+
+  reference for leapyear-calculation:
+    https://docs.microsoft.com/de-de/office/troubleshoot/excel/determine-a-leap-year 11/23/2021 09:27pm
 */
 int DateIsLeapYear(int year){
-  if((year % 4 == 0) && (year % 100 != 0) && (year % 400 == 0)){
-    return 1;
+  if(year % 4 == 0){
+    if(year % 100 == 0){
+      if(year % 400 == 0){
+        return 1;
+      }
+    }else{
+      return 1;  
+    }
   }
   return 0;
 }
@@ -75,7 +84,7 @@ int DateIsValid(int day, int month, int year){
   if(day < 1 || day > 31) return 0;    
 
   if(month == 2){
-    if(isLeapYear(year)){
+    if(DateIsLeapYear(year)){
       if(day <= 28){
         return 1;
       }
@@ -93,14 +102,6 @@ int DateIsValid(int day, int month, int year){
     }
   }
   return 1;
-}
-
-/*//validateDate//
-  return 1 if the date is valid
-  returns 0 if the date is invalid
-*/
-int DateIsValid(Date *date){
-  return DateIsValid(date->day, date->month, date->year);
 }
 
 
@@ -839,6 +840,40 @@ void test_printAllStudent(){
 }
 
 
+/*//test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1
+
+*/
+void test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1(){
+  printf("-->%s::", __func__);
+
+  int years[16] = {1904, 1920, 1984, 1992, 1996, 2000, 2004, 2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044};
+  int yearsLen = sizeof(years) / sizeof(int);
+
+  for(int i = 0; i< yearsLen; i++){
+    assert(DateIsLeapYear(years[i]) == 1);
+  }
+
+  printf("success");
+  fflush(stdout);
+}
+
+
+/*//test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0
+
+*/
+void test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+
+  int years[16] = {1909, 1910, 1950, 1966, 1997, 1999, 2010, 2021, 2022, 2023, 2025, 2026, 2027, 2029, 2043, 2045};
+  int yearsLen = sizeof(years) / sizeof(int);
+
+  for(int i = 0; i< yearsLen; i++){
+    assert(DateIsLeapYear(years[i]) == 0);
+  }
+
+  printf("success");
+  fflush(stdout);
+}
 
 /*//test_DateIsLeapYear
 
@@ -847,7 +882,10 @@ void test_DateIsLeapYear(){
   printf("TEST::%s\n", __func__);
 
   
+  test_DateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0();
+  printf("\n");
 
+  test_DateIsLeapYear_IfIsLeapYear_ShouldReturn_1();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);  
@@ -860,7 +898,8 @@ int main(){
   test_addStudent();
   test_getStudentByMatrikelNr();
   test_deleteStudent();
-  test_printStudent();
+  test_DateIsLeapYear();
+  //test_printStudent();
 
   return 0;
 }
