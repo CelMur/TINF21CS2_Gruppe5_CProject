@@ -49,6 +49,16 @@ int initStudent(Student *student){
   student->prev_node = NULL;
 }
 
+
+/*//setDate//
+  
+*/
+void setDate(Date *date, int day, int month, int year){
+  date->day = day;
+  date->month = month;
+  date->year = year;
+}
+
 /*//compareNodes//
     returns the matrikelNr of 'node1' with 'node2'
 
@@ -738,6 +748,8 @@ void test_printStudent(){
 
   strcpy(s1->matrikelNr, "test5");
   strcpy(s1->lastname, "mustermann");
+  
+
   
 
   char *targetMatrikelNr = "test5";
