@@ -778,8 +778,8 @@ void test_getStudentByMatrikelNr_IfStudentNotFound_ShouldReturnNULL(){
 void test_getStudentByMatrikelNr_IfListIsNULL_ShouldReturnNULL(){
   printf("-->%s::", __func__);
 
-  List *list;
-  Student *node;
+  List *list = NULL;
+  Student *node = NULL;
 
   char *targetMatrikelNr = "test5";
 
