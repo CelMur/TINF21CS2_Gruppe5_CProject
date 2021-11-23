@@ -342,12 +342,15 @@ int deleteStudent(List *list, char *matrikelNr){
 
 */
 int printStudent(List *list, char *matrikelNr){
+
+  if(list == NULL) return -1;
   Student *node = getStudentByMatrikelNr(list, matrikelNr);
 
   if(node == NULL){
-    return 0;
+    return -2;
   }
 
+  //TODO:validateStudent
 
   printf("'Student'=\n");
   printf("  {\n");
@@ -357,7 +360,6 @@ int printStudent(List *list, char *matrikelNr){
   printf("    'studyStart' = '%02i/%02i/%i',\n", node->start.month, node->start.day, node->start.year);
   printf("    'studyEnd' = '%02i/%02i/%i',\n", node->end.month, node->end.day, node->end.year);
   printf("  }");
-
 
   return 1;
 }
