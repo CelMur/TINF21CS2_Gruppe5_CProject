@@ -1184,7 +1184,7 @@ void test_setDate_IfDateValid_ShouldReturn_1(){
   
   assert(returnValue == 1);
   assert(date.day == 23 && date.month == 11 && date.year == 2021);
-
+  
   printf("success");
   fflush(stdout);
 }
@@ -1208,6 +1208,102 @@ void test_setDate(){
   printf("END_TEST::%s::success\n\n", __func__);  
 }
 
+
+
+/*//test_studentIsValid_IfValid_ShouldRerurn_1//
+
+*/
+void test_studentIsValid_IfValid_ShouldRerurn_1(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_studentIsValid_IfLastnameIsInvalid_ShouldReturn_0//
+
+*/
+void test_studentIsValid_IfLastnameIsInvalid_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0//
+
+*/
+void test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0//
+
+*/
+void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_studentIsValid_IfStartIsInvalid_ShouldReturn_0//
+
+*/
+void test_studentIsValid_IfStartIsInvalid_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_studentIsValid_IfEndIsInvalid_ShouldReturn_0//
+
+*/
+void test_studentIsValid_IfEndIsInvalid_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1//
+
+*/
+void test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+
+/*//test_studentIsValid//
+
+*/
+void test_studentIsValid(){
+  printf("TEST::%s\n", __func__);
+
+  test_studentIsValid_IfValid_ShouldRerurn_1();
+  printf("\n");
+
+  test_studentIsValid_IfLastnameIsInvalid_ShouldReturn_0();
+  printf("\n");
+
+  test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0();
+  printf("\n");
+
+  test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0();
+  printf("\n");
+
+  test_studentIsValid_IfStartIsInvalid_ShouldReturn_0();
+  printf("\n");
+
+  test_studentIsValid_IfEndIsInvalid_ShouldReturn_0();
+  printf("\n");
+
+  test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);  
+}
+
 /*//test_all//
 
 */
@@ -1215,6 +1311,8 @@ void test_all(){
   test_dateIsLeapYear();
   test_dateIsValid();
   test_setDate();
+
+  test_studentIsValid();
 
   test_addStudent();
   test_getStudentByMatrikelNr();
