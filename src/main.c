@@ -50,6 +50,61 @@ int initStudent(Student *student){
 }
 
 
+/*//DateIsLeapYear//
+  return 1 if the date is valid
+  returns 0 if the date is invalid
+*/
+int DateIsLeapYear(int year){
+  if((year % 4 == 0) && (year % 100 != 0) && (year % 400 == 0)){
+    return 1;
+  }
+  return 0;
+}
+
+
+/*//DateIsValid//
+  return 1 if the date is valid
+  returns 0 if the date is invalid
+*/
+int DateIsValid(int day, int month, int year){
+  int minYear = 1900;
+  int maxYear = 2100;
+
+  if(year < minYear || year > maxYear) return 0;   
+  if(month < 1 || month > 12) return 0;    
+  if(day < 1 || day > 31) return 0;    
+
+  if(month == 2){
+    if(isLeapYear(year)){
+      if(day <= 28){
+        return 1;
+      }
+      return 0;
+    }
+    if(day <= 29){
+      return 1;
+    }
+    return 0;
+  }
+
+  if(month == 4 || month == 6 || month == 9 || month == 11){
+    if(day > 30){
+      return 0;
+    }
+  }
+  return 1;
+}
+
+/*//validateDate//
+  return 1 if the date is valid
+  returns 0 if the date is invalid
+*/
+int DateIsValid(Date *date){
+  return DateIsValid(date->day, date->month, date->year);
+}
+
+
+
 /*//setDate//
   
 */
