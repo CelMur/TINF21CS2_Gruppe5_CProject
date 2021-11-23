@@ -708,7 +708,7 @@ void test_deleteStudent(){
 }
 
 
-void test_getStudentByMatrikelNr_IfStudentFoundExpectPointer(){
+void test_getStudentByMatrikelNr_IfStudentFound_ShouldReturn_Pointer(){
   printf("-->%s::", __func__);
   
   List *list = (List *) malloc(sizeof(List));
@@ -795,7 +795,7 @@ void test_getStudentByMatrikelNr_IfListIsNULL_ShouldReturnNULL(){
 void test_getStudentByMatrikelNr(){
   printf("TEST::%s\n", __func__);
 
-  test_getStudentByMatrikelNr_IfStudentFoundExpectPointer();
+  test_getStudentByMatrikelNr_IfStudentFound_ShouldReturn_Pointer();
   printf("\n");
 
   test_getStudentByMatrikelNr_IfStudentNotFound_ShouldReturnNULL();
