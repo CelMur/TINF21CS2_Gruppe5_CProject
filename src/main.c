@@ -421,7 +421,7 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
 
   assert(s2->next_node == NULL);
   assert(s2->prev_node == s1);
-
+  
   printf("success");
   fflush(stdout);
 }
@@ -452,6 +452,8 @@ void test_addStudent(){
 
 */
 void test_deleteStudent_isFirstNode(){
+  printf("-->%s::", __func__);
+  
   List *list = (List *) malloc(sizeof(List));
   initList(list);
   
@@ -485,6 +487,8 @@ void test_deleteStudent_isFirstNode(){
   assert(s2->prev_node == s1);
   assert(s2->next_node == NULL);
  
+  printf("success");
+  fflush(stdout);
 }
 
 
@@ -492,6 +496,8 @@ void test_deleteStudent_isFirstNode(){
 
 */
 void test_deleteStudent_isLastNode(){
+  printf("-->%s::", __func__);
+ 
   List *list = (List *) malloc(sizeof(List));
   initList(list);
   
@@ -524,6 +530,9 @@ void test_deleteStudent_isLastNode(){
 
   assert(s2->prev_node == s0);
   assert(s2->next_node == NULL);
+
+  printf("success");
+  fflush(stdout);
 }
 
 
@@ -531,6 +540,8 @@ void test_deleteStudent_isLastNode(){
 
 */
 void test_deleteStudent_isNotFirst_isNotLast(){
+  printf("-->%s::", __func__);
+  
   List *list = (List *) malloc(sizeof(List));
   initList(list);
   
@@ -564,6 +575,9 @@ void test_deleteStudent_isNotFirst_isNotLast(){
 
   assert(s2->prev_node == s0);
   assert(s2->next_node == NULL);
+
+  printf("success");
+  fflush(stdout);
 }
 
 
@@ -571,10 +585,18 @@ void test_deleteStudent_isNotFirst_isNotLast(){
 
 */
 void test_deleteStudent(){
-  
+  printf("TEST::%s\n", __func__);
+
   test_deleteStudent_isFirstNode();
+  printf("\n");
+
   test_deleteStudent_isLastNode();
+  printf("\n");
+
   test_deleteStudent_isNotFirst_isNotLast();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);
 }
 
 
