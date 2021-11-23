@@ -320,7 +320,7 @@ void test_inputStudent(){
 
 */
 void test_addStudent_isFirstNode(){
-  printf("%s-->", __func__);
+  printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
   initList(list);
@@ -351,7 +351,7 @@ void test_addStudent_isFirstNode(){
 
 */
 void test_addStudent_isLastNode(){
-  printf("%s-->", __func__);
+  printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
   initList(list);
@@ -388,7 +388,7 @@ void test_addStudent_isLastNode(){
 
 */
 void test_addStudent_isNotFirstNode_isNotLastNode(){
-  printf("%s-->", __func__);
+  printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
   initList(list);
@@ -402,25 +402,25 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
   initStudent(s2);
 
   strcpy(s0->matrikelNr, "test2");
-  strcpy(s1->matrikelNr, "test5");
-  strcpy(s2->matrikelNr, "test3");
+  strcpy(s1->matrikelNr, "test3");
+  strcpy(s2->matrikelNr, "test5");
 
   addStudent(list, s0);
   addStudent(list, s1);
   addStudent(list, s2);
 
   assert(list->first_node == s0);
-  assert(list->last_node == s1);
+  assert(list->last_node == s2);
   assert(list->length == 3);
 
   assert(s0->next_node == s1);
   assert(s0->prev_node == NULL);
 
-  assert(s1->next_node == NULL);
-  assert(s1->prev_node == s1);
+  assert(s1->next_node == s2);
+  assert(s1->prev_node == s0);
 
-  assert(s2->next_node == s1);
-  assert(s2->prev_node == s0);
+  assert(s2->next_node == NULL);
+  assert(s2->prev_node == s1);
 
   printf("success");
   fflush(stdout);
@@ -431,10 +431,18 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
 
 */
 void test_addStudent(){
+  printf("TEST::%s\n", __func__);
 
   test_addStudent_isFirstNode();
+  printf("\n");
+
   test_addStudent_isLastNode();
+  printf("\n");
+
   test_addStudent_isNotFirstNode_isNotLastNode();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);
 }
 
 
@@ -622,7 +630,7 @@ void test_getStudentByMatrikelNr(){
 
 int main(){
  
-  test_addStudent_isFirstNode();
+  test_addStudent();
 
   return 0;
 }
