@@ -320,7 +320,7 @@ void test_inputStudent(){
 
 */
 void test_addStudent_isFirstNode(){
-  printf("TEST::%s::", __func__);
+  printf("%s-->", __func__);
 
   List *list = (List *) malloc(sizeof(List));
   initList(list);
@@ -343,7 +343,7 @@ void test_addStudent_isFirstNode(){
   free(s0);
   free(list);
 
-  printf("\rsucess");
+  printf("success");
   fflush(stdout);
 }
 
