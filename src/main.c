@@ -462,7 +462,7 @@ int printAllStudents(List *list){
   do{
 
     printStudentResult = printStudent(list, currentNode->matrikelNr);
-    if(printStudentResult){
+    if(printStudentResult == 1){
       counterPrinted++;
     }
 
@@ -1070,7 +1070,7 @@ TODO:
 */
 void test_printAllStudents_IfSuccessfullyPrinted0_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("\n");
+  
   printf("not implemented");
   fflush(stdout);
 }
