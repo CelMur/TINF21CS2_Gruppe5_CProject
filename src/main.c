@@ -508,9 +508,9 @@ int save(List *list, char* fileName){
 
     fprintf(f, "%s;", currentNode->matrikelNr);
     fprintf(f, "%s;", currentNode->lastname);
-    fprintf(f, "%i/%i/%i;", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
-    fprintf(f, "%i/%i/%i;", currentNode->start.month, currentNode->start.day, currentNode->start.year);
-    fprintf(f, "%i/%i/%i", currentNode->end.month, currentNode->end.day, currentNode->end.year);
+    fprintf(f, "{%i/%i/%i};", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
+    fprintf(f, "%i/%i/%i};", currentNode->start.month, currentNode->start.day, currentNode->start.year);
+    fprintf(f, "{%i/%i/%i}", currentNode->end.month, currentNode->end.day, currentNode->end.year);
     
     if(currentNode != list->last_node){
       fprintf(f, "\n");
@@ -529,7 +529,7 @@ int save(List *list, char* fileName){
 int read(List *List, char *fileName){
   FILE *f = fopen(fileName, "r");
 
-  
+
 
   fclose(fileName);
 
