@@ -1538,10 +1538,10 @@ void test_compareDates_IfDate1GreaterDate2_ShouldReturn_1(){
 void test_compareDates_IfDate1EqualsDate2_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
-  Date date1 = {24,11,2021};
-  Date date2 = {24,11,2021};
+  Date d1 = {24,11,2021};
+  Date d2 = {24,11,2021};
 
-  int returnValue = compareDates(&date1, &date2); 
+  int returnValue = compareDates(&d1, &d2); 
     
   assert(returnValue == 0);
 
@@ -1580,7 +1580,15 @@ void test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1(){
 */
 void test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+
+  Date *d1 = NULL;
+  Date d2;
+
+  int returnValue = compareDates(d1, &d2);
+  
+  assert(returnValue == -2);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1588,8 +1596,16 @@ void test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2(){
 
 */
 void test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2(){
-  printf("-->%s::", __func__);
-  printf("not implemented");
+ printf("-->%s::", __func__);
+
+  Date d1;
+  Date *d2 = NULL;
+
+  int returnValue = compareDates(&d1, d2);
+  
+  assert(returnValue == -2);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1598,6 +1614,12 @@ void test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2(){
 */
 void test_compareDates(){
   printf("TEST::%s\n", __func__);
+  
+  test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2();
+  printf("\n");
+
+  test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2();
+  printf("\n");
 
   test_compareDates_IfDate1GreaterDate2_ShouldReturn_1();
   printf("\n");
@@ -1606,12 +1628,6 @@ void test_compareDates(){
   printf("\n");
 
   test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1();
-  printf("\n");
-
-  test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2();
-  printf("\n");
-
-  test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);
