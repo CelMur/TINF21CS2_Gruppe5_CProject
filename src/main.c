@@ -133,13 +133,13 @@ int compareDates(Date *date1, Date *date2){
   if(date2 == NULL) return -2;
 
   if(date1->year > date2->year) return 1;
-  if(date1->year < date2->year) return 0;
+  if(date1->year < date2->year) return -1;
 
   if(date1->month > date2->month) return 1;
-  if(date1->month < date2->month) return 0;
+  if(date1->month < date2->month) return -1;
 
   if(date1->day > date2->day) return 1;
-  if(date1->day < date2->day) return 0;
+  if(date1->day < date2->day) return -1;
 
   return 0;
 }
@@ -1511,7 +1511,24 @@ void test_studentIsValid(){
 */
 void test_compareDates_IfDate1GreaterDate2_ShouldReturn_1(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+
+  Date dates[5] = {
+    {31,8,2021},
+    {31,8,2020},
+    {31,7,2020},
+    {30,7,2020}
+  };
+
+  int datesLen = sizeof(dates) / sizeof(Date);
+  int returnValue;
+
+  for(int i = 0; i < datesLen - 1; i++){
+    
+    returnValue = compareDates(&dates[i], &dates[i+1]);  
+    assert(returnValue == 1);
+  }
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1520,7 +1537,15 @@ void test_compareDates_IfDate1GreaterDate2_ShouldReturn_1(){
 */
 void test_compareDates_IfDate1EqualsDate2_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+
+  Date date1 = {24,11,2021};
+  Date date2 = {24,11,2021};
+
+  int returnValue = compareDates(&date1, &date2); 
+    
+  assert(returnValue == 0);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1528,8 +1553,25 @@ void test_compareDates_IfDate1EqualsDate2_ShouldReturn_0(){
 
 */
 void test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1(){
-  printf("-->%s::", __func__);
-  printf("not implemented");
+ printf("-->%s::", __func__);
+
+  Date dates[4] = {
+    {30,7,2020},
+    {31,7,2020},
+    {31,8,2020},
+    {31,8,2021}
+  };
+
+  int datesLen = sizeof(dates) / sizeof(Date);
+  int returnValue;
+
+  for(int i = 0; i < datesLen - 1; i++){
+    
+    returnValue = compareDates(&dates[i], &dates[i+1]);  
+    assert(returnValue == -1);
+  }
+
+  printf("success");
   fflush(stdout);
 }
 
