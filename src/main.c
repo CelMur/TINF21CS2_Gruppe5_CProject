@@ -206,6 +206,15 @@ int compareNodes(Student *node1, Student *node2){
 }
 
 
+/*//printNumberStudents//
+  returns 1 if successfull
+  returns 0 if not successfull
+  returns -1 if list == NULL
+*/
+int printNumberStudents(List *list){
+
+}
+
 /*//getStudentByMatrikelNr//
   returns a Student from 'list' by comparing 'matrikelNr'
 */
