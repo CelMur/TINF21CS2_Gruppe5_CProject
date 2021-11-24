@@ -132,8 +132,8 @@ int dateIsValid(Date *date){
 int studentIsValid(Student *student){
   if(student == NULL) return -1;
 
-  if(student->lastname == "") return 0;
-  if(student->matrikelNr == "") return 0;
+  if(strcmp(student->lastname,"") == 0) return 0;
+  if(strcmp(student->matrikelNr, "") == 0) return 0;
   if(dateIsValid(&student->birthday) == 0) return 0;
   if(dateIsValid(&student->start) == 0) return 0;
   if(dateIsValid(&student->end) == 0) return 0;
@@ -860,6 +860,8 @@ void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
   printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
+  initList(list);
+  
   char *targetMatrikelNr = "test5";
   
   int returnValue = printStudent(list, targetMatrikelNr);
@@ -1255,7 +1257,29 @@ void test_studentIsValid_IfValid_ShouldRerurn_1(){
 */
 void test_studentIsValid_IfLastnameIsInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.matrikelNr, "test5");
+
+  setDate(&s0.birthday, 10, 2, 1999);
+  setDate(&s0.start, 1, 10, 2021);
+  setDate(&s0.end, 30, 9, 2024);
+
+  assert(dateIsValid(&s0.birthday));
+  assert(dateIsValid(&s0.start));
+  assert(dateIsValid(&s0.end));
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 0);
+  assert(strcmp(s0.lastname, "") == 0);
+  assert(strcmp(s0.matrikelNr, "test5") == 0);
+  assert(s0.birthday.day == 10 && s0.birthday.month == 2 && s0.birthday.year == 1999);
+  assert(s0.start.day == 1 && s0.start.month == 10 && s0.start.year == 2021);
+  assert(s0.end.day == 30 && s0.end.month == 9 && s0.end.year == 2024);
+
+  printf("success");
   fflush(stdout);
 }
 
