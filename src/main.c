@@ -161,6 +161,9 @@ int studentIsValid(Student *student){
   if(dateIsValid(&student->start) == 0) return 0;
   if(dateIsValid(&student->end) == 0) return 0;
 
+  if(compareDates(&student->start, &student->end) == 0) return 0;
+  if(compareDates(&student->start, &student->end) == 1) return 0;
+
   return 1;
 }
 
@@ -1438,7 +1441,30 @@ TODO:
 */
 void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.lastname, "mustermann");
+  strcpy(s0.matrikelNr, "test5");
+
+  setDate(&s0.birthday, 10, 2, 1999);
+  setDate(&s0.start, 30, 9, 2024);
+  setDate(&s0.end, 1, 10, 2021);
+
+  assert(dateIsValid(&s0.birthday));
+  assert(dateIsValid(&s0.start));
+  assert(dateIsValid(&s0.end));
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 0);
+  assert(strcmp(s0.lastname, "mustermann") == 0);
+  assert(strcmp(s0.matrikelNr, "test5") == 0);
+  assert(s0.birthday.day == 10 && s0.birthday.month == 2 && s0.birthday.year == 1999);
+  assert(s0.start.day == 30 && s0.start.month == 9 && s0.start.year == 2024);
+  assert(s0.end.day == 1 && s0.end.month == 10 && s0.end.year == 2021);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1447,7 +1473,30 @@ TODO:
 */
 void test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.lastname, "mustermann");
+  strcpy(s0.matrikelNr, "test5");
+
+  setDate(&s0.birthday, 10, 2, 1999);
+  setDate(&s0.start, 1, 10, 2021);
+  setDate(&s0.end, 1, 10, 2021);
+
+  assert(dateIsValid(&s0.birthday));
+  assert(dateIsValid(&s0.start));
+  assert(dateIsValid(&s0.end));
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 0);
+  assert(strcmp(s0.lastname, "mustermann") == 0);
+  assert(strcmp(s0.matrikelNr, "test5") == 0);
+  assert(s0.birthday.day == 10 && s0.birthday.month == 2 && s0.birthday.year == 1999);
+  assert(s0.start.day == 1 && s0.start.month == 10 && s0.start.year == 2021);
+  assert(s0.end.day == 1 && s0.end.month == 10 && s0.end.year == 2021);
+
+  printf("success");
   fflush(stdout);
 }
 
