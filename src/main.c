@@ -441,7 +441,7 @@ int printStudent(List *list, char *matrikelNr){
 /*//printAllStudents//
 
 */
-void printAllStudents(char *matrikelNr){
+void printAllStudents(List *list){
 
 }
 
