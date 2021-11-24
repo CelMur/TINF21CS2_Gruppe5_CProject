@@ -439,7 +439,7 @@ int printStudent(List *list, char *matrikelNr){
   printf("    'birthday' = '%02i/%02i/%i',\n", node->birthday.month, node->birthday.day, node->birthday.year);
   printf("    'studyStart' = '%02i/%02i/%i',\n", node->start.month, node->start.day, node->start.year);
   printf("    'studyEnd' = '%02i/%02i/%i',\n", node->end.month, node->end.day, node->end.year);
-  printf("  }");
+  printf("  }\n");
 
   return 1;
 }
@@ -466,8 +466,12 @@ int printAllStudents(List *list){
       counterPrinted++;
     }
 
-    if(currentNode->next_node == NULL) break;
-    currentNode = currentNode->next_node;
+    if(currentNode->next_node != NULL){
+      hasNext = 1;
+      currentNode = currentNode->next_node;
+    }else{
+      hasNext = 0;
+    }
   }while(hasNext);
   
   return counterPrinted;
@@ -1070,8 +1074,37 @@ TODO:
 */
 void test_printAllStudents_IfSuccessfullyPrinted0_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  
-  printf("not implemented");
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+  initStudent(s1);
+  initStudent(s2);
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s1->matrikelNr, "test3");
+  strcpy(s2->matrikelNr, "test5");
+ 
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
+
+  int returnValue = printAllStudents(list);
+
+  assert(returnValue == 0);
+  //TODO: assert vlaues not changed
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1081,7 +1114,52 @@ TODO:
 void test_printAllStudents_IfSuccessfull_ShouldReturn_NumberSuccessfullyPrinted(){
   printf("-->%s::", __func__);
   printf("\n");
-  printf("not implemented");
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+  initStudent(s1);
+  initStudent(s2);
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s0->lastname, "otto");
+  setDate(&s0->birthday, 11, 11, 1998);
+  setDate(&s0->start, 1, 10, 2021);
+  setDate(&s0->end, 30, 9, 2024);
+
+  strcpy(s1->matrikelNr, "test3");
+  strcpy(s1->lastname, "mueller");
+  setDate(&s1->birthday, 21, 8, 1997);
+  setDate(&s1->start, 1, 10, 2021);
+  setDate(&s1->end, 30, 9, 2024);
+  
+  strcpy(s2->matrikelNr, "test5");
+  strcpy(s2->lastname, "mustermann");
+  setDate(&s2->birthday, 10, 11, 2000);
+  setDate(&s2->start, 1, 10, 2021);
+  setDate(&s2->end, 30, 9, 2024);
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
+
+  int returnValue = printAllStudents(list);
+
+  assert(returnValue == 3);
+  assert(list->length == 3);
+  //TODO: assert values not changed
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1090,8 +1168,13 @@ TODO:
 */
 void test_printAllStudents_IfListIsNULL_ShouldReturn_Minus1(){
   printf("-->%s::", __func__);
-  printf("\n");
-  printf("not implemented");
+  
+  List *list = NULL;
+  int returnValue = printAllStudents(list);
+
+  assert(returnValue == -1);
+  
+  printf("success");
   fflush(stdout);
 }
 
