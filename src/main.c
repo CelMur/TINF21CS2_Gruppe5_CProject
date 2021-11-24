@@ -116,7 +116,11 @@ int dateIsValid(Date *date){
 
 
 /*//studentIsValid//
+
+  return 1 if valid
+  returns 0 if any data is invalid
   returns -1 if student is NULL
+
 */
 int studentIsValid(Student *student){
   if(student == NULL) return -1;
@@ -369,11 +373,8 @@ int printStudent(List *list, char *matrikelNr){
   if(list == NULL) return -1;
   Student *node = getStudentByMatrikelNr(list, matrikelNr);
 
-  if(node == NULL){
-    return -2;
-  }
-
-  //TODO:validateStudent
+  if(node == NULL) return -2;
+  if(studentIsValid(node) != 1) return 0;
 
   printf("'Student'=\n");
   printf("  {\n");
@@ -1215,7 +1216,30 @@ void test_setDate(){
 */
 void test_studentIsValid_IfValid_ShouldRerurn_1(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.lastname, "mustermann");
+  strcpy(s0.matrikelNr, "test5");
+
+  setDate(&s0.birthday, 10, 2, 1999);
+  setDate(&s0.start, 1, 10, 2021);
+  setDate(&s0.end, 30, 9, 2024);
+
+  assert(dateIsValid(&s0.birthday));
+  assert(dateIsValid(&s0.start));
+  assert(dateIsValid(&s0.end));
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 1);
+  assert(strcmp(s0.lastname, "mustermann") == 0);
+  assert(strcmp(s0.matrikelNr, "test5") == 0);
+  assert(s0.birthday.day == 10 && s0.birthday.month == 2 && s0.birthday.year == 1999);
+  assert(s0.start.day == 1 && s0.start.month == 10 && s0.start.year == 2021);
+  assert(s0.end.day == 30 && s0.end.month == 9 && s0.end.year == 2024);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1264,6 +1288,25 @@ void test_studentIsValid_IfEndIsInvalid_ShouldReturn_0(){
   fflush(stdout);
 }
 
+/*//test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0//
+
+*/
+void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0//
+
+*/
+void test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+
 /*//test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1//
 
 */
@@ -1299,6 +1342,12 @@ void test_studentIsValid(){
   printf("\n");
 
   test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1();
+  printf("\n");
+
+  test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0();
+  printf("\n");
+
+  test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);  
