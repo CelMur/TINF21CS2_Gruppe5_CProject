@@ -944,7 +944,7 @@ void test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1(){
 
   free(list);
 
-  printf("successfull");
+  printf("success");
   fflush(stdout);
 }
 
@@ -966,7 +966,7 @@ void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
 
   free(list);
 
-  printf("successfull");
+  printf("success");
   fflush(stdout);
 }
 
@@ -1942,7 +1942,6 @@ void test_all(){
   test_printNumberStudents();
   test_save();
   test_read();
-
   test_menue();
 }
 
