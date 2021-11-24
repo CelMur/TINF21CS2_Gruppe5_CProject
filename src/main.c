@@ -212,7 +212,14 @@ int compareNodes(Student *node1, Student *node2){
   returns -1 if list == NULL
 */
 int printNumberStudents(List *list){
+  if(list == NULL) return -1;
+  //TODO: get the number Students from file
+  printf("\n");
+  printf("Anzahl Studenten (current)::\n");
+  print("Anzahl Studenten (saved)::\n");
+  printf("\n");
 
+  return 1;
 }
 
 /*//getStudentByMatrikelNr//
