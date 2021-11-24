@@ -445,7 +445,7 @@ int printStudent(List *list, char *matrikelNr){
 */
 int printAllStudents(List *list){
   
-  if(lists == NULL) return -1;
+  if(list == NULL) return -1;
 
   Student *currentNode = list->first_node;
   int hasNext = 0;
@@ -453,7 +453,7 @@ int printAllStudents(List *list){
 
   do{
 
-    printResult = printStudent(currentNode->matrikelNr);
+    printResult = printStudent(list, currentNode->matrikelNr);
 
     if(currentNode->next_node == NULL) break;
     currentNode = currentNode->next_node;
@@ -1029,12 +1029,38 @@ void test_printStudent(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
+/*//test_printAllStudents_IfSuccessful_ShouldReturn_1()
+TODO:
+*/
+void test_printAllStudents_IfSuccessful_ShouldReturn_1(){
+  printf("-->%s::", __func__);
+  printf("\n");
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_printAllStudents_IfListIsNULL_ShouldReturn_Minus1()
+TODO:
+*/
+void test_printAllStudents_IfListIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+  printf("\n");
+  printf("not implemented");
+  fflush(stdout);
+}
+
 /*//test_printAllStudents()
 TODO:
 */
 void test_printAllStudents(){
   printf("TEST::%s\n", __func__);
+
+  test_printAllStudents_IfListIsNULL_ShouldReturn_Minus1();
   printf("\n");
+
+  test_printAllStudents_IfSuccessful_ShouldReturn_1();
+  printf("\n");
+
   printf("END_TEST::%s::not implemented\n\n", __func__);
 }
 
