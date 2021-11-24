@@ -7,6 +7,9 @@
 const int MIN_YEAR = 1900;
 const int MAX_YEAR = 2100;
 
+static char SAVE_FILE[20] = "saveFile.csv";
+static char TEST_SAVE_FILE[20] = "testSaveFile.csv";
+
 typedef struct Date{
   int day;
   int month;
@@ -487,11 +490,11 @@ void menue(){
   return 1 if successfull
   return -1 for any bad parameter
 */
-int save(List *list){
+int save(List *list, char* fileName){
   
   if(list == NULL) return -1;
 
-  FILE *f = fopen("savefile.csv", "w");
+  FILE *f = fopen(fileName, "w");
 
   Student *currentNode;
 
@@ -1961,7 +1964,7 @@ void test_save(){
   addStudent(list, s1);
   addStudent(list, s2);
 
-  save(list);
+  save(list, TEST_SAVE_FILE);
 
   free(s0);
   free(s1);
