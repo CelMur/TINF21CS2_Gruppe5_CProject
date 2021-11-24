@@ -1474,7 +1474,7 @@ void test_studentIsValid_IfEndIsInvalid_ShouldReturn_0(){
 }
 
 /*//test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0//
-TODO:
+
 */
 void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0(){
   printf("-->%s::", __func__);
@@ -1506,7 +1506,7 @@ void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0(){
 }
 
 /*//test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0//
-TODO:
+
 */
 void test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0(){
   printf("-->%s::", __func__);
