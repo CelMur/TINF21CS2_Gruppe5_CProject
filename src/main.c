@@ -1065,10 +1065,20 @@ void test_printStudent(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
-/*//test_printAllStudents_IfSuccessful_ShouldReturn_1()
+/*//test_printAllStudents_IfSuccessfullyPrinted0_ShouldReturn_0()
 TODO:
 */
-void test_printAllStudents_IfSuccessful_ShouldReturn_1(){
+void test_printAllStudents_IfSuccessfullyPrinted0_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("\n");
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_printAllStudents_IfSuccessfull_ShouldReturn_NumberSuccessfullyPrinted()
+TODO:
+*/
+void test_printAllStudents_IfSuccessfull_ShouldReturn_NumberSuccessfullyPrinted(){
   printf("-->%s::", __func__);
   printf("\n");
   printf("not implemented");
@@ -1094,10 +1104,13 @@ void test_printAllStudents(){
   test_printAllStudents_IfListIsNULL_ShouldReturn_Minus1();
   printf("\n");
 
-  test_printAllStudents_IfSuccessful_ShouldReturn_1();
+  test_printAllStudents_IfSuccessfullyPrinted0_ShouldReturn_0();
   printf("\n");
 
-  printf("END_TEST::%s::not implemented\n\n", __func__);
+  test_printAllStudents_IfSuccessfull_ShouldReturn_NumberSuccessfullyPrinted();
+  printf("\n");
+
+  printf("END_TEST::%s::succes\n\n", __func__);
 }
 
 
