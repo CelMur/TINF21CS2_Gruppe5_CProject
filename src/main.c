@@ -414,7 +414,7 @@ int deleteStudent(List *list, char *matrikelNr){
 }
 
 
-/*//printStudent//
+/*//printStudentByMatrikelNr//
   searches for student with 'matrikelNr' and prints its data
 
   returns 1 if successfull
@@ -422,7 +422,7 @@ int deleteStudent(List *list, char *matrikelNr){
   returns -1 if any parameter is bad
   returns -2 if matrikelNr not found
 */
-int printStudent(List *list, char *matrikelNr){
+int printStudentByMatrikelNr(List *list, char *matrikelNr){
 
   if(list == NULL) return -1;
   if(matrikelNr == NULL) return -1;
@@ -461,7 +461,7 @@ int printAllStudents(List *list){
 
   do{
 
-    printStudentResult = printStudent(list, currentNode->matrikelNr);
+    printStudentResult = printStudentByMatrikelNr(list, currentNode->matrikelNr);
     if(printStudentResult == 1){
       counterPrinted++;
     }
@@ -910,16 +910,16 @@ void test_getStudentByMatrikelNr(){
 }
 
 
-/*//test_printStudent_IfListIsNULL_ShouldReturn_Minus1//
+/*//test_printStudentByMatrikelNr_IfListIsNULL_ShouldReturn_Minus1//
 
 */
-void test_printStudent_IfListIsNULL_ShouldReturn_Minus1(){
+void test_printStudentByMatrikelNr_IfListIsNULL_ShouldReturn_Minus1(){
   printf("-->%s::", __func__);
 
   List *list = NULL;
   char *targetMatrikelNr = "test5";
 
-  int returnValue = printStudent(list, targetMatrikelNr);
+  int returnValue = printStudentByMatrikelNr(list, targetMatrikelNr);
 
   assert(returnValue == -1);
 
@@ -927,10 +927,10 @@ void test_printStudent_IfListIsNULL_ShouldReturn_Minus1(){
   fflush(stdout);
 }
 
-/*//test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1//
+/*//test_printStudentByMatrikelNr_IfMatrikelNrIsNULL_ShouldReturn_Minus1//
 
 */
-void test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1(){
+void test_printStudentByMatrikelNr_IfMatrikelNrIsNULL_ShouldReturn_Minus1(){
   printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
@@ -938,7 +938,7 @@ void test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1(){
 
   char *targetMatrikelNr = NULL;
 
-  int returnValue = printStudent(list, targetMatrikelNr);
+  int returnValue = printStudentByMatrikelNr(list, targetMatrikelNr);
 
   assert(returnValue == -1);
 
@@ -949,10 +949,10 @@ void test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1(){
 }
 
 
-/*//test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2//
+/*//test_printStudentByMatrikelNr_IfStudentIsNULL_ShouldReturn_Minus2//
 
 */
-void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
+void test_printStudentByMatrikelNr_IfStudentIsNULL_ShouldReturn_Minus2(){
   printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
@@ -960,7 +960,7 @@ void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
 
   char *targetMatrikelNr = "test5";
   
-  int returnValue = printStudent(list, targetMatrikelNr);
+  int returnValue = printStudentByMatrikelNr(list, targetMatrikelNr);
 
   assert(returnValue == -2);
 
@@ -970,10 +970,10 @@ void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
   fflush(stdout);
 }
 
-/*//test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0//
+/*//test_printStudentByMatrikelNr_IfStudentDataIsInvalid_ShouldReturn_0//
 
 */
-void test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0(){
+void test_printStudentByMatrikelNr_IfStudentDataIsInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
@@ -987,7 +987,7 @@ void test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0(){
 
   char *targetMatrikelNr = "test5";
 
-  int returnValue = printStudent(list, targetMatrikelNr);
+  int returnValue = printStudentByMatrikelNr(list, targetMatrikelNr);
 
   assert(returnValue == 0);
 
@@ -998,10 +998,10 @@ void test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0(){
   fflush(stdout);
 }
 
-/*//test_printStudent_IfStudentExists_ShouldReturn_1//
+/*//test_printStudentByMatrikelNr_IfStudentExists_ShouldReturn_1//
 
 */
-void test_printStudent_IfStudentExists_ShouldReturn_1(){
+void test_printStudentByMatrikelNr_IfStudentExists_ShouldReturn_1(){
   printf("-->%s::", __func__);
   printf("\n");
 
@@ -1031,7 +1031,7 @@ void test_printStudent_IfStudentExists_ShouldReturn_1(){
 
   node = getStudentByMatrikelNr(list, targetMatrikelNr);
 
-  printSuccessfull = printStudent(list, targetMatrikelNr);
+  printSuccessfull = printStudentByMatrikelNr(list, targetMatrikelNr);
 
   assert(node == s1);
   assert(printSuccessfull == 1);
@@ -1051,19 +1051,19 @@ void test_printStudent_IfStudentExists_ShouldReturn_1(){
 void test_printStudent(){
   printf("TEST::%s\n", __func__);
 
-  test_printStudent_IfStudentExists_ShouldReturn_1();
+  test_printStudentByMatrikelNr_IfStudentExists_ShouldReturn_1();
   printf("\n");
 
-  test_printStudent_IfStudentDataIsInvalid_ShouldReturn_0();
+  test_printStudentByMatrikelNr_IfStudentDataIsInvalid_ShouldReturn_0();
   printf("\n");
 
-  test_printStudent_IfListIsNULL_ShouldReturn_Minus1();
+  test_printStudentByMatrikelNr_IfListIsNULL_ShouldReturn_Minus1();
   printf("\n");
 
-  test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1();
+  test_printStudentByMatrikelNr_IfMatrikelNrIsNULL_ShouldReturn_Minus1();
   printf("\n");
 
-  test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2();
+  test_printStudentByMatrikelNr_IfStudentIsNULL_ShouldReturn_Minus2();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);
