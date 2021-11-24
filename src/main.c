@@ -861,7 +861,7 @@ void test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2(){
 
   List *list = (List *) malloc(sizeof(List));
   initList(list);
-  
+
   char *targetMatrikelNr = "test5";
   
   int returnValue = printStudent(list, targetMatrikelNr);
@@ -1288,7 +1288,29 @@ void test_studentIsValid_IfLastnameIsInvalid_ShouldReturn_0(){
 */
 void test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.lastname, "mustermann");
+
+  setDate(&s0.birthday, 10, 2, 1999);
+  setDate(&s0.start, 1, 10, 2021);
+  setDate(&s0.end, 30, 9, 2024);
+
+  assert(dateIsValid(&s0.birthday));
+  assert(dateIsValid(&s0.start));
+  assert(dateIsValid(&s0.end));
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 0);
+  assert(strcmp(s0.lastname, "mustermann") == 0);
+  assert(strcmp(s0.matrikelNr, "") == 0);
+  assert(s0.birthday.day == 10 && s0.birthday.month == 2 && s0.birthday.year == 1999);
+  assert(s0.start.day == 1 && s0.start.month == 10 && s0.start.year == 2021);
+  assert(s0.end.day == 30 && s0.end.month == 9 && s0.end.year == 2024);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1297,7 +1319,30 @@ void test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0(){
 */
 void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.lastname, "mustermann");
+  strcpy(s0.matrikelNr, "test5");
+
+  setDate(&s0.birthday, 0, 0, 0);
+  setDate(&s0.start, 1, 10, 2021);
+  setDate(&s0.end, 30, 9, 2024);
+
+  assert(dateIsValid(&s0.birthday) == 0);
+  assert(dateIsValid(&s0.start));
+  assert(dateIsValid(&s0.end));
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 0);
+  assert(strcmp(s0.lastname, "mustermann") == 0);
+  assert(strcmp(s0.matrikelNr, "test5") == 0);
+  assert(s0.birthday.day == 0 && s0.birthday.month == 0 && s0.birthday.year == 0);
+  assert(s0.start.day == 1 && s0.start.month == 10 && s0.start.year == 2021);
+  assert(s0.end.day == 30 && s0.end.month == 9 && s0.end.year == 2024);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1305,8 +1350,31 @@ void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0(){
 
 */
 void test_studentIsValid_IfStartIsInvalid_ShouldReturn_0(){
-  printf("-->%s::", __func__);
-  printf("not implemented");
+ printf("-->%s::", __func__);
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.lastname, "mustermann");
+  strcpy(s0.matrikelNr, "test5");
+
+  setDate(&s0.birthday, 10, 2, 1999);
+  setDate(&s0.start, 0, 0, 0);
+  setDate(&s0.end, 30, 9, 2024);
+
+  assert(dateIsValid(&s0.birthday));
+  assert(dateIsValid(&s0.start) == 0);
+  assert(dateIsValid(&s0.end));
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 0);
+  assert(strcmp(s0.lastname, "mustermann") == 0);
+  assert(strcmp(s0.matrikelNr, "test5") == 0);
+  assert(s0.birthday.day == 10 && s0.birthday.month == 2 && s0.birthday.year == 1999);
+  assert(s0.start.day == 0 && s0.start.month == 0 && s0.start.year == 0);
+  assert(s0.end.day == 30 && s0.end.month == 9 && s0.end.year == 2024);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -1315,12 +1383,35 @@ void test_studentIsValid_IfStartIsInvalid_ShouldReturn_0(){
 */
 void test_studentIsValid_IfEndIsInvalid_ShouldReturn_0(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student s0;
+  initStudent(&s0);
+
+  strcpy(s0.lastname, "mustermann");
+  strcpy(s0.matrikelNr, "test5");
+
+  setDate(&s0.birthday, 10, 2, 1999);
+  setDate(&s0.start, 1, 10, 2021);
+  setDate(&s0.end, 0, 0, 0);
+
+  assert(dateIsValid(&s0.birthday));
+  assert(dateIsValid(&s0.start));
+  assert(dateIsValid(&s0.end) == 0);
+
+  int returnValue = studentIsValid(&s0);
+
+  assert(returnValue == 0);
+  assert(strcmp(s0.lastname, "mustermann") == 0);
+  assert(strcmp(s0.matrikelNr, "test5") == 0);
+  assert(s0.birthday.day == 10 && s0.birthday.month == 2 && s0.birthday.year == 1999);
+  assert(s0.start.day == 1 && s0.start.month == 10 && s0.start.year == 2021);
+  assert(s0.end.day == 0 && s0.end.month == 0 && s0.end.year == 0);
+
+  printf("success");
   fflush(stdout);
 }
 
 /*//test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0//
-
+TODO:
 */
 void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0(){
   printf("-->%s::", __func__);
@@ -1329,7 +1420,7 @@ void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0(){
 }
 
 /*//test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0//
-
+TODO:
 */
 void test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0(){
   printf("-->%s::", __func__);
