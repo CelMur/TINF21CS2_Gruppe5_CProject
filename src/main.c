@@ -951,8 +951,8 @@ void test_printStudent_IfStudentExists_ShouldReturn_1(){
   strcpy(s1->matrikelNr, "test5");
   strcpy(s1->lastname, "mustermann");
   setDate(&s1->birthday, 10, 11, 2000);
-  setDate(&s1->start, 1, 10, 2000);
-  setDate(&s1->end, 30, 9, 2000);
+  setDate(&s1->start, 1, 10, 2021);
+  setDate(&s1->end, 30, 9, 2024);
 
   addStudent(list, s0);
   addStudent(list, s1);
