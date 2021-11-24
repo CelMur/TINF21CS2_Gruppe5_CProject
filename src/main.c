@@ -63,28 +63,7 @@ int initStudent(Student *student){
 }
 
 
-/*//createStudent//
-  return a Student *
-  returns NULL if any parameter is invalid
-*/
-Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end){
 
-  Student student;
-  initStudent(&student);
-
-  if(matrikelNr == NULL) return NULL;
-  if(lastname == NULL) return NULL;
-
-  strcpy(student.matrikelNr, matrikelNr);
-  strcpy(student.lastname, lastname);
-  student.birthday = birthday;
-  student.start = start;
-  student.end = end;
-
-  if(studentIsValid(&student) != 1) return NULL;
-
-  return &student;
-}
 
 
 /*//dateIsLeapYear//
@@ -192,6 +171,30 @@ int studentIsValid(Student *student){
   if(compareDates(&student->start, &student->end) == 1) return 0;
 
   return 1;
+}
+
+
+/*//createStudent//
+  return a Student *
+  returns NULL if any parameter is invalid
+*/
+Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end){
+
+  Student student;
+  initStudent(&student);
+
+  if(matrikelNr == NULL) return NULL;
+  if(lastname == NULL) return NULL;
+
+  strcpy(student.matrikelNr, matrikelNr);
+  strcpy(student.lastname, lastname);
+  student.birthday = birthday;
+  student.start = start;
+  student.end = end;
+
+  if(studentIsValid(&student) != 1) return NULL;
+
+  return &student;
 }
 
 
@@ -2012,6 +2015,65 @@ void test_read(){
 }
 
 
+/*//test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL//
+
+*/
+void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL//
+
+*/
+void test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+
+/*//test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL//
+
+*/
+void test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_createStudent_If_ShouldReturn_Pointer//
+
+*/
+void test_createStudent_IfStudentIsValid_ShouldReturn_Pointer(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_createStudent//
+
+*/
+void test_createStudent(){
+  printf("TEST::%s\n", __func__);
+
+  test_createStudent_IfStudentIsValid_ShouldReturn_Pointer();
+  printf("\n");
+
+  test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL();
+  printf("\n");
+
+  test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL();
+  printf("\n");
+
+  test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL();
+  printf("\n");
+
+  printf("END_TEST::%s::not implemented\n\n", __func__);
+}
+
+
 /*//test_menue//
 
 */
@@ -2031,6 +2093,7 @@ void test_all(){
   test_compareDates();
 
   test_studentIsValid();
+  test_createStudent();
 
   test_addStudent();
   test_getStudentByMatrikelNr();
