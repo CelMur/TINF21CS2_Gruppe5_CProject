@@ -413,7 +413,6 @@ int deleteStudent(List *list, char *matrikelNr){
  return zwischenspeicher;
 }
 
-
 /*//printStudentByMatrikelNr//
   searches for student with 'matrikelNr' and prints its data
 
@@ -485,10 +484,39 @@ void menue(){
 }
 
 /*//save//
-
+  return 1 if successfull
+  return -1 for any bad parameter
 */
-void save(List *list){
+int save(List *list){
+  
+  if(list == NULL) return -1;
 
+  FILE *f = fopen("savefile.csv", "w");
+
+  Student *currentNode;
+
+  for(int i = 0; i < list->length; i++){
+
+    if(i == 0){
+       currentNode = list->first_node;
+    }else{
+      currentNode = currentNode->next_node;
+    }
+
+    fprintf(f, "%s;", currentNode->matrikelNr);
+    fprintf(f, "%s;", currentNode->lastname);
+    fprintf(f, "%i/%i/%i;", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
+    fprintf(f, "%i/%i/%i;", currentNode->start.month, currentNode->start.day, currentNode->start.year);
+    fprintf(f, "%i/%i/%i", currentNode->end.month, currentNode->end.day, currentNode->end.year);
+    
+    if(currentNode != list->last_node){
+      fprintf(f, "\n");
+    }
+  }
+
+  fclose(f);
+
+  return 1;
 }
 
 
@@ -1900,8 +1928,47 @@ void test_compareDates(){
 */
 void test_save(){
   printf("TEST::%s\n", __func__);
-  printf("\n");
-  printf("END_TEST::%s::not implemented\n\n", __func__);
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+  initStudent(s1);
+  initStudent(s2);
+
+  strcpy(s0->matrikelNr, "test2");
+  strcpy(s0->lastname, "otto");
+  setDate(&s0->birthday, 11, 11, 1998);
+  setDate(&s0->start, 1, 10, 2021);
+  setDate(&s0->end, 30, 9, 2024);
+
+  strcpy(s1->matrikelNr, "test3");
+  strcpy(s1->lastname, "mueller");
+  setDate(&s1->birthday, 21, 8, 1997);
+  setDate(&s1->start, 1, 10, 2021);
+  setDate(&s1->end, 30, 9, 2024);
+  
+  strcpy(s2->matrikelNr, "test5");
+  strcpy(s2->lastname, "mustermann");
+  setDate(&s2->birthday, 10, 11, 2000);
+  setDate(&s2->start, 1, 10, 2021);
+  setDate(&s2->end, 30, 9, 2024);
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
+
+  save(list);
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
+
+  printf("END_TEST::%s::success\n\n", __func__);
 }
 
 /*//test_read//
