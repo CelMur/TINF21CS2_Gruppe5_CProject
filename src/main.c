@@ -415,11 +415,18 @@ int deleteStudent(List *list, char *matrikelNr){
 
 
 /*//printStudent//
-
+  searches for student with 'matrikelNr' and prints its data
+  
+  returns 1 if successfull
+  returns 0 if student invalid
+  returns -1 if any parameter is bad
+  returns -2 if matrikelNr not found
 */
 int printStudent(List *list, char *matrikelNr){
 
   if(list == NULL) return -1;
+  if(matrikelNr == NULL) return -1;
+
   Student *node = getStudentByMatrikelNr(list, matrikelNr);
 
   if(node == NULL) return -2;
@@ -439,8 +446,8 @@ int printStudent(List *list, char *matrikelNr){
 
 
 /*//printAllStudents//
-  returns 1 if successfull
-  returns 0 if failed
+  returns number of successfully printed students (>= 0) 
+
   returns -1 list == NULL
 */
 int printAllStudents(List *list){
@@ -449,17 +456,21 @@ int printAllStudents(List *list){
 
   Student *currentNode = list->first_node;
   int hasNext = 0;
-  int printResult = 0;
+  int printStudentResult = 0;
+  int counterPrinted = 0;
 
   do{
 
-    printResult = printStudent(list, currentNode->matrikelNr);
+    printStudentResult = printStudent(list, currentNode->matrikelNr);
+    if(printStudentResult){
+      counterPrinted++;
+    }
 
     if(currentNode->next_node == NULL) break;
     currentNode = currentNode->next_node;
   }while(hasNext);
   
-  return 1;
+  return counterPrinted;
 }
 
 /*//menue//
