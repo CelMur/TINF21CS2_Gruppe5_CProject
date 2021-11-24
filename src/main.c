@@ -1012,10 +1012,10 @@ void test_printStudent(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
-/*//test_printAllStudent()
+/*//test_printAllStudents()
 TODO:
 */
-void test_printAllStudent(){
+void test_printAllStudents(){
   printf("TEST::%s\n", __func__);
   printf("\n");
   printf("END_TEST::%s::not implemented\n\n", __func__);
@@ -1763,7 +1763,7 @@ void test_all(){
   test_getStudentByMatrikelNr();
   test_deleteStudent();
   test_printStudent();
-  test_printAllStudent();
+  test_printAllStudents();
   test_printNumberStudents();
   test_save();
   test_read();
