@@ -63,6 +63,30 @@ int initStudent(Student *student){
 }
 
 
+/*//createStudent//
+  return a Student *
+  returns NULL if any parameter is invalid
+*/
+Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end){
+
+  Student student;
+  initStudent(&student);
+
+  if(matrikelNr == NULL) return NULL;
+  if(lastname == NULL) return NULL;
+
+  strcpy(student.matrikelNr, matrikelNr);
+  strcpy(student.lastname, lastname);
+  student.birthday = birthday;
+  student.start = start;
+  student.end = end;
+
+  if(studentIsValid(&student) != 1) return NULL;
+
+  return &student;
+}
+
+
 /*//dateIsLeapYear//
   return 1 if the date is valid
   returns 0 if the date is invalid
@@ -529,9 +553,7 @@ int save(List *list, char* fileName){
 int read(List *List, char *fileName){
   FILE *f = fopen(fileName, "r");
 
-
-
-  fclose(fileName);
+  fclose(f);
 
   return 1;
 }
