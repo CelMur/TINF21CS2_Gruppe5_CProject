@@ -216,7 +216,7 @@ int printNumberStudents(List *list){
   //TODO: get the number Students from file
   printf("\n");
   printf("Anzahl Studenten (current)::\n");
-  print("Anzahl Studenten (saved)::\n");
+  printf("Anzahl Studenten (saved)::\n");
   printf("\n");
 
   return 1;
@@ -1012,8 +1012,13 @@ void test_printStudent(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
+/*//test_printAllStudent()
+TODO:
+*/
 void test_printAllStudent(){
-
+  printf("TEST::%s\n", __func__);
+  printf("\n");
+  printf("END_TEST::%s::not implemented\n\n", __func__);
 }
 
 
@@ -1699,6 +1704,34 @@ void test_compareDates(){
 }
 
 
+/*//test_save//
+
+*/
+void test_save(){
+  printf("TEST::%s\n", __func__);
+  printf("\n");
+  printf("END_TEST::%s::not implemented\n\n", __func__);
+}
+
+/*//test_read//
+
+*/
+void test_read(){
+  printf("TEST::%s\n", __func__);
+  printf("\n");
+  printf("END_TEST::%s::not implemented\n\n", __func__);
+}
+
+
+/*//test_menue//
+
+*/
+void test_menue(){
+  printf("TEST::%s\n", __func__);
+  printf("\n");
+  printf("END_TEST::%s::not implemented\n\n", __func__);
+}
+
 /*//test_all//
 
 */
@@ -1714,6 +1747,9 @@ void test_all(){
   test_getStudentByMatrikelNr();
   test_deleteStudent();
   test_printStudent();
+  test_printAllStudent();
+
+  test_menue();
 }
 
 int main(){
