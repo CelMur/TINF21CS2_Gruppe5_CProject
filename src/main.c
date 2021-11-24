@@ -180,21 +180,28 @@ int studentIsValid(Student *student){
 */
 Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end){
 
-  Student student;
-  initStudent(&student);
+  Student *student = (Student *) malloc(sizeof(Student));
+  initStudent(student);
 
-  if(matrikelNr == NULL) return NULL;
-  if(lastname == NULL) return NULL;
+  if(matrikelNr == NULL || lastname == NULL){
 
-  strcpy(student.matrikelNr, matrikelNr);
-  strcpy(student.lastname, lastname);
-  student.birthday = birthday;
-  student.start = start;
-  student.end = end;
+    free(student);
+    return NULL;
+  } 
 
-  if(studentIsValid(&student) != 1) return NULL;
+  strcpy(student->matrikelNr, matrikelNr);
+  strcpy(student->lastname, lastname);
+  student->birthday = birthday;
+  student->start = start;
+  student->end = end;
 
-  return &student;
+  if(studentIsValid(student) != 1){
+
+    free(student);
+    return NULL;
+  } 
+
+  return student;
 }
 
 
@@ -2020,7 +2027,18 @@ void test_read(){
 */
 void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+
+  char *matrikelNr = NULL;
+  char *lastname = "mustermann";
+  Date birthday = {18,11,1998};
+  Date start = {1,10,2021};
+  Date end = {30,9,2024};
+
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+
+  assert(returnValue == NULL);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -2029,7 +2047,18 @@ void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL(){
 */
 void test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+
+  char *matrikelNr = "test2";
+  char *lastname = NULL;
+  Date birthday = {18,11,1998};
+  Date start = {1,10,2021};
+  Date end = {30,9,2024};
+
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+
+  assert(returnValue == NULL);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -2039,7 +2068,18 @@ void test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL(){
 */
 void test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+
+  char *matrikelNr = "test2";
+  char *lastname = "mustermann";
+  Date birthday = {45,11,1998};
+  Date start = {0,10,2021};
+  Date end = {31,9,2024};
+
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+
+  assert(returnValue == NULL);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -2048,7 +2088,23 @@ void test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL(){
 */
 void test_createStudent_IfStudentIsValid_ShouldReturn_Pointer(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+
+  char *matrikelNr = "mustermann";
+  char *lastname = "test2";
+  Date birthday = {18,11,1998};
+  Date start = {1,10,2021};
+  Date end = {30,9,2024};
+
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+
+  assert(returnValue != NULL);
+  assert(strcmp(returnValue->matrikelNr, matrikelNr) == 0);
+  assert(strcmp(returnValue->lastname, lastname) == 0);
+  assert(compareDates(&returnValue->birthday, &birthday) == 0);
+  assert(compareDates(&returnValue->start, &start) == 0);
+  assert(compareDates(&returnValue->end, &end) == 0);
+
+  printf("success");
   fflush(stdout);
 }
 
@@ -2057,9 +2113,6 @@ void test_createStudent_IfStudentIsValid_ShouldReturn_Pointer(){
 */
 void test_createStudent(){
   printf("TEST::%s\n", __func__);
-
-  test_createStudent_IfStudentIsValid_ShouldReturn_Pointer();
-  printf("\n");
 
   test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL();
   printf("\n");
@@ -2070,7 +2123,10 @@ void test_createStudent(){
   test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL();
   printf("\n");
 
-  printf("END_TEST::%s::not implemented\n\n", __func__);
+  test_createStudent_IfStudentIsValid_ShouldReturn_Pointer();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n", __func__);
 }
 
 
