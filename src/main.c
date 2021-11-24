@@ -121,6 +121,29 @@ int dateIsValid(Date *date){
   return 1;
 }
 
+/*//compareDates//
+  returns 1 if date1 > date2
+  returns 0 if date1 == date2
+  return -1 if date1 < date2
+  return -2 if any parameter is invalid
+*/
+int compareDates(Date *date1, Date *date2){
+
+  if(date1 == NULL) return -2;
+  if(date2 == NULL) return -2;
+
+  if(date1->year > date2->year) return 1;
+  if(date1->year < date2->year) return 0;
+
+  if(date1->month > date2->month) return 1;
+  if(date1->month < date2->month) return 0;
+
+  if(date1->day > date2->day) return 1;
+  if(date1->day < date2->day) return 0;
+
+  return 0;
+}
+
 
 /*//studentIsValid//
 
@@ -1434,7 +1457,14 @@ void test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0(){
 */
 void test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1(){
   printf("-->%s::", __func__);
-  printf("not implemented");
+  Student *s0 = NULL;
+
+  int returnValue = studentIsValid(s0);
+
+  assert(returnValue == -1);
+  assert(s0 == NULL);
+
+  printf("success");
   fflush(stdout);
 }
 
