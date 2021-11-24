@@ -1505,6 +1505,77 @@ void test_studentIsValid(){
   printf("END_TEST::%s::success\n\n", __func__);  
 }
 
+
+/*//test_compareDates_IfDate1GreaterDate2_ShouldReturn_1()//
+
+*/
+void test_compareDates_IfDate1GreaterDate2_ShouldReturn_1(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_compareDates_IfDate1EqualsDate2_ShouldReturn_0()//
+
+*/
+void test_compareDates_IfDate1EqualsDate2_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1()//
+
+*/
+void test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2()//
+
+*/
+void test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2()//
+
+*/
+void test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2(){
+  printf("-->%s::", __func__);
+  printf("not implemented");
+  fflush(stdout);
+}
+
+/*//test_compareDates()//
+
+*/
+void test_compareDates(){
+  printf("TEST::%s\n", __func__);
+
+  test_compareDates_IfDate1GreaterDate2_ShouldReturn_1();
+  printf("\n");
+
+  test_compareDates_IfDate1EqualsDate2_ShouldReturn_0();
+  printf("\n");
+
+  test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1();
+  printf("\n");
+
+  test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2();
+  printf("\n");
+
+  test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);
+}
+
+
 /*//test_all//
 
 */
@@ -1512,6 +1583,7 @@ void test_all(){
   test_dateIsLeapYear();
   test_dateIsValid();
   test_setDate();
+  test_compareDates();
 
   test_studentIsValid();
 
