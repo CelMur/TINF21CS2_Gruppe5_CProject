@@ -416,7 +416,7 @@ int deleteStudent(List *list, char *matrikelNr){
 
 /*//printStudent//
   searches for student with 'matrikelNr' and prints its data
-  
+
   returns 1 if successfull
   returns 0 if student invalid
   returns -1 if any parameter is bad
@@ -923,6 +923,28 @@ void test_printStudent_IfListIsNULL_ShouldReturn_Minus1(){
   fflush(stdout);
 }
 
+/*//test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1//
+
+*/
+void test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  char *targetMatrikelNr = NULL;
+
+  int returnValue = printStudent(list, targetMatrikelNr);
+
+  assert(returnValue == -1);
+
+  free(list);
+
+  printf("successfull");
+  fflush(stdout);
+}
+
+
 /*//test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2//
 
 */
@@ -1032,6 +1054,9 @@ void test_printStudent(){
   printf("\n");
 
   test_printStudent_IfListIsNULL_ShouldReturn_Minus1();
+  printf("\n");
+
+  test_printStudent_IfMatrikelNrIsNULL_ShouldReturn_Minus1();
   printf("\n");
 
   test_printStudent_IfStudentIsNULL_ShouldReturn_Minus2();
