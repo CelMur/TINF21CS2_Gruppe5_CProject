@@ -48,6 +48,13 @@ void initList(List *list){
   reserves memory and sets pointer to NULL
 */
 int initStudent(Student *student){
+  strcpy(student->lastname, "");
+  strcpy(student->matrikelNr, "");
+
+  student->birthday = (Date) {0,0,0};
+  student->start = (Date) {0,0,0};
+  student->end = (Date) {0,0,0};
+
   student->next_node = NULL;
   student->prev_node = NULL;
 }
