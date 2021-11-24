@@ -215,7 +215,7 @@ int printNumberStudents(List *list){
   if(list == NULL) return -1;
   //TODO: get the number Students from file
   printf("\n");
-  printf("Anzahl Studenten (current)::\n");
+  printf("Anzahl Studenten (in memory)::\n");
   printf("Anzahl Studenten (saved)::\n");
   printf("\n");
 
@@ -1022,6 +1022,22 @@ void test_printAllStudent(){
 }
 
 
+/*//test_printNumberStudents()//
+
+*/
+void test_printNumberStudents(){
+  printf("TEST::%s\n", __func__);
+  
+  List *list = (List *) malloc(sizeof(List));
+
+  int returnValue = printNumberStudents(list);
+
+  assert(returnValue == 1);
+
+  printf("END_TEST::%s::not implemented\n\n", __func__);
+}
+
+
 /*//test_dateIsLeapYear_IfIsLeapYear_ShouldReturn_1
 
 */
@@ -1748,6 +1764,9 @@ void test_all(){
   test_deleteStudent();
   test_printStudent();
   test_printAllStudent();
+  test_printNumberStudents();
+  test_save();
+  test_read();
 
   test_menue();
 }
