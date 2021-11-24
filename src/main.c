@@ -524,10 +524,16 @@ int save(List *list, char* fileName){
 
 
 /*//read//
-
+  returns 1 if successfull
 */
-void read(List *List){
+int read(List *List, char *fileName){
+  FILE *f = fopen(fileName, "r");
 
+  
+
+  fclose(fileName);
+
+  return 1;
 }
 
 
