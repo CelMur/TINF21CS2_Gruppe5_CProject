@@ -439,10 +439,27 @@ int printStudent(List *list, char *matrikelNr){
 
 
 /*//printAllStudents//
-
+  returns 1 if successfull
+  returns 0 if failed
+  returns -1 list == NULL
 */
-void printAllStudents(List *list){
+int printAllStudents(List *list){
+  
+  if(lists == NULL) return -1;
 
+  Student *currentNode = list->first_node;
+  int hasNext = 0;
+  int printResult = 0;
+
+  do{
+
+    printResult = printStudent(currentNode->matrikelNr);
+
+    if(currentNode->next_node == NULL) break;
+    currentNode = currentNode->next_node;
+  }while(hasNext);
+  
+  return 1;
 }
 
 /*//menue//
