@@ -2429,6 +2429,25 @@ void menuOperatioAddStudent(){
   printf("|\n");
   printf("|'Matrikel-Nr': ");
   scanf(" %s", newStudent->matrikelNr);
+
+  if(matrikelNrExists(StudentList, newStudent->matrikelNr) == 1){
+    printf("|\n");
+    printf("|Student: '%s' Already Exists -->Operation Aborted\n", newStudent->matrikelNr);
+    printf("|\n");
+
+    fflush(stdin);
+
+    printf("|\n");
+    printf("|\n");
+    printf("|Press ANY Key to Continue\n");
+    getchar();
+    printf("|\n");
+
+    fflush(stdin);
+
+    return;
+  }
+
   printf("|'Lastname': ");
   scanf(" %s", newStudent->lastname);
 
@@ -2524,8 +2543,8 @@ void menuOperatioAddStudent(){
 
   switch (addResult)
   {
-  case 1: printf("|Student: %s --> ADDED\n", newStudent->matrikelNr); break;
-  case 0: printf("|Student: %s --> Student Data NOT Valid\n", newStudent->matrikelNr); break;
+  case 1: printf("|Student: '%s' --> ADDED\n", newStudent->matrikelNr); break;
+  case 0: printf("|Student: '%s' --> Student Data NOT Valid\n", newStudent->matrikelNr); break;
   case -1: printf("|Internal ERROR Operation Aborted\n"); break;
   default: return;
   }
@@ -2554,7 +2573,7 @@ void menuOperationDeleteStudent(){
   printf("|Operation::Delete Student:\n");
   printf("|\n");
   printf("|Please enter the 'Matrikel-Nr': ");
-  scanf("%s", targetMatrikelNr);
+  scanf(" %s", targetMatrikelNr);
   printf("|\n");
   fflush(stdin);
   
@@ -2577,8 +2596,8 @@ void menuOperationDeleteStudent(){
 
   switch (deleteResult)
   {
-    case 1: printf("|Student: %s --> DELETED\n", targetMatrikelNr); break;
-    case 0: printf("|Student: %s --> NOT FOUND\n", targetMatrikelNr); break;
+    case 1: printf("|Student: '%s' --> DELETED\n", targetMatrikelNr); break;
+    case 0: printf("|Student: '%s' --> NOT FOUND\n", targetMatrikelNr); break;
     case -1: printf("|Internal ERROR Deletion Aborted\n", targetMatrikelNr); break;
     default: break;
   }
@@ -2609,9 +2628,9 @@ void menuOperationPrintStudent(){
  
   switch (printResult)
   {
-    case 0: printf("|Student: %s --> Can't be Printed\n", targetMatrikelNr); break;
+    case 0: printf("|Student: '%s' --> Can't be Printed\n", targetMatrikelNr); break;
     case -1: printf("|Internal ERROR Operation Aborted\n", targetMatrikelNr); break;
-    case -2: printf("|Student: %s --> NOT FOUND\n", targetMatrikelNr); break;
+    case -2: printf("|Student: '%s' --> NOT FOUND\n", targetMatrikelNr); break;
     default: break;
   }
 
