@@ -25,6 +25,8 @@ typedef struct Student{
   struct Date start;
   struct Date end;
 
+  int isSaved;
+
   struct Student *next_node;
   struct Student *prev_node;
 }Student;
