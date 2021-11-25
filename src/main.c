@@ -59,6 +59,25 @@ int initList(List *list){
 }
 
 
+/*//freeList//
+
+*/
+int freeList(List *list){
+
+  if(list == NULL) return -1;
+
+  Student *currentNode = list->first_node;
+
+  while(currentNode != NULL){
+    free(currentNode);
+  }
+
+  free(StudentList);
+
+  return 1;
+}
+
+
 /*//initStudent//
   reserves memory and sets pointer to NULL
 
@@ -2412,15 +2431,8 @@ void exitHandler_saveOnExit(void){
 
 
 void exitHandler_freeMemOnExit(void){
-  if(StudentList == NULL) return;
+  freeList(StudentList);
 
-  Student *currentNode = StudentList->first_node;
-  
-  while(currentNode != NULL){
-    free(currentNode);
-  }
-
-  free(StudentList);
 }
 
 int main(){
