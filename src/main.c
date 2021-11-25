@@ -540,10 +540,10 @@ int save(List *list, char* fileName){
       currentNode = currentNode->next_node;
     }
 
-    fprintf(f, "%s;", currentNode->matrikelNr);
-    fprintf(f, "%s;", currentNode->lastname);
-    fprintf(f, "{%i/%i/%i};", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
-    fprintf(f, "%i/%i/%i};", currentNode->start.month, currentNode->start.day, currentNode->start.year);
+    fprintf(f, "%s ", currentNode->matrikelNr);
+    fprintf(f, "%s ", currentNode->lastname);
+    fprintf(f, "{%i/%i/%i} ", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
+    fprintf(f, "{%i/%i/%i} ", currentNode->start.month, currentNode->start.day, currentNode->start.year);
     fprintf(f, "{%i/%i/%i}", currentNode->end.month, currentNode->end.day, currentNode->end.year);
     
     if(currentNode != list->last_node){
@@ -559,6 +559,7 @@ int save(List *list, char* fileName){
 
 /*//read//
   read valid data from 'fileName' and add to 'list'
+  return 0 if error while on open file
   returns -1 for any bad parameter
 */
 int read(List *list, char *fileName){
@@ -570,19 +571,19 @@ int read(List *list, char *fileName){
   FILE *f = fopen(fileName, "r");
 
   if(f == NULL){
-    fprintf(stderr, "error while trying file open ...\n");
+    //fprintf(stderr, "error while trying file open ...\n");
     return 0;
   }
 
   Student readResult;
   Student *currentNode = NULL;
 
-  while((fscanf(f, "%s;%s;{%i/%i/%i};{%i/%i/%i};{%i/%i/%i}\n",
-    readResult.matrikelNr, 
-    readResult.lastname,
-    readResult.birthday.month, readResult.birthday.day, readResult.birthday.year,
-    readResult.start.month, readResult.start.day, readResult.start.year,
-    readResult.end.month, readResult.end.day, readResult.end.year)) != EOF){
+  while((fscanf(f, "%s %s {%i/%i/%i} {%i/%i/%i} {%i/%i/%i}\n",
+    &readResult.matrikelNr,   
+    &readResult.lastname,
+    &readResult.birthday.month, &readResult.birthday.day, &readResult.birthday.year,
+    &readResult.start.month, &readResult.start.day, &readResult.start.year,
+    &readResult.end.month, &readResult.end.day, &readResult.end.year)) != EOF){
 
       currentNode = createStudent(
         readResult.matrikelNr, 
@@ -1967,7 +1968,7 @@ void test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2(){
   int returnValue = compareDates(&d1, d2);
   
   assert(returnValue == -2);
-
+  
   printf("success");
   fflush(stdout);
 }
@@ -2045,13 +2046,107 @@ void test_save(){
   printf("END_TEST::%s::success\n\n", __func__);
 }
 
+
+/*//test_read_IfListIsNULL_ShouldReturn_Minus1//
+
+*/
+void test_read_IfListIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+  
+  List *list = NULL;
+
+  int resultValue = read(list, TEST_SAVE_FILE);
+
+  assert(resultValue == -1);
+
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_read_IfFileNameIsNULL_ShouldReturn_Minus1//
+
+*/
+void test_read_IfFileNameIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  char *fileName = NULL;
+
+  int resultValue = read(list, fileName);
+
+  assert(resultValue == -1);
+  assert(list->length == 0);
+  assert(list->first_node == NULL);
+  assert(list->last_node == NULL);
+
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_read_IfFileNotFound_ShouldReturn_0//
+
+*/
+void test_read_IfFileNotFound_ShouldReturn_0(){
+  printf("-->%s::", __func__);
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  char *fileName = "fileDoesNotExist.csv";
+
+  int resultValue = read(list, fileName);
+
+  assert(resultValue == 0);
+  assert(list->length == 0);
+  assert(list->first_node == NULL);
+  assert(list->last_node == NULL);
+
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_read_IfSuccess_ShouldReturn_1//
+
+*/
+void test_read_IfSuccess_ShouldReturn_1(){
+  printf("-->%s::", __func__);
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  int resultValue = read(list, TEST_SAVE_FILE);
+
+  assert(resultValue == 1);
+  assert(list->length == 3);
+  assert(list->first_node != NULL);
+  assert(list->last_node != NULL);
+
+  printf("success");
+  fflush(stdout);
+}
+
+
 /*//test_read//
 
 */
 void test_read(){
   printf("TEST::%s\n", __func__);
+
+  test_read_IfListIsNULL_ShouldReturn_Minus1();
   printf("\n");
-  printf("END_TEST::%s::not implemented\n\n", __func__);
+
+  test_read_IfFileNameIsNULL_ShouldReturn_Minus1();
+  printf("\n");
+
+  test_read_IfFileNotFound_ShouldReturn_0();
+  printf("\n");
+
+  test_read_IfSuccess_ShouldReturn_1();
+  printf("\n");
+
+  printf("END_TEST::%s::success\n\n", __func__);
 }
 
 
