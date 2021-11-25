@@ -537,14 +537,14 @@ int printStudentByMatrikelNr(List *list, char *matrikelNr){
   if(node == NULL) return -2;
   if(studentIsValid(node) != 1) return 0;
 
-  printf("'Student'=\n");
-  printf("  {\n");
-  printf("    'matrikelNr' = '%s',\n", node->matrikelNr);
-  printf("    'lastname' = '%s',\n", node->lastname);
-  printf("    'birthday' = '%02i/%02i/%i',\n", node->birthday.month, node->birthday.day, node->birthday.year);
-  printf("    'studyStart' = '%02i/%02i/%i',\n", node->start.month, node->start.day, node->start.year);
-  printf("    'studyEnd' = '%02i/%02i/%i',\n", node->end.month, node->end.day, node->end.year);
-  printf("  }\n");
+  printf("|Student:=\n");
+  printf("|\n");
+  printf("|'matrikelNr' = '%s',\n", node->matrikelNr);
+  printf("|'lastname' = '%s',\n", node->lastname);
+  printf("|'birthday' = '%2d/%2d/%d',\n", node->birthday.month, node->birthday.day, node->birthday.year);
+  printf("|'studyStart' = '%2d/%2d/%d',\n", node->start.month, node->start.day, node->start.year);
+  printf("|'studyEnd' = '%2d/%2d/%d',\n", node->end.month, node->end.day, node->end.year);
+  printf("|\n");
 
   return 1;
 }
@@ -606,9 +606,9 @@ int save(List *list, char* fileName){
 
     fprintf(f, "%s ", currentNode->matrikelNr);
     fprintf(f, "%s ", currentNode->lastname);
-    fprintf(f, "'%i/%i/%i' ", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
-    fprintf(f, "'%i/%i/%i' ", currentNode->start.month, currentNode->start.day, currentNode->start.year);
-    fprintf(f, "'%i/%i/%i'", currentNode->end.month, currentNode->end.day, currentNode->end.year);
+    fprintf(f, "'%2d/%2d/%d' ", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
+    fprintf(f, "'%2d/%2d/%d' ", currentNode->start.month, currentNode->start.day, currentNode->start.year);
+    fprintf(f, "'%2d/%2d/%d'", currentNode->end.month, currentNode->end.day, currentNode->end.year);
     
     if(currentNode != list->last_node){
       fprintf(f, "\n");
@@ -642,7 +642,7 @@ int read(List *list, char *fileName){
   Student readResult;
   Student *currentNode = NULL;
 
-  while((fscanf(f, "%s %s '%i/%i/%i' '%i/%i/%i' '%i/%i/%i'\n",
+  while((fscanf(f, "%s %s '%2d/%2d/%d' '%2d/%2d/%d' '%2d/%2d/%d'\n",
     &readResult.matrikelNr,   
     &readResult.lastname,
     &readResult.birthday.month, &readResult.birthday.day, &readResult.birthday.year,
