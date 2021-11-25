@@ -563,9 +563,9 @@ int save(List *list, char* fileName){
 
     fprintf(f, "%s ", currentNode->matrikelNr);
     fprintf(f, "%s ", currentNode->lastname);
-    fprintf(f, "{%i/%i/%i} ", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
-    fprintf(f, "{%i/%i/%i} ", currentNode->start.month, currentNode->start.day, currentNode->start.year);
-    fprintf(f, "{%i/%i/%i}", currentNode->end.month, currentNode->end.day, currentNode->end.year);
+    fprintf(f, "'%i/%i/%i' ", currentNode->birthday.month, currentNode->birthday.day, currentNode->birthday.year);
+    fprintf(f, "'%i/%i/%i' ", currentNode->start.month, currentNode->start.day, currentNode->start.year);
+    fprintf(f, "'%i/%i/%i'", currentNode->end.month, currentNode->end.day, currentNode->end.year);
     
     if(currentNode != list->last_node){
       fprintf(f, "\n");
@@ -599,7 +599,7 @@ int read(List *list, char *fileName){
   Student readResult;
   Student *currentNode = NULL;
 
-  while((fscanf(f, "%s %s {%i/%i/%i} {%i/%i/%i} {%i/%i/%i}\n",
+  while((fscanf(f, "%s %s '%i/%i/%i' '%i/%i/%i' '%i/%i/%i'\n",
     &readResult.matrikelNr,   
     &readResult.lastname,
     &readResult.birthday.month, &readResult.birthday.day, &readResult.birthday.year,
