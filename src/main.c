@@ -558,10 +558,43 @@ int save(List *list, char* fileName){
 
 
 /*//read//
-  returns 1 if successfull
+  read valid data from 'fileName' and add to 'list'
+  returns -1 for any bad parameter
 */
-int read(List *List, char *fileName){
+int read(List *list, char *fileName){
+
+  if(list == NULL) return -1;
+  if(fileName == NULL) return -1;
+
+
   FILE *f = fopen(fileName, "r");
+
+  if(f == NULL){
+    fprintf(stderr, "error while trying file open ...\n");
+    return 0;
+  }
+
+  Student readResult;
+  Student *currentNode = NULL;
+
+  while((fscanf(f, "%s;%s;{%i/%i/%i};{%i/%i/%i};{%i/%i/%i}\n",
+    readResult.matrikelNr, 
+    readResult.lastname,
+    readResult.birthday.month, readResult.birthday.day, readResult.birthday.year,
+    readResult.start.month, readResult.start.day, readResult.start.year,
+    readResult.end.month, readResult.end.day, readResult.end.year)) != EOF){
+
+      currentNode = createStudent(
+        readResult.matrikelNr, 
+        readResult.lastname,
+        readResult.birthday,
+        readResult.start,
+        readResult.end);
+
+      addStudent(list, currentNode);
+      initStudent(&readResult);
+    }
+
 
   fclose(f);
 
