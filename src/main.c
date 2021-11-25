@@ -571,23 +571,6 @@ int printAllStudents(List *list){
 }
 
 
-void printMenue(){
-  printf("+-------------------------------------+\n");
-  printf("|Menu\n");
-  printf("+-------------------------------------+\n");
-  printf("|   (1)   add student\n");
-  printf("|   (2)   delete student\n");
-  printf("|\n");
-  printf("|   (3)   print student\n");
-  printf("|   (4)   print student::all\n");
-  printf("|   (5)   print number students\n");
-  printf("|\n");
-  printf("|   (t)   run tests::all\n");
-  printf("|   (x)   exit\n");
-  printf("+-------------------------------------+\n");
-  printf("|choose operation:: ");
-
-}
 
 /*//save//
   return 1 if successfull
@@ -2387,7 +2370,7 @@ void test_createStudent(){
 /*//runAllTests//
 
 */
-void runAllTests(){
+void menuOperationRunTests(){
   test_dateIsLeapYear();
   test_dateIsValid();
   test_setDate();
@@ -2407,36 +2390,79 @@ void runAllTests(){
 }
 
 
-/*//menue//
+void menuOperatioAddStudent(){
+
+}
+
+void menuOperationDeleteStudent(){
+
+}
+
+void menuOperationPrintStudent(){
+
+}
+
+void menuOperationPrintAllStudents(){
+
+}
+
+void menuOperationPrintNumberStudents(){
+
+}
+
+void printMenu(){
+  printf("+-------------------------------------+\n");
+  printf("|menu\n");
+  printf("+-------------------------------------+\n");
+  printf("|   (1)   add student\n");
+  printf("|   (2)   delete student\n");
+  printf("|\n");
+  printf("|   (3)   print student\n");
+  printf("|   (4)   print student::all\n");
+  printf("|   (5)   print number students\n");
+  printf("|\n");
+  printf("|   (t)   run tests::all\n");
+  printf("|   (x)   exit\n");
+  printf("+-------------------------------------+\n");
+  printf("|choose operation:: ");
+
+}
+
+
+/*//menu//
 
 */
-void menue(){
+void menu(){
 
   char mode;
   int isRunning = 1;
 
   do{
     
-    printMenue();
+    printMenu();
 
     scanf(" %c", &mode);
     fflush(stdin);
 
     switch (mode)
     {
-    case '1':
-      break;
-    case '2':
-      break;
-    case '3':
-      break;
-    case '4':
-      break;
-    case '5':
-      break;
-    case 't': runAllTests(); break;
+    case '1': menuOperatioAddStudent(); break;
+    case '2': menuOperationDeleteStudent(); break;
+
+    case '3': menuOperationPrintStudent(); break;
+    case '4': menuOperationPrintAllStudents(); break;
+    case '5': menuOperationPrintNumberStudents(); break;
+     
+    case 't': menuOperationRunTests(); break;
     case 'x': isRunning = 0; break;
-    default: break;
+
+    default: 
+      printf("|\n");
+      printf("|Invalid Menu-Operation::Press ANY Key to Continue"); 
+      getchar();
+      printf("\n");
+      break;
+
     }
 
   }while(isRunning);
@@ -2460,7 +2486,7 @@ int main(){
   atexit(exitHandler_saveOnExit);
   atexit(exitHandler_freeMemOnExit);
 
-  menue();
+  menu();
 
   return 0;
 }
