@@ -45,7 +45,7 @@ typedef struct List{
   returns 1 if successfull
   returns -1 for any bad parameter
 */
-void initList(List *list){
+int initList(List *list){
 
   if(list == NULL) return -1;
 
@@ -198,7 +198,7 @@ int studentIsValid(Student *student){
   return a Student *
   returns NULL if any parameter is invalid
 */
-Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end){
+Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end, int isSaved){
 
   Student *student = (Student *) malloc(sizeof(Student));
   initStudent(student);
@@ -214,6 +214,7 @@ Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date sta
   student->birthday = birthday;
   student->start = start;
   student->end = end;
+  student->isSaved = isSaved;
 
   if(studentIsValid(student) != 1){
 
@@ -610,7 +611,8 @@ int read(List *list, char *fileName){
         readResult.lastname,
         readResult.birthday,
         readResult.start,
-        readResult.end);
+        readResult.end,
+        1);
 
       addStudent(list, currentNode);
       initStudent(&readResult);
@@ -2136,12 +2138,29 @@ void test_read_IfSuccess_ShouldReturn_1(){
   List *list = (List *) malloc(sizeof(List));
   initList(list);
 
+  Student *s0;
+  Student *s1;
+  Student *s2;
+
   int resultValue = read(list, TEST_SAVE_FILE);
 
   assert(resultValue == 1);
   assert(list->length == 3);
   assert(list->first_node != NULL);
   assert(list->last_node != NULL);
+
+  s0 = list->first_node;
+  s1 = s0->next_node;
+  s2 = s1->next_node;
+
+  assert(s0->isSaved == 1);
+  assert(s1->isSaved == 1);
+  assert(s2->isSaved == 1);
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
 
   printf("success");
   fflush(stdout);
@@ -2181,8 +2200,9 @@ void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL(){
   Date birthday = {18,11,1998};
   Date start = {1,10,2021};
   Date end = {30,9,2024};
+  int isSaved = 0;
 
-  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end, isSaved);
 
   assert(returnValue == NULL);
 
@@ -2201,8 +2221,9 @@ void test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL(){
   Date birthday = {18,11,1998};
   Date start = {1,10,2021};
   Date end = {30,9,2024};
+  int isSaved = 0;
 
-  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end, isSaved);
 
   assert(returnValue == NULL);
 
@@ -2222,8 +2243,9 @@ void test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL(){
   Date birthday = {45,11,1998};
   Date start = {0,10,2021};
   Date end = {31,9,2024};
+  int isSaved = 0;
 
-  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end, isSaved);
 
   assert(returnValue == NULL);
 
@@ -2242,8 +2264,9 @@ void test_createStudent_IfStudentIsValid_ShouldReturn_Pointer(){
   Date birthday = {18,11,1998};
   Date start = {1,10,2021};
   Date end = {30,9,2024};
+  int isSaved = 0;
 
-  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end);
+  Student *returnValue = createStudent(matrikelNr, lastname, birthday, start, end, isSaved);
 
   assert(returnValue != NULL);
   assert(strcmp(returnValue->matrikelNr, matrikelNr) == 0);
