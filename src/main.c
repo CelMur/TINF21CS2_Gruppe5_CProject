@@ -272,9 +272,24 @@ int compareNodes(Student *node1, Student *node2){
 int printNumberStudents(List *list){
   if(list == NULL) return -1;
   //TODO: get the number Students from file
+
+  int cntStudentsInMem = 0;
+  int cntStudentsSaved = 0;
+
+  Student *currentNode = list->first_node;
+
+  for(int i = 0; i < list->length; i++){
+    if(currentNode->next_node == NULL) break;
+
+    currentNode = currentNode->next_node;
+
+    if(currentNode->isSaved == 0) cntStudentsInMem++;
+    if(currentNode->isSaved == 1) cntStudentsSaved++;
+  }
+
   printf("\n");
-  printf("Anzahl Studenten (in memory)::\n");
-  printf("Anzahl Studenten (saved)::\n");
+  printf("Anzahl Studenten (in memory)::%i\n", &cntStudentsInMem);
+  printf("Anzahl Studenten (saved)::%i\n", &cntStudentsSaved);
   printf("\n");
 
   return 1;
@@ -1322,19 +1337,55 @@ void test_printAllStudents(){
 }
 
 
+/*//test_printNumberStudents_IfListIsNULL_ShouldReturn_Minus1()//
+
+*/
+void test_printNumberStudents_IfListIsNULL_ShouldReturn_Minus1(){
+  printf("-->%s::", __func__);
+  
+  List *list = NULL;
+
+  int returnValue = printNumberStudents(list);
+
+  assert(returnValue == -1);
+
+  printf("success");
+  fflush(stdout);
+}
+
+/*//test_printNumberStudents_IfSuccessfull_ShouldReturn_1()//
+
+*/
+void test_printNumberStudents_IfSuccessfull_ShouldReturn_1(){
+  printf("-->%s::", __func__);
+  printf("\n");
+  
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  int returnValue = printNumberStudents(list);
+
+  assert(returnValue == 1);
+
+  free(list);
+
+  printf("success");
+  fflush(stdout);
+}
+
 /*//test_printNumberStudents()//
 
 */
 void test_printNumberStudents(){
   printf("TEST::%s\n", __func__);
   
-  List *list = (List *) malloc(sizeof(List));
+  test_printNumberStudents_IfListIsNULL_ShouldReturn_Minus1();
+  printf("\n");
 
-  int returnValue = printNumberStudents(list);
+  test_printNumberStudents_IfSuccessfull_ShouldReturn_1();
+  printf("\n");
 
-  assert(returnValue == 1);
-
-  printf("END_TEST::%s::not implemented\n\n", __func__);
+  printf("END_TEST::%s::success\n\n", __func__);
 }
 
 
