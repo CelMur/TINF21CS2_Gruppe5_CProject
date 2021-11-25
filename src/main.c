@@ -554,6 +554,24 @@ int printAllStudents(List *list){
 */
 void menue(){
 
+  char mode;
+  int isRunning = 1;
+
+  do{
+    //printMenue
+    scanf("choose operation::%c", &mode);
+    fflush(stdin);
+
+    switch (mode)
+    {
+    case '1':
+      break;
+    case 't': runAllTests(); break;
+    case 'x': isRunning = 0; break;
+    default: break;
+    }
+
+  }while(isRunning);
 }
 
 /*//save//
@@ -2351,16 +2369,6 @@ void test_createStudent(){
   printf("END_TEST::%s::success\n", __func__);
 }
 
-
-/*//test_menue//
-
-*/
-void test_menue(){
-  printf("TEST::%s\n", __func__);
-  printf("\n");
-  printf("END_TEST::%s::not implemented\n\n", __func__);
-}
-
 /*//runAllTests//
 
 */
@@ -2381,12 +2389,11 @@ void runAllTests(){
   test_printNumberStudents();
   test_save();
   test_read();
-  test_menue();
 }
 
 int main(){
- 
-  runAllTests();
+  
+  menue();
 
   return 0;
 }
