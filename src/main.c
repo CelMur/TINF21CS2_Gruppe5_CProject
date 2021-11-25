@@ -41,11 +41,19 @@ typedef struct List{
 
 /*//initList//
   reserves memory and sets pointer to NULL
+
+  returns 1 if successfull
+  returns -1 for any bad parameter
 */
 void initList(List *list){
+
+  if(list == NULL) return -1;
+
   list->first_node = NULL;
   list->last_node= NULL;
   list->length = 0;
+
+  return 1;
 }
 
 
