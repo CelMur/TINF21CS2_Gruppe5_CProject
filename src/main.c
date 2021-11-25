@@ -2415,9 +2415,10 @@ void exitHandler_freeMemOnExit(void){
   if(StudentList == NULL) return;
 
   Student *currentNode = StudentList->first_node;
-  do{
+  
+  while(currentNode != NULL){
     free(currentNode);
-  }while(currentNode != NULL);
+  }
 
   free(StudentList);
 }
