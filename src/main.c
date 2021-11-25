@@ -280,18 +280,18 @@ int printNumberStudents(List *list){
 
   Student *currentNode = list->first_node;
 
-  for(int i = 0; i < list->length; i++){
-    if(currentNode->next_node == NULL) break;
+  while(currentNode != NULL){
+    
+    if(currentNode->isSaved == 0) cntStudentsInMem++;
+    if(currentNode->isSaved == 1) cntStudentsSaved++;
 
     currentNode = currentNode->next_node;
 
-    if(currentNode->isSaved == 0) cntStudentsInMem++;
-    if(currentNode->isSaved == 1) cntStudentsSaved++;
   }
 
   printf("\n");
-  printf("Anzahl Studenten (in memory)::%i\n", &cntStudentsInMem);
-  printf("Anzahl Studenten (saved)::%i\n", &cntStudentsSaved);
+  printf("Anzahl Studenten (in memory)::%i\n", cntStudentsInMem);
+  printf("Anzahl Studenten (saved)::%i\n", cntStudentsSaved);
   printf("\n");
 
   return 1;
@@ -2406,10 +2406,28 @@ void menue(){
 }
 
 
+void exitHandler_saveOnExit(void){
+  save(StudentList, SAVE_FILE);
+}
+
+
+void exitHandler_freeMemOnExit(void){
+  if(StudentList == NULL) return;
+
+  Student *currentNode = StudentList->first_node;
+  do{
+    free(currentNode);
+  }while(currentNode != NULL);
+
+  free(StudentList);
+}
 
 int main(){
   StudentList = (List *) malloc(sizeof(List));
   initList(StudentList);
+
+  atexit(exitHandler_saveOnExit);
+  atexit(exitHandler_freeMemOnExit);
 
   menue();
 
