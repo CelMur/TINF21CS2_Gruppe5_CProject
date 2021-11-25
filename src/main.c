@@ -103,8 +103,26 @@ int initStudent(Student *student){
   return 1;
 }
 
+/*//matrikelNrExists//
+  returns 1 if exits
+  returns 0 if not exists
+  returns -1 for any bad parameter
+*/
+int matrikelNrExists(List *list, char *targetMatrikelNr){
+  if(list == NULL) return -1;
+  if(targetMatrikelNr == NULL) return -1;
 
+  Student *currentNode = list->first_node;
 
+  while(currentNode != NULL){
+    
+    if(strcmp(currentNode->matrikelNr, targetMatrikelNr) == 0) return 1;
+
+    currentNode = currentNode->next_node;
+  }
+
+  return 0;
+}
 
 
 /*//dateIsLeapYear//
@@ -301,16 +319,16 @@ int printNumberStudents(List *list){
 
   while(currentNode != NULL){
     
-    if(currentNode->isSaved == 0) cntStudentsInMem++;
     if(currentNode->isSaved == 1) cntStudentsSaved++;
+    cntStudentsInMem++;
 
     currentNode = currentNode->next_node;
 
   }
 
   printf("\n");
-  printf("Anzahl Studenten (in memory)::%i\n", cntStudentsInMem);
-  printf("Anzahl Studenten (saved)::%i\n", cntStudentsSaved);
+  printf("|Number of Students (in memory)::%d\n", cntStudentsInMem);
+  printf("|Number of Students (saved)::%d\n", cntStudentsSaved);
   printf("\n");
 
   return 1;
@@ -2512,6 +2530,8 @@ void menuOperatioAddStudent(){
   default: return;
   }
   
+  fflush(stdin);
+
   printf("|\n");
   printf("|\n");
   printf("|Press ANY Key to Continue\n");
@@ -2621,7 +2641,19 @@ void menuOperationPrintAllStudents(){
 }
 
 void menuOperationPrintNumberStudents(){
+  printf("|\n");
+  printf("|Operation::Print Number Students:\n");
+  printf("|\n");
 
+  printNumberStudents(StudentList);
+
+  printf("|\n");
+  printf("|\n");
+  printf("|Press ANY Key to Continue\n");
+  getchar();
+  printf("|\n");
+
+  fflush(stdin);
 }
 
 void printMenu(){
@@ -2699,7 +2731,6 @@ int main(){
   read(StudentList, SAVE_FILE);
 
   atexit(exitHandler_saveOnExit);
-  //atexit(exitHandler_freeMemOnExit);
 
   menu();
 
