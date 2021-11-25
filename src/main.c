@@ -51,8 +51,16 @@ void initList(List *list){
 
 /*//initStudent//
   reserves memory and sets pointer to NULL
+
+  returns 1 if successfull
+  returns -1 for any bad parameter
 */
 int initStudent(Student *student){
+
+  if(student == NULL) return -1;
+  
+  student->isSaved = 0;
+
   strcpy(student->lastname, "");
   strcpy(student->matrikelNr, "");
 
@@ -62,6 +70,8 @@ int initStudent(Student *student){
 
   student->next_node = NULL;
   student->prev_node = NULL;
+
+  return 1;
 }
 
 
