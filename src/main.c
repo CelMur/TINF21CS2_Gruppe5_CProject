@@ -351,14 +351,19 @@ Student *getStudentByMatrikelNr(List *list, char *matrikelNr){
 /*//addStudent//
   inserts 'node' at the alphabetically destined position
 
+  returns 1 if successfull
+  return -1 for any bad parameter
 */
-void addStudent(List *list, Student *node){
+int addStudent(List *list, Student *node){
+
+  if(list == NULL) return -1;
+  if(node == NULL) return -1;
 
   if(list->first_node == NULL){
       list->first_node = node;
       list->last_node = node;
       list->length++;
-      return;
+      return 1;
   }
 
   Student *currentNode = list->first_node;
@@ -395,6 +400,7 @@ void addStudent(List *list, Student *node){
   }while(1);
 
   list->length++;
+  return 1;
 }
 
 /*//deleteStudent//
@@ -2398,8 +2404,133 @@ void menuOperationRunTests(){
 
 void menuOperatioAddStudent(){
 
+  Student *newStudent = (Student *) malloc(sizeof(Student));
+  initStudent(newStudent);
+
+  char tryAgainChar[1];
+  int isTryAgainCharValid = 0;
+  int addResult = 0;
+  
+  printf("|\n");
+  printf("|Operation::Add Student:\n");
+  printf("|\n");
+  printf("|Please Enter Values:\n");
+  printf("|\n");
+  printf("|'Matrikel-Nr': ");
+  scanf(" %s", newStudent->matrikelNr);
+  printf("|'Lastname': ");
+  scanf(" %s", newStudent->lastname);
+
+  do{
+    printf("|'Brithday (mm/dd/YYYY)': ");
+    scanf(" %2i/%2i/%i", &newStudent->birthday.month, &newStudent->birthday.day, &newStudent->birthday.year);
+    
+    if(dateIsValid(&newStudent->birthday) == 1){
+      break;
+    }
+    printf("|\n");
+    printf("|Invalid Date\n");
+    printf("|\n");
+    
+    do{
+      fflush(stdin);
+      printf("|Do You Want to Try Again? [Y/n]: ");
+      scanf(" %c", tryAgainChar);
+      printf("|\n");
+      fflush(stdin);
+
+      if(strcmp(tryAgainChar, "Y") == 0){
+        isTryAgainCharValid = 1;
+      }
+      if(strcmp(tryAgainChar, "n") == 0) return;
+    }while(isTryAgainCharValid != 1);
+  
+    if(isTryAgainCharValid == 0) break;
+  }while(1);
+
+  isTryAgainCharValid = 0;
+
+  do{
+    printf("|'Start of Studies' (mm/dd/YYYY)': ");
+    scanf(" %2i/%2i/%i", &newStudent->start.month, &newStudent->start.day, &newStudent->start.year);
+    
+    if(dateIsValid(&newStudent->start) == 1){
+      break;
+    }
+    printf("|\n");
+    printf("|Invalid Date\n");
+    printf("|\n");
+
+    do{
+      fflush(stdin);
+      printf("|Do You Want to Try Again? [Y/n]: ");
+      scanf(" %c", tryAgainChar);
+      printf("|\n");
+      fflush(stdin);
+
+      if(strcmp(tryAgainChar, "Y") == 0){
+        isTryAgainCharValid = 1;
+      }
+      if(strcmp(tryAgainChar, "n") == 0) return;
+    }while(isTryAgainCharValid != 1);
+  
+    if(isTryAgainCharValid == 0) break;
+  }while(1);
+
+  isTryAgainCharValid = 0;
+
+  do{
+    printf("|'End of Studies (mm/dd/YYYY)': ");
+    scanf(" %2i/%2i/%i", &newStudent->end.month, &newStudent->end.day, &newStudent->end.year);
+    
+    if(dateIsValid(&newStudent->end) == 1){
+      break;
+    }
+    printf("|\n");
+    printf("|Invalid Date\n");
+    printf("|\n");
+
+    do{
+      fflush(stdin);
+      printf("|Do You Want to Try Again? [Y/n]: ");
+      scanf(" %c", tryAgainChar);
+      printf("|\n");
+      fflush(stdin);
+
+      if(strcmp(tryAgainChar, "Y") == 0){
+        isTryAgainCharValid = 1;
+      }
+      if(strcmp(tryAgainChar, "n") == 0) return;
+    }while(isTryAgainCharValid != 1);
+  
+    if(isTryAgainCharValid == 0) break;
+  }while(1);
+  
+  addResult = addStudent(StudentList, newStudent);
+
+  printf("|\n");
+  printf("|\n");
+
+  switch (addResult)
+  {
+  case 1: printf("|Student: %s --> ADDED\n", newStudent->matrikelNr); break;
+  case 0: printf("|Student: %s --> Student Data NOT Valid\n", newStudent->matrikelNr); break;
+  case -1: printf("|Internal ERROR Operation Aborted\n"); break;
+  default: return;
+  }
+  
+  printf("|\n");
+  printf("|\n");
+  printf("|Press ANY Key to Continue\n");
+  getchar();
+  printf("|\n");
+
+  fflush(stdin);
 }
 
+/*//menuOperationDeleteStudent//
+
+*/
 void menuOperationDeleteStudent(){
   char confirmChar[1];
   char targetMatrikelNr[50];
@@ -2407,8 +2538,7 @@ void menuOperationDeleteStudent(){
   int deleteResult = 0;
 
   printf("|\n");
-  printf("|\n");
-  printf("|Operation::Delete Student:");
+  printf("|Operation::Delete Student:\n");
   printf("|\n");
   printf("|Please enter the 'Matrikel-Nr': ");
   scanf("%s", targetMatrikelNr);
@@ -2534,7 +2664,7 @@ int main(){
   initList(StudentList);
 
   atexit(exitHandler_saveOnExit);
-  atexit(exitHandler_freeMemOnExit);
+  //atexit(exitHandler_freeMemOnExit);
 
   menu();
 
