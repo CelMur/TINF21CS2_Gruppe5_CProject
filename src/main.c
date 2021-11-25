@@ -549,29 +549,14 @@ int printAllStudents(List *list){
   return counterPrinted;
 }
 
-/*//menue//
 
-*/
-void menue(){
-
-  char mode;
-  int isRunning = 1;
-
-  do{
-    //printMenue
-    scanf("choose operation::%c", &mode);
-    fflush(stdin);
-
-    switch (mode)
-    {
-    case '1':
-      break;
-    case 't': runAllTests(); break;
-    case 'x': isRunning = 0; break;
-    default: break;
-    }
-
-  }while(isRunning);
+void printMenue(){
+  printf("|-----------------------+\n");
+  printf("|Menu\n");
+  printf("+-----------------------+\n");
+  printf("|   (t)   run tests::ALL\n");
+  printf("|   (x)   exit\n");
+  printf("|-----------------------+\n");
 }
 
 /*//save//
@@ -2390,6 +2375,34 @@ void runAllTests(){
   test_save();
   test_read();
 }
+
+/*//menue//
+
+*/
+void menue(){
+
+  char mode;
+  int isRunning = 1;
+
+  do{
+    
+    printMenue();
+    printf("|choose operation::");
+    scanf(" %c", &mode);
+    fflush(stdin);
+
+    switch (mode)
+    {
+    case '1':
+      break;
+    case 't': runAllTests(); break;
+    case 'x': isRunning = 0; break;
+    default: break;
+    }
+
+  }while(isRunning);
+}
+
 
 int main(){
   
