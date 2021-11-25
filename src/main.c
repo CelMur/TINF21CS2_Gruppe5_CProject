@@ -39,6 +39,8 @@ typedef struct List{
   int length;
 }List;
 
+List *StudentList;
+
 /*//initList//
   reserves memory and sets pointer to NULL
 
@@ -2404,8 +2406,11 @@ void menue(){
 }
 
 
+
 int main(){
-  
+  StudentList = (List *) malloc(sizeof(List));
+  initList(StudentList);
+
   menue();
 
   return 0;
