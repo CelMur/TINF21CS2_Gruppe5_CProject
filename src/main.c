@@ -400,8 +400,14 @@ void addStudent(List *list, Student *node){
 /*//deleteStudent//
   removes a Student from 'list' by comparing its 'matrikelNr'
 
+  returns 1 if successfull
+  returns 0 if 'matrikelNr' not found
+  returns -1 for any bad parameter
 */
 int deleteStudent(List *list, char *matrikelNr){
+  if(list == NULL) return -1;
+  if(matrikelNr == NULL) return -1;
+
   Student *node = getStudentByMatrikelNr(list, matrikelNr);
   Student *prevNode = NULL;
   Student *nextNode = NULL;
@@ -2395,7 +2401,52 @@ void menuOperatioAddStudent(){
 }
 
 void menuOperationDeleteStudent(){
+  char confirmChar[1];
+  char targetMatrikelNr[50];
+  int isConfirmCharValid = 0;
+  int deleteResult = 0;
 
+  printf("|\n");
+  printf("|\n");
+  printf("|Operation::Delete Student:");
+  printf("|\n");
+  printf("|Please enter the 'Matrikel-Nr': ");
+  scanf("%s", targetMatrikelNr);
+  printf("|\n");
+  fflush(stdin);
+  
+  do{
+    
+    printf("|Delete Student Permanently? [Y/n]: ");
+    scanf(" %c",confirmChar);
+
+    if(strcmp(confirmChar, "Y") == 0){
+      isConfirmCharValid = 1;
+    }
+    if(strcmp(confirmChar, "n") == 0) return;
+
+  }while(isConfirmCharValid != 1);
+
+  printf("|\n");
+  fflush(stdin);
+
+  deleteResult = deleteStudent(StudentList, targetMatrikelNr);
+
+  switch (deleteResult)
+  {
+    case 1: printf("|Student: %s --> DELETED\n", targetMatrikelNr); break;
+    case 0: printf("|Student: %s --> NOT FOUND\n", targetMatrikelNr); break;
+    case -1: printf("|Internal ERROR Deletion Aborted\n", targetMatrikelNr); break;
+    default: break;
+  }
+
+  printf("|\n");
+  printf("|\n");
+  printf("|Press ANY Key to Continue\n");
+  getchar();
+  printf("|\n");
+
+  fflush(stdin);
 }
 
 void menuOperationPrintStudent(){
@@ -2458,9 +2509,8 @@ void menu(){
 
     default: 
       printf("|\n");
-      printf("|Invalid Menu-Operation::Press ANY Key to Continue"); 
+      printf("|Invalid Menu-Operation::Press ANY Key to Continue\n"); 
       getchar();
-      printf("\n");
       break;
 
     }
