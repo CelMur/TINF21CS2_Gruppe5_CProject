@@ -537,14 +537,14 @@ int printStudentByMatrikelNr(List *list, char *matrikelNr){
   if(node == NULL) return -2;
   if(studentIsValid(node) != 1) return 0;
 
-  printf("|Student:=\n");
+  printf("|'Student'={\n");
   printf("|\n");
   printf("|'matrikelNr' = '%s',\n", node->matrikelNr);
   printf("|'lastname' = '%s',\n", node->lastname);
-  printf("|'birthday' = '%2d/%2d/%d',\n", node->birthday.month, node->birthday.day, node->birthday.year);
-  printf("|'studyStart' = '%2d/%2d/%d',\n", node->start.month, node->start.day, node->start.year);
-  printf("|'studyEnd' = '%2d/%2d/%d',\n", node->end.month, node->end.day, node->end.year);
-  printf("|\n");
+  printf("|'birthday' = '%02d/%02d/%d',\n", node->birthday.month, node->birthday.day, node->birthday.year);
+  printf("|'studyStart' = '%02d/%02d/%d',\n", node->start.month, node->start.day, node->start.year);
+  printf("|'studyEnd' = '%02d/%02d/%d'\n", node->end.month, node->end.day, node->end.year);
+  printf("|}\n");
 
   return 1;
 }
@@ -560,24 +560,17 @@ int printAllStudents(List *list){
   if(list == NULL) return -1;
 
   Student *currentNode = list->first_node;
-  int hasNext = 0;
   int printStudentResult = 0;
   int counterPrinted = 0;
 
-  do{
+  while(currentNode != NULL){
 
     printStudentResult = printStudentByMatrikelNr(list, currentNode->matrikelNr);
     if(printStudentResult == 1){
       counterPrinted++;
     }
-
-    if(currentNode->next_node != NULL){
-      hasNext = 1;
-      currentNode = currentNode->next_node;
-    }else{
-      hasNext = 0;
-    }
-  }while(hasNext);
+    currentNode = currentNode->next_node;
+  }
   
   return counterPrinted;
 }
@@ -2581,10 +2574,50 @@ void menuOperationDeleteStudent(){
 
 void menuOperationPrintStudent(){
 
+  char targetMatrikelNr[50];
+  int printResult = 0;
+
+  printf("|\n");
+  printf("|Operation::Print Student:\n");
+  printf("|\n");
+  printf("|Please enter the 'Matrikel-Nr': ");
+  scanf("%s", targetMatrikelNr);
+  printf("|\n");
+  fflush(stdin);
+
+  printResult = printStudentByMatrikelNr(StudentList, targetMatrikelNr);
+ 
+  switch (printResult)
+  {
+    case 0: printf("|Student: %s --> Can't be Printed\n", targetMatrikelNr); break;
+    case -1: printf("|Internal ERROR Operation Aborted\n", targetMatrikelNr); break;
+    case -2: printf("|Student: %s --> NOT FOUND\n", targetMatrikelNr); break;
+    default: break;
+  }
+
+  printf("|\n");
+  printf("|\n");
+  printf("|Press ANY Key to Continue\n");
+  getchar();
+  printf("|\n");
+
+  fflush(stdin);
 }
 
 void menuOperationPrintAllStudents(){
+  printf("|\n");
+  printf("|Operation::Print All Students:\n");
+  printf("|\n");
 
+  printAllStudents(StudentList);
+
+  printf("|\n");
+  printf("|\n");
+  printf("|Press ANY Key to Continue\n");
+  getchar();
+  printf("|\n");
+
+  fflush(stdin);
 }
 
 void menuOperationPrintNumberStudents(){
@@ -2662,6 +2695,8 @@ void exitHandler_freeMemOnExit(void){
 int main(){
   StudentList = (List *) malloc(sizeof(List));
   initList(StudentList);
+
+  read(StudentList, SAVE_FILE);
 
   atexit(exitHandler_saveOnExit);
   //atexit(exitHandler_freeMemOnExit);
