@@ -2361,10 +2361,10 @@ void test_menue(){
   printf("END_TEST::%s::not implemented\n\n", __func__);
 }
 
-/*//test_all//
+/*//runAllTests//
 
 */
-void test_all(){
+void runAllTests(){
   test_dateIsLeapYear();
   test_dateIsValid();
   test_setDate();
@@ -2386,7 +2386,7 @@ void test_all(){
 
 int main(){
  
-  test_all();
+  runAllTests();
 
   return 0;
 }
