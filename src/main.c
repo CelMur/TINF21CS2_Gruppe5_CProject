@@ -2422,8 +2422,8 @@ void menuOperatioAddStudent(){
   scanf(" %s", newStudent->lastname);
 
   do{
-    printf("|'Brithday (mm/dd/YYYY)': ");
-    scanf(" %2i/%2i/%i", &newStudent->birthday.month, &newStudent->birthday.day, &newStudent->birthday.year);
+    printf("|'Birthday (mm/dd/YYYY)':");
+    scanf("%2d/%2d/%d", &newStudent->birthday.month, &newStudent->birthday.day, &newStudent->birthday.year);
     
     if(dateIsValid(&newStudent->birthday) == 1){
       break;
@@ -2451,8 +2451,8 @@ void menuOperatioAddStudent(){
   isTryAgainCharValid = 0;
 
   do{
-    printf("|'Start of Studies' (mm/dd/YYYY)': ");
-    scanf(" %2i/%2i/%i", &newStudent->start.month, &newStudent->start.day, &newStudent->start.year);
+    printf("|'Start of Studies' (mm/dd/YYYY)':");
+    scanf("%2d/%2d/%d", &newStudent->start.month, &newStudent->start.day, &newStudent->start.year);
     
     if(dateIsValid(&newStudent->start) == 1){
       break;
@@ -2480,8 +2480,8 @@ void menuOperatioAddStudent(){
   isTryAgainCharValid = 0;
 
   do{
-    printf("|'End of Studies (mm/dd/YYYY)': ");
-    scanf(" %2i/%2i/%i", &newStudent->end.month, &newStudent->end.day, &newStudent->end.year);
+    printf("|'End of Studies (mm/dd/YYYY)':");
+    scanf("%2d/%2d/%d", &newStudent->end.month, &newStudent->end.day, &newStudent->end.year);
     
     if(dateIsValid(&newStudent->end) == 1){
       break;
