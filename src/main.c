@@ -41,6 +41,8 @@ typedef struct List{
 
 List *StudentList;
 
+int isTestMode = 0;
+
 /*//initList//
   reserves memory and sets pointer to NULL
 
@@ -226,8 +228,22 @@ int studentIsValid(Student *student){
   if(dateIsValid(&student->start) == 0) return 0;
   if(dateIsValid(&student->end) == 0) return 0;
 
-  if(compareDates(&student->start, &student->end) == 0) return 0;
-  if(compareDates(&student->start, &student->end) == 1) return 0;
+  if(compareDates(&student->birthday, &student->start) == 0){ 
+    if(!isTestMode)  printf("|Invalid Date --> Birthday = Studystart\n|\n");
+    return 0;
+  }
+  if(compareDates(&student->birthday, &student->start) == 1){
+    if(!isTestMode)  printf("|Invalid Date --> Birthday > Studystart\n|\n");
+    return 0;
+  }
+  if(compareDates(&student->start, &student->end) == 0){ 
+    if(!isTestMode) printf("|Invalid Date --> Studystart = Studyend\n|\n");
+    return 0;
+  }
+  if(compareDates(&student->start, &student->end) == 1){
+    if(!isTestMode)  printf("|Invalid Date::Studystart > Studyend\n|\n");
+    return 0;
+  }
 
   return 1;
 }
@@ -2393,6 +2409,8 @@ void test_createStudent(){
 
 */
 void menuOperationRunTests(){
+  isTestMode = 1;
+
   test_dateIsLeapYear();
   test_dateIsValid();
   test_setDate();
@@ -2409,6 +2427,8 @@ void menuOperationRunTests(){
   test_printNumberStudents();
   test_save();
   test_read();
+
+  isTestMode = 0;
 }
 
 
