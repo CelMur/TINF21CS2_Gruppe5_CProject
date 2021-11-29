@@ -118,7 +118,7 @@ int matrikelNrExists(List *list, char *targetMatrikelNr){
 
   while(currentNode != NULL){
     
-    if(strcmp(currentNode->matrikelNr, targetMatrikelNr) == 0) return 1;
+    if(strcmp(currentNode->matrikelNr, targetMatrikelNr) == 0)return 1;
 
     currentNode = currentNode->next_node;
   }
@@ -153,35 +153,51 @@ int dateIsLeapYear(int year){
 /*//dateIsValid//
   return 1 if date is valid
   returns 0 if date is invalid
-  returns -1 if date == NULL
+  returns -1 for any bad parameter
 */
 int dateIsValid(Date *date){
 
   if(date == NULL) return -1;
+  if(date->day == 0 && date->month == 0 && date->year == 0){
+    if(!isTestMode) printf("|Invalid Date: --> Wrong Format\n|\n");
+    return -1;
+  }
 
   int day = date->day;
   int month = date->month;
   int year = date->year;
 
-  if(year < MIN_YEAR || year > MAX_YEAR) return 0;   
-  if(month < 1 || month > 12) return 0;    
-  if(day < 1 || day > 31) return 0;    
+  if(year < MIN_YEAR || year > MAX_YEAR) {
+    if(!isTestMode) printf("|Invalid Date --> year not in range %d - %d\n|\n", MIN_YEAR, MAX_YEAR);
+    return 0;   
+  }
+  if(month < 1 || month > 12){ 
+    if(!isTestMode) printf("|Invalid Date --> month not in range 1 - 12\n|\n");
+    return 0; 
+  }   
+  if(day < 1 || day > 31){
+    if(!isTestMode) printf("|Invalid Date --> day not in range 1 - 31\n|\n");
+    return 0;
+  } 
 
   if(month == 2){
     if(dateIsLeapYear(year)){
       if(day <= 29){
         return 1;
       }
+      if(!isTestMode)  printf("|Invalid Date --> day > 29\n|\n");
       return 0;
     }
     if(day <= 28){
       return 1;
     }
+    if(!isTestMode) printf("|Invalid Date --> day > 28\n|\n");
     return 0;
   }
 
   if(month == 4 || month == 6 || month == 9 || month == 11){
     if(day > 30){
+      if(!isTestMode) printf("|Invalid Date --> day > 30\n|\n");
       return 0;
     }
   }
@@ -2451,7 +2467,7 @@ void menuOperatioAddStudent(){
 
   if(matrikelNrExists(StudentList, newStudent->matrikelNr) == 1){
     printf("|\n");
-    printf("|Student: '%s' Already Exists -->Operation Aborted\n", newStudent->matrikelNr);
+    printf("|Matrikel-Nr: '%s' Already Exists -->Operation Aborted\n", newStudent->matrikelNr);
     printf("|\n");
 
     fflush(stdin);
@@ -2477,8 +2493,6 @@ void menuOperatioAddStudent(){
     if(dateIsValid(&newStudent->birthday) == 1){
       break;
     }
-    printf("|\n");
-    printf("|Invalid Date\n");
     printf("|\n");
     
     do{
@@ -2507,8 +2521,6 @@ void menuOperatioAddStudent(){
       break;
     }
     printf("|\n");
-    printf("|Invalid Date\n");
-    printf("|\n");
 
     do{
       fflush(stdin);
@@ -2535,8 +2547,6 @@ void menuOperatioAddStudent(){
     if(dateIsValid(&newStudent->end) == 1){
       break;
     }
-    printf("|\n");
-    printf("|Invalid Date\n");
     printf("|\n");
 
     do{
