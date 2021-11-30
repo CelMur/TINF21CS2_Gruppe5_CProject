@@ -1,9 +1,108 @@
-int initList(List *list)
-int initStudent(Student *student)
-int matrikelNrExists(List *list, char *targetMatrikelNr)
-int dateIsLeapYear(int year)
-int dateIsValid(Date *date)
-int compareDates(Date *date1, Date *date2)
-int studentIsValid(Student *student)
-Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end, int isSaved)
-Student inputStudent()
+/*
+
+    DOKUMENTATION:
+    --------------
+
+
+    int initList(List *list)
+    int initStudent(Student *student)
+    int matrikelNrExists(List *list, char *targetMatrikelNr)
+    int dateIsLeapYear(int year)
+    int dateIsValid(Date *date)
+    int compareDates(Date *date1, Date *date2)
+    int studentIsValid(Student *student)
+    Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end, int isSaved)
+    Student inputStudent()
+    int printStudentByMatrikelNr(List *list, char *matrikelNr)
+    int printAllStudents(List *list)
+    int save(List *list, char* fileName)
+    int read(List *list, char *fileName)
+
+    void test_addStudent_isFirstNode()
+    void test_addStudent_isLastNode()
+    void test_addStudent_isNotFirstNode_isNotLastNode()
+    void test_addStudent()
+
+    void test_deleteStudent_isFirstNode()
+    void test_deleteStudent_isLastNode()
+    void test_deleteStudent_isNotFirst_isNotLast()
+    void test_deleteStudent()
+
+    void test_getStudentByMatrikelNr_IfStudentFound_ShouldReturn_Pointer()
+    void test_getStudentByMatrikelNr_IfStudentNotFound_ShouldReturnNULL()
+    void test_getStudentByMatrikelNr_IfListIsNULL_ShouldReturnNULL()
+    void test_getStudentByMatrikelNr()
+
+    void test_printStudentByMatrikelNr_IfListIsNULL_ShouldReturn_Minus1()
+    void test_printStudentByMatrikelNr_IfMatrikelNrIsNULL_ShouldReturn_Minus1()
+    void test_printStudentByMatrikelNr_IfStudentIsNULL_ShouldReturn_Minus2()
+    void test_printStudentByMatrikelNr_IfStudentDataIsInvalid_ShouldReturn_0()
+    void test_printStudentByMatrikelNr_IfStudentExists_ShouldReturn_1()
+    void test_printStudent()
+
+    void test_printAllStudents_IfSuccessfullyPrinted0_ShouldReturn_0()
+    void test_printAllStudents_IfSuccessfull_ShouldReturn_NumberSuccessfullyPrinted()
+    void test_printAllStudents_IfListIsNULL_ShouldReturn_Minus1()
+    void test_printAllStudents()
+
+    void test_printNumberStudents_IfListIsNULL_ShouldReturn_Minus1()
+    void test_printNumberStudents_IfSuccessfull_ShouldReturn_1()
+    void test_printNumberStudents()
+
+    void test_dateIsLeapYear_IfIsLeapYear_ShouldReturn_1()
+    void test_dateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0()
+    void test_dateIsLeapYear_IfYearIsNegative_ShouldReturn_0()
+    void test_dateIsLeapYear()
+
+    void test_dateIsValid_IfDayNotInRange_ShouldReturn_0()
+    void test_dateIsValid_IfMonthNotInRange_ShouldReturn_0()
+    void test_dateIsValid_IfYearNotInRange_ShouldReturn_0()
+    void test_dateIsValid()
+
+    void test_setDate_IfDateIsNULL_ShouldReturn_Minus1()
+    void test_setDate_IfDateInvalid_ShouldReturn_0()
+    void test_setDate_IfDateValid_ShouldReturn_1()
+    void test_setDate()
+
+    void test_studentIsValid_IfValid_ShouldRerurn_1()
+    void test_studentIsValid_IfLastnameIsInvalid_ShouldReturn_0()
+    void test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0()
+    void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0()
+    void test_studentIsValid_IfStartIsInvalid_ShouldReturn_0()
+    void test_studentIsValid_IfEndIsInvalid_ShouldReturn_0()
+    void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0()
+    void test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0()
+    void test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1()
+    void test_studentIsValid()
+
+    void test_compareDates_IfDate1GreaterDate2_ShouldReturn_1()
+    void test_compareDates_IfDate1EqualsDate2_ShouldReturn_0()
+    void test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1()
+    void test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2()
+    void test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2()
+    void test_compareDates()
+
+    void test_save()
+
+    void test_read_IfListIsNULL_ShouldReturn_Minus1()
+    void test_read_IfFileNameIsNULL_ShouldReturn_Minus1()
+    void test_read_IfFileNotFound_ShouldReturn_0()
+    void test_read_IfSuccess_ShouldReturn_1()
+    void test_read()
+
+    void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL()
+    void test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL()
+    void test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL()
+    void test_createStudent_IfStudentIsValid_ShouldReturn_Pointer()
+    void test_createStudent()
+
+    void menuOperationRunTests()
+    void menuOperatioAddStudent()
+    void menuOperationDeleteStudent()
+    void menuOperationPrintStudent()
+    void menuOperationPrintAllStudents()
+    void menuOperationPrintNumberStudents()
+
+    void printMenu()
+    void menu()
+*/

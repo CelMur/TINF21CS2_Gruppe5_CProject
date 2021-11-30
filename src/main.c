@@ -710,14 +710,6 @@ int read(List *list, char *fileName){
 }
 
 
-/*//test_inputStudent//
-
-*/
-void test_inputStudent(){
-  Student s0 = inputStudent();
-  
-}
-
 /*//test_addStudent_isFistNode//
 
 */
