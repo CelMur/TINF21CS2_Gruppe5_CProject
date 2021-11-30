@@ -3,7 +3,6 @@
     DOKUMENTATION:
     --------------
 
-
     int initList(List *list)
     int initStudent(Student *student)
     int matrikelNrExists(List *list, char *targetMatrikelNr)
