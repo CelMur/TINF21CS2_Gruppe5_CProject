@@ -240,9 +240,9 @@ int studentIsValid(Student *student){
 
   if(strcmp(student->lastname,"") == 0) return 0;
   if(strcmp(student->matrikelNr, "") == 0) return 0;
-  if(dateIsValid(&student->birthday) == 0) return 0;
-  if(dateIsValid(&student->start) == 0) return 0;
-  if(dateIsValid(&student->end) == 0) return 0;
+  if(dateIsValid(&student->birthday) <= 0) return 0;
+  if(dateIsValid(&student->start) <= 0) return 0;
+  if(dateIsValid(&student->end) <= 0) return 0;
 
   if(compareDates(&student->birthday, &student->start) == 0){ 
     if(!isTestMode)  printf("|Invalid Date --> Birthday = Studystart\n|\n");
@@ -425,7 +425,6 @@ int addStudent(List *list, Student *node){
 
   do{
     currentCmpResult = compareNodes(currentNode, node);
-    
     if(currentCmpResult > 0 && prevCmpResult < 0){
       prevNode = currentNode->prev_node;
       nextNode = currentNode;
@@ -435,6 +434,12 @@ int addStudent(List *list, Student *node){
 
       prevNode->next_node = node;
       nextNode->prev_node = node;
+      break;
+    }
+    else if(currentCmpResult > 0){
+      list->first_node = node;
+      node->next_node = currentNode;
+      currentNode->prev_node = node;
       break;
     }
     else if(currentNode->next_node == NULL){
@@ -800,25 +805,121 @@ void test_addStudent_isNotFirstNode_isNotLastNode(){
   initStudent(s2);
 
   strcpy(s0->matrikelNr, "test2");
-  strcpy(s1->matrikelNr, "test3");
-  strcpy(s2->matrikelNr, "test5");
+  strcpy(s1->matrikelNr, "test5");
+  strcpy(s2->matrikelNr, "test3");
 
   addStudent(list, s0);
   addStudent(list, s1);
   addStudent(list, s2);
 
   assert(list->first_node == s0);
+  assert(list->last_node == s1);
+  assert(list->length == 3);
+
+  assert(s0->next_node == s2);
+  assert(s0->prev_node == NULL);
+
+  assert(s1->next_node == NULL);
+  assert(s1->prev_node == s2);
+
+  assert(s2->next_node == s1);
+  assert(s2->prev_node == s0);
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
+  
+  printf("success");
+  fflush(stdout);
+}
+
+
+/*//test_addStudent_ShouldBeFirst_Case1//
+
+*/
+void test_addStudent_ShouldBeFirst_Case1(){
+  printf("-->%s::", __func__);
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+  initStudent(s1);
+  initStudent(s2);
+
+  strcpy(s0->matrikelNr, "test3");
+  strcpy(s1->matrikelNr, "test2");
+  strcpy(s2->matrikelNr, "test5");
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
+
+  assert(list->first_node == s1);
   assert(list->last_node == s2);
   assert(list->length == 3);
 
-  assert(s0->next_node == s1);
-  assert(s0->prev_node == NULL);
+  assert(s0->next_node == s2);
+  assert(s0->prev_node == s1);
 
-  assert(s1->next_node == s2);
-  assert(s1->prev_node == s0);
+  assert(s1->next_node == s0);
+  assert(s1->prev_node == NULL);
 
   assert(s2->next_node == NULL);
-  assert(s2->prev_node == s1);
+  assert(s2->prev_node == s0);
+
+  free(s0);
+  free(s1);
+  free(s2);
+  free(list);
+  
+  printf("success");
+  fflush(stdout);
+}
+
+
+/*//test_addStudent_ShouldBeFirst_Case2//
+
+*/
+void test_addStudent_ShouldBeFirst_Case2(){
+  printf("-->%s::", __func__);
+
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+
+  Student *s0 = (Student *) malloc(sizeof(Student));
+  Student *s1 = (Student *) malloc(sizeof(Student));
+  Student *s2 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+  initStudent(s1);
+  initStudent(s2);
+
+  strcpy(s0->matrikelNr, "test3");
+  strcpy(s1->matrikelNr, "test5");
+  strcpy(s2->matrikelNr, "test2");
+
+  addStudent(list, s0);
+  addStudent(list, s1);
+  addStudent(list, s2);
+
+  assert(list->first_node == s2);
+  assert(list->last_node == s1);
+  assert(list->length == 3);
+
+  assert(s0->next_node == s1);
+  assert(s0->prev_node == s2);
+
+  assert(s1->next_node == NULL);
+  assert(s1->prev_node == s0);
+
+  assert(s2->next_node == s0);
+  assert(s2->prev_node == NULL);
 
   free(s0);
   free(s1);
@@ -843,6 +944,12 @@ void test_addStudent(){
   printf("\n");
 
   test_addStudent_isNotFirstNode_isNotLastNode();
+  printf("\n");
+
+  test_addStudent_ShouldBeFirst_Case1();
+  printf("\n");
+  
+  test_addStudent_ShouldBeFirst_Case2();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);
@@ -1125,7 +1232,7 @@ void test_printStudentByMatrikelNr_IfListIsNULL_ShouldReturn_Minus1(){
 
   assert(returnValue == -1);
 
-  printf("successfull");
+  printf("success");
   fflush(stdout);
 }
 
@@ -1790,10 +1897,10 @@ void test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0(){
   fflush(stdout);
 }
 
-/*//test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0//
+/*//test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_Munus1//
 
 */
-void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0(){
+void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_Munus1(){
   printf("-->%s::", __func__);
   Student s0;
   initStudent(&s0);
@@ -1805,7 +1912,7 @@ void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0(){
   setDate(&s0.start, 1, 10, 2021);
   setDate(&s0.end, 30, 9, 2024);
 
-  assert(dateIsValid(&s0.birthday) == 0);
+  assert(dateIsValid(&s0.birthday) == -1);
   assert(dateIsValid(&s0.start));
   assert(dateIsValid(&s0.end));
 
@@ -1838,7 +1945,7 @@ void test_studentIsValid_IfStartIsInvalid_ShouldReturn_0(){
   setDate(&s0.end, 30, 9, 2024);
 
   assert(dateIsValid(&s0.birthday));
-  assert(dateIsValid(&s0.start) == 0);
+  assert(dateIsValid(&s0.start) == -1);
   assert(dateIsValid(&s0.end));
 
   int returnValue = studentIsValid(&s0);
@@ -1871,7 +1978,7 @@ void test_studentIsValid_IfEndIsInvalid_ShouldReturn_0(){
 
   assert(dateIsValid(&s0.birthday));
   assert(dateIsValid(&s0.start));
-  assert(dateIsValid(&s0.end) == 0);
+  assert(dateIsValid(&s0.end) == -1);
 
   int returnValue = studentIsValid(&s0);
 
@@ -1983,7 +2090,7 @@ void test_studentIsValid(){
   test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0();
   printf("\n");
 
-  test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0();
+  test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_Munus1();
   printf("\n");
 
   test_studentIsValid_IfStartIsInvalid_ShouldReturn_0();
