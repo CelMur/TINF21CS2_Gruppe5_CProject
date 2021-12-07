@@ -4,10 +4,30 @@
     --------------
 
     int initList(List *list)
+        initialisiert die Attribute des List Pointers mit Startwerten
+
+
     int initStudent(Student *student)
+        initialisiert die Attribute des Student Pointers mit Startwerten
+
+
     int matrikelNrExists(List *list, char *targetMatrikelNr)
+        Prueft ob die targetMatrikelNr in der Liste enthalten ist.
+        Rueckgabewerte:
+            1, wenn matrikelNr existiert
+            0, wenn matrikelNr NICHT existiert
+            -1, wenn mindestens einer der Parameter invalide ist (z.B. *list == NULL)
+
+
     int dateIsLeapYear(int year)
+        Prueft ob es sich bei dem Jahr um ein Schaltjahr handelt.
+        Rueckgabewerte:
+            1, Das Jahr ist ein Schaltjahr
+            0, Das Jahr ist KEIN Schaltjahr
+
+
     int dateIsValid(Date *date)
+    
     int compareDates(Date *date1, Date *date2)
     int studentIsValid(Student *student)
     Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end, int isSaved)
