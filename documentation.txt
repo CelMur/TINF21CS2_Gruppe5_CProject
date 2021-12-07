@@ -71,6 +71,7 @@
             0, Student enthaelt fehlerhafte Daten. Ausgabe wird abgebrochen
             -1, Mindestens ein Parameter ist invalide (z.B. *list == NULL)
             -2, Kein Student unter dieser matrikelNr
+            
 
     int printAllStudents(List *list)
     int save(List *list, char* fileName)
