@@ -12,7 +12,7 @@
 
 
     int matrikelNrExists(List *list, char *targetMatrikelNr)
-        Prueft ob die targetMatrikelNr in der Liste enthalten ist.
+        Prueft, ob die targetMatrikelNr in der Liste enthalten ist.
         Rueckgabewerte:
             1, wenn matrikelNr existiert
             0, wenn matrikelNr NICHT existiert
@@ -20,19 +20,58 @@
 
 
     int dateIsLeapYear(int year)
-        Prueft ob es sich bei dem Jahr um ein Schaltjahr handelt.
+        Prueft, ob es sich bei dem Jahr um ein Schaltjahr handelt.
         Rueckgabewerte:
             1, Das Jahr ist ein Schaltjahr
             0, Das Jahr ist KEIN Schaltjahr
 
 
     int dateIsValid(Date *date)
-    
+        Prueft, ob das Datum existiert und sich im Rahmen des Vorgegebenen Bereiches befindet
+        Rueckgabewerte:
+            1, Das Datum ist korrekt
+            0, Das Datum ist NICHT korrekt
+            -1, Mindestens ein Parameter ist invalide (z.B. date == NULL)
+        
+
     int compareDates(Date *date1, Date *date2)
+        Vergleicht zwei Daten
+        Rueckgabewerte:
+            1, date1 > date2
+            0, date1 > date2
+            -1, Mindestens ein parameter ist invalide (z.B. date1 == NULL)
+
+
     int studentIsValid(Student *student)
+        Prueft:
+            geburtsdatum valide
+            startdatum valide
+            enddatum valide
+            geburtsdatum < startdatum < enddatum
+
+
     Student *createStudent(char *matrikelNr, char *lastname, Date birthday, Date start, Date end, int isSaved)
+        legt eine Student Struktur mit den uebergebenen Parametern an.
+        Rueckgabewerte:
+            Student Pointer, Der Student wurde erfolgreich angelegt
+            NULL, Es gab Probleme beim Erstellen der Stuktur
+
+
     Student inputStudent()
+        Laesst den Benutzer Studenten-Daten ueber die Konsole eingeben
+        Rueckgabewerte:
+            Student, Der Student wurde erfolgreich erfasst
+            NULL, Es gab Probleme beim erfassen oder anlegen der Studenten
+
+
     int printStudentByMatrikelNr(List *list, char *matrikelNr)
+        Sucht ueber die matrikelNr nach einem Studenten und gibt dessen Daten aus, falls er existiert.
+        Rueckgabewerte:
+            1, Student gefunden und ausgegeben
+            0, Student enthaelt fehlerhafte Daten. Ausgabe wird abgebrochen
+            -1, Mindestens ein Parameter ist invalide (z.B. *list == NULL)
+            -2, Kein Student unter dieser matrikelNr
+
     int printAllStudents(List *list)
     int save(List *list, char* fileName)
     int read(List *list, char *fileName)
