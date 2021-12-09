@@ -74,7 +74,15 @@
             
 
     int printAllStudents(List *list)
+        Gibt die Daten jedes Studenten in der Liste in der Konsole aus
+        Rueckgabewerte:
+            Anzahl ausgegebener Studenten
+            -1, Mindestens ein Parameter ist invalide (z.B. *list == NULL)
+
+
     int save(List *list, char* fileName)
+        Speichert 
+
     int read(List *list, char *fileName)
 
     void test_addStudent_isFirstNode()
