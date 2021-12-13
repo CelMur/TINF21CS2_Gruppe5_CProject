@@ -494,12 +494,36 @@
 
 
     void test_read()
-    
+
 
     void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL()
+        Szenario:
+            Die Matrikel-Nr ist NICHT initialisiert
+        Ergebnis:
+            Es wird NULL zurueckgegeben
+
+
     void test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL()
+        Szenario:
+            Die Nachname ist NICHT initialisiert
+        Ergebnis:
+            Es wird NULL zurueckgegeben
+
+
     void test_createStudent_IfStudentIsInvalid_ShouldReturn_NULL()
+        Szenario:
+            Der/Die neu angelegte Student:in NICHT valide
+        Ergebnis:
+            Es wird NULL zurueckgegeben
+
+
     void test_createStudent_IfStudentIsValid_ShouldReturn_Pointer()
+        Szenario:
+            ALLE Daten sind korrekt, der/die Student:in ist valid
+        Ergebnis:
+            Die Speicheradresse des/der Student:in wird zurueckgegeben
+
+
     void test_createStudent()
 
 
