@@ -3,6 +3,10 @@
     DOKUMENTATION:
     --------------
 
+    void clearConsole()
+        leert die Console
+
+
     int initList(List *list)
         initialisiert die Attribute des List Pointers mit Startwerten
 
@@ -464,28 +468,28 @@
     void test_save()
 
 
-    void test_read_IfListIsNULL_ShouldReturn_Minus1()
+    void test_readStudentFile_IfListIsNULL_ShouldReturn_Minus1()
         Szenario:
             Die Liste ist NICHT initialisiert
         Ergebnis:
             Es wird -1 zurueckgegeben
 
 
-    void test_read_IfFileNameIsNULL_ShouldReturn_Minus1()
+    void test_readStudentFile_IfFileNameIsNULL_ShouldReturn_Minus1()
         Szenario:
             Die Dateiname ist NICHT initialisiert
         Ergebnis:
             Es wird -1 zurueckgegeben
 
 
-    void test_read_IfFileNotFound_ShouldReturn_0()
+    void test_readStudentFile_IfFileNotFound_ShouldReturn_0()
         Szenario:
             Die Datei wurde konnte NICHT geoeffnet oder gefunden werden
         Ergebnis:
             Es wird 0 zurueckgegeben
 
 
-    void test_read_IfSuccess_ShouldReturn_1()
+    void test_readStudentFile_IfSuccess_ShouldReturn_1()
         Szenario:
             Die Datei enthaelt Daten (im korrekten Format)
         Ergebnis:
@@ -493,7 +497,7 @@
             Es wird 1 zurueckgegeben
 
 
-    void test_read()
+    void test_readStudentFile()
 
 
     void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL()
@@ -571,6 +575,6 @@
 
     void menu()
         Startet das Program und stellt dem User die Funktionen bereit.
-        Ueber Tastatureingaben koennen die Jeweiligen Funktionen aufgerufen werden.
+        Ueber Tastatureingaben koennen die jeweiligen Funktionen aufgerufen werden.
 
 */

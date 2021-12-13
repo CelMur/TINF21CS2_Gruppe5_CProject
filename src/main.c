@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
+#include <unistd.h>
 
 const int MIN_YEAR = 1900;
 const int MAX_YEAR = 2100;
@@ -42,6 +43,17 @@ typedef struct List{
 List *StudentList;
 
 int isTestMode = 0;
+
+
+/*//clearConsole//
+  clears the console
+
+  reference: https://stackoverflow.com/questions/2347770/how-do-you-clear-the-console-screen-in-c 13.12.2021 13:54
+*/
+void clearConsole()
+{
+  system("@cls||clear");
+}
 
 /*//initList//
   reserves memory and sets pointer to NULL
@@ -673,12 +685,12 @@ int save(List *list, char* fileName){
 }
 
 
-/*//read//
-  read valid data from 'fileName' and add to 'list'
+/*//readStudentFile//
+  readStudentFile valid data from 'fileName' and add to 'list'
   return 0 if error while on open file
   returns -1 for any bad parameter
 */
-int read(List *list, char *fileName){
+int readStudentFile(List *list, char *fileName){
 
   if(list == NULL) return -1;
   if(fileName == NULL) return -1;
@@ -2294,15 +2306,15 @@ void test_save(){
 }
 
 
-/*//test_read_IfListIsNULL_ShouldReturn_Minus1//
+/*//test_readStudentFile_IfListIsNULL_ShouldReturn_Minus1//
 
 */
-void test_read_IfListIsNULL_ShouldReturn_Minus1(){
+void test_readStudentFile_IfListIsNULL_ShouldReturn_Minus1(){
   printf("-->%s::", __func__);
   
   List *list = NULL;
 
-  int resultValue = read(list, TEST_SAVE_FILE);
+  int resultValue = readStudentFile(list, TEST_SAVE_FILE);
 
   assert(resultValue == -1);
 
@@ -2310,10 +2322,10 @@ void test_read_IfListIsNULL_ShouldReturn_Minus1(){
   fflush(stdout);
 }
 
-/*//test_read_IfFileNameIsNULL_ShouldReturn_Minus1//
+/*//test_readStudentFile_IfFileNameIsNULL_ShouldReturn_Minus1//
 
 */
-void test_read_IfFileNameIsNULL_ShouldReturn_Minus1(){
+void test_readStudentFile_IfFileNameIsNULL_ShouldReturn_Minus1(){
   printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
@@ -2321,7 +2333,7 @@ void test_read_IfFileNameIsNULL_ShouldReturn_Minus1(){
 
   char *fileName = NULL;
 
-  int resultValue = read(list, fileName);
+  int resultValue = readStudentFile(list, fileName);
 
   assert(resultValue == -1);
   assert(list->length == 0);
@@ -2335,7 +2347,7 @@ void test_read_IfFileNameIsNULL_ShouldReturn_Minus1(){
 /*//test_read_IfFileNotFound_ShouldReturn_0//
 
 */
-void test_read_IfFileNotFound_ShouldReturn_0(){
+void test_readStudentFile_IfFileNotFound_ShouldReturn_0(){
   printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
@@ -2343,7 +2355,7 @@ void test_read_IfFileNotFound_ShouldReturn_0(){
 
   char *fileName = "fileDoesNotExist.csv";
 
-  int resultValue = read(list, fileName);
+  int resultValue = readStudentFile(list, fileName);
 
   assert(resultValue == 0);
   assert(list->length == 0);
@@ -2357,7 +2369,7 @@ void test_read_IfFileNotFound_ShouldReturn_0(){
 /*//test_read_IfSuccess_ShouldReturn_1//
 
 */
-void test_read_IfSuccess_ShouldReturn_1(){
+void test_readStudentFile_IfSuccess_ShouldReturn_1(){
   printf("-->%s::", __func__);
 
   List *list = (List *) malloc(sizeof(List));
@@ -2367,7 +2379,7 @@ void test_read_IfSuccess_ShouldReturn_1(){
   Student *s1;
   Student *s2;
 
-  int resultValue = read(list, TEST_SAVE_FILE);
+  int resultValue = readStudentFile(list, TEST_SAVE_FILE);
 
   assert(resultValue == 1);
   assert(list->length == 3);
@@ -2392,22 +2404,22 @@ void test_read_IfSuccess_ShouldReturn_1(){
 }
 
 
-/*//test_read//
+/*//test_readStudentFile//
 
 */
-void test_read(){
+void test_readStudentFile(){
   printf("TEST::%s\n", __func__);
 
-  test_read_IfListIsNULL_ShouldReturn_Minus1();
+  test_readStudentFile_IfListIsNULL_ShouldReturn_Minus1();
   printf("\n");
 
-  test_read_IfFileNameIsNULL_ShouldReturn_Minus1();
+  test_readStudentFile_IfFileNameIsNULL_ShouldReturn_Minus1();
   printf("\n");
 
-  test_read_IfFileNotFound_ShouldReturn_0();
+  test_readStudentFile_IfFileNotFound_ShouldReturn_0();
   printf("\n");
 
-  test_read_IfSuccess_ShouldReturn_1();
+  test_readStudentFile_IfSuccess_ShouldReturn_1();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);
@@ -2546,13 +2558,23 @@ void menuOperationRunTests(){
   test_printAllStudents();
   test_printNumberStudents();
   test_save();
-  test_read();
+  test_readStudentFile();
 
   isTestMode = 0;
+
+  fflush(stdin);
+
+  printf("|\n");
+  printf("|\n");
+  printf("|Press ANY Key to Continue\n");
+  getchar();
+  printf("|\n");
+
+  clearConsole();
 }
 
 
-void menuOperationAddStudent(){
+void menuOperatioAddStudent(){
 
   Student *newStudent = (Student *) malloc(sizeof(Student));
   initStudent(newStudent);
@@ -2581,6 +2603,8 @@ void menuOperationAddStudent(){
     printf("|Press ANY Key to Continue\n");
     getchar();
     printf("|\n");
+
+    clearConsole();
 
     fflush(stdin);
 
@@ -2690,6 +2714,8 @@ void menuOperationAddStudent(){
   getchar();
   printf("|\n");
 
+  clearConsole();
+
   fflush(stdin);
 }
 
@@ -2741,6 +2767,8 @@ void menuOperationDeleteStudent(){
   getchar();
   printf("|\n");
 
+  clearConsole();
+
   fflush(stdin);
 }
 
@@ -2789,6 +2817,8 @@ void menuOperationPrintAllStudents(){
   getchar();
   printf("|\n");
 
+  clearConsole();
+
   fflush(stdin);
 }
 
@@ -2804,6 +2834,8 @@ void menuOperationPrintNumberStudents(){
   printf("|Press ANY Key to Continue\n");
   getchar();
   printf("|\n");
+
+  clearConsole();
 
   fflush(stdin);
 }
@@ -2844,7 +2876,7 @@ void menu(){
 
     switch (mode)
     {
-    case '1': menuOperationAddStudent(); break;
+    case '1': menuOperatioAddStudent(); break;
     case '2': menuOperationDeleteStudent(); break;
 
     case '3': menuOperationPrintStudent(); break;
@@ -2880,7 +2912,7 @@ int main(){
   StudentList = (List *) malloc(sizeof(List));
   initList(StudentList);
 
-  read(StudentList, SAVE_FILE);
+  readStudentFile(StudentList, SAVE_FILE);
 
   atexit(exitHandler_saveOnExit);
 
