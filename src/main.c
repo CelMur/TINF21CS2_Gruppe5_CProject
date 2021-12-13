@@ -634,12 +634,17 @@ int printAllStudents(List *list){
 /*//save//
   return 1 if successfull
   return -1 for any bad parameter
+  return 0 if problems occured while opening the file
 */
 int save(List *list, char* fileName){
   
   if(list == NULL) return -1;
 
   FILE *f = fopen(fileName, "w");
+
+  if(f == NULL){
+    return 0;
+  }
 
   Student *currentNode;
 
@@ -2547,7 +2552,7 @@ void menuOperationRunTests(){
 }
 
 
-void menuOperatioAddStudent(){
+void menuOperationAddStudent(){
 
   Student *newStudent = (Student *) malloc(sizeof(Student));
   initStudent(newStudent);
@@ -2839,7 +2844,7 @@ void menu(){
 
     switch (mode)
     {
-    case '1': menuOperatioAddStudent(); break;
+    case '1': menuOperationAddStudent(); break;
     case '2': menuOperationDeleteStudent(); break;
 
     case '3': menuOperationPrintStudent(); break;

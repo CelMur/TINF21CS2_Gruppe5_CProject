@@ -81,81 +81,420 @@
 
 
     int save(List *list, char* fileName)
-        Speichert 
+        Speichert die Elemente der einter Liste in der gewuenschten Zieldatei ab
+
 
     int read(List *list, char *fileName)
+        Liest die in einer Datei gespeichterten Studentendaten aus und fuegt sie im Speicher zu einer Liste zusammen
+
 
     void test_addStudent_isFirstNode()
+        Szenario:
+            Die Liste leer und ein Element wird hinzugefuegt
+        Ergebnis:
+            Das neue Element ist das erste in der Liste
+
+
     void test_addStudent_isLastNode()
+        Szenario:
+            Die Liste enthaelt bereits Elemente und ein weiters wird hinzugefuegt
+        Ergebnis:
+            Das Element ist das Letzte in der Liste
+
+
     void test_addStudent_isNotFirstNode_isNotLastNode()
+         Szenario:
+            Die Liste enthaelt bereits Elemente und ein weiters wird hinzugefuegt
+        Ergebnis:
+            Das Element wird zwischen den anderen Elementen eingefuegt
+
+
+    void test_addStudent_ShouldBeFirst_Case1()
+         Szenario:
+            Die Liste enthaelt bereits Elemente und ein weiters wird hinzugefuegt
+        Ergebnis:
+            Das neue Element ist das Erste in der Liste
+
+
+    void test_addStudent_ShouldBeFirst_Case2()
+         Szenario:
+            Die Liste enthaelt bereits Elemente und ein weiters wird hinzugefuegt
+        Ergebnis:
+            Das neue Element ist das Erste in der Liste
+
+
     void test_addStudent()
+        
 
     void test_deleteStudent_isFirstNode()
+        Szenario:
+            Die Liste enthaelt bereits Elemente.
+            Das Ziel-Element ist das Erste in der Liste.
+        Ergebnis:
+            Das erste Element wird aus der Liste entfernt.
+            Alle anderen Elemente sind weiterhin in der Liste enthalten und abrufbar.
+
+
     void test_deleteStudent_isLastNode()
+        Szenario:
+            Die Liste enthaelt bereits Elemente.
+            Das Ziel-Element ist das Letzte in der Liste.
+        Ergebnis:
+            Das letzte Element wird aus der Liste entfernt.
+            Alle anderen Elemente sind weiterhin in der Liste enthalten und abrufbar.
+
+
     void test_deleteStudent_isNotFirst_isNotLast()
+        Szenario:
+            Die Liste enthaelt bereits Elemente.
+            Das Ziel-Element ist weder Erste noch das Letzte in der Liste.
+        Ergebnis:
+            Das Ziel-Element wird aus der Liste entfernt.
+            Alle anderen Elemente sind weiterhin in der Liste enthalten und abrufbar.
+
     void test_deleteStudent()
 
     void test_getStudentByMatrikelNr_IfStudentFound_ShouldReturn_Pointer()
+        Szenario:
+            Die Liste enthaelt bereits Elemente.
+            Es existiert ein Element mit der gesuchten Matrikel-Nr
+        Ergebnis:
+            Die Adresse des gesuchten Elements wird zurueckgegeben
+
+
     void test_getStudentByMatrikelNr_IfStudentNotFound_ShouldReturnNULL()
+        Szenario:
+            Die Liste enthaelt bereits Elemente.
+            Es existiert KEIN ein Element mit der gesuchten Matrikel-Nr
+        Ergebnis:
+            Es wird NULL zurueckgegeben
+
+
     void test_getStudentByMatrikelNr_IfListIsNULL_ShouldReturnNULL()
+        Szenario:
+            Die Liste wurde NICHT initialisiert
+        Ergebnis:
+            Es wird NULL zurueckgegeben
+
+
     void test_getStudentByMatrikelNr()
 
+
     void test_printStudentByMatrikelNr_IfListIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Die Liste wurde NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_printStudentByMatrikelNr_IfMatrikelNrIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Die Liste wurde initialisiert
+            Die Matrikel-Nr wurde NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+            
     void test_printStudentByMatrikelNr_IfStudentIsNULL_ShouldReturn_Minus2()
+         Szenario:
+            Die Liste wurde initialisiert
+            Es existiert KEIN Element mit der gesuchten Matrikel-Nr / Das Gesuchte Element wird nicht gefunden
+        Ergebnis:
+            Es wird -2 zurueckgegeben
+
+
     void test_printStudentByMatrikelNr_IfStudentDataIsInvalid_ShouldReturn_0()
+        Szenario:
+            Die Liste wurde initialisiert
+            Es existiert ein Element mit der gesuchten Matrikel-Nr
+            Die Daten des Elements sind NICHT volstaendig oder NICHT valide.
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_printStudentByMatrikelNr_IfStudentExists_ShouldReturn_1()
+        Szenario:
+            Die Liste wurde initialisiert
+            Es existiert ein Element mit der gesuchten Matrikel-Nr
+            Die Daten des Elements sind vollstaendig und valide
+        Ergebnis:
+            Der Student wird ausgegeben
+            Es wird 1 zurueckgegeben
+
+
     void test_printStudent()
 
+
     void test_printAllStudents_IfSuccessfullyPrinted0_ShouldReturn_0()
+        Szenario:
+            Die Liste enthaelt Elemente
+            KEIN Element hat vollstaedige oder valide Daten
+        Ergebnis:
+            Es werden KEINE Elemente ausgegeben
+            Es wird 0 zurueckgegeben
+
+
     void test_printAllStudents_IfSuccessfull_ShouldReturn_NumberSuccessfullyPrinted()
+        Szenario:
+            Die Liste enthaelt Elemente
+            ALLE Elemente haben vollstaedige und valide Daten
+        Ergebnis:
+            ALLE Elemente werden ausgegeben
+            Die Anzahl der ausgegebenen Elemente entspricht dem Rueckgabewert
+
+
     void test_printAllStudents_IfListIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Die Liste ist NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_printAllStudents()
 
+
     void test_printNumberStudents_IfListIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Die Liste ist NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_printNumberStudents_IfSuccessfull_ShouldReturn_1()
+        Szenario:
+            Die Liste ist NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_printNumberStudents()
 
+
     void test_dateIsLeapYear_IfIsLeapYear_ShouldReturn_1()
+        Szenario:
+            Das Jahr ist ein Schaltjahr
+        Ergebnis:
+            Es wird 1 zurueckgegeben
+
+
     void test_dateIsLeapYear_IfIsNotLeapYear_ShouldReturn_0()
+        Szenario:
+            Das Jahr ist KEIN Schaltjahr
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_dateIsLeapYear_IfYearIsNegative_ShouldReturn_0()
+        Szenario:
+            Das Jahr hat ein negatives vorzeichen (year < 0)
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_dateIsLeapYear()
 
+
     void test_dateIsValid_IfDayNotInRange_ShouldReturn_0()
+        Szenario:
+            Der Tag liegt NICHT im Bereich:
+                - Jan                   : 1 bis 31
+                - Feb(Schaltjahr)       : 1 bis 29
+                - Feb(KEIN Schaltjahr)  : 1 bis 28
+                - Mär                   : 1 bis 31
+                - Apr                   : 1 bis 30
+                - Mai                   : 1 bis 31
+                - Jun                   : 1 bis 30
+                - Jul                   : 1 bis 31
+                - Aug                   : 1 bis 31
+                - Sep                   : 1 bis 30
+                - Okt                   : 1 bis 31
+                - Nov                   : 1 bis 30 
+                - Dez                   : 1 bis 31             
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_dateIsValid_IfMonthNotInRange_ShouldReturn_0()
+        Szenario:
+            Der Monat liegt nicht im Bereich 1 bis 12
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_dateIsValid_IfYearNotInRange_ShouldReturn_0()
+        Szenario:
+            Das Jahr liegt NICHT im Bereich MIN_YEAR bis MAX_YEAR
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_dateIsValid()
 
+
     void test_setDate_IfDateIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Das Datum wurde NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_setDate_IfDateInvalid_ShouldReturn_0()
+        Szenario:
+            Das Datum ist NICHT vollstaendig oder NICHT valide
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_setDate_IfDateValid_ShouldReturn_1()
+        Szenario:
+            Das Datum is volstaendig und valide
+        Ergebnis:
+            Es wird 1 zurueckgegeben
+
+
     void test_setDate()
 
+
     void test_studentIsValid_IfValid_ShouldRerurn_1()
+        Szenario:
+            ALLE Daten sind vollstaending un valide
+        Ergebnis:
+            Es wird 1 zurueckgegeben
+
+
     void test_studentIsValid_IfLastnameIsInvalid_ShouldReturn_0()
+        Szenario:
+            Der Nachname ist NICHT initialisiert
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_studentIsValid_IfMatrikelNrIsInvalid_ShouldReturn_0()
+        Szenario:
+            Die Matrikel-Nr ist NICHT initialisiert
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_studentIsValid_IfBirthdayIsInvalid_ShouldReturn_0()
+        Szenario:
+            Der Geburtstag ist NICHT valide
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_studentIsValid_IfStartIsInvalid_ShouldReturn_0()
+        Szenario:
+            Das Startdatum ist NICHT valide
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_studentIsValid_IfEndIsInvalid_ShouldReturn_0()
+        Szenario:
+            Das Enddatum ist NICHT valide
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_studentIsValid_IfStartGreaterThenEnd_ShouldReturn_0()
+        Szenario:
+            Das Startdatum liegt zeitlich nach dem Enddatum
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_studentIsValid_IfStartEqualsEnd_ShouldReturn_0()
+        Szenario:
+            Das Startdatum entspricht dem Enddatum
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_studentIsValid_IfStudentIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Der/Die Student:in ist NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_studentIsValid()
 
+
     void test_compareDates_IfDate1GreaterDate2_ShouldReturn_1()
+        Szenario:
+            Datum1 liegt zeitlich nach Datum2
+        Ergebnis:
+            Es wird 1 zurueckgegeben
+
+
     void test_compareDates_IfDate1EqualsDate2_ShouldReturn_0()
+        Szenario:
+            Datum1 entspricht Datum2
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_compareDates_IfDate1LessDate2_ShouldReturn_Minus1()
+        Szenario:
+            Datum1 liegt zeitlich vor Datum2
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_compareDates_IfDate1IsNULL_ShouldReturn_Minus2()
+        Szenario:
+            Datum1 ist NICHT initialisiert
+            Datum2 ist initialisiert
+        Ergebnis:
+            Es wird -2 zurueckgegeben
+
+
     void test_compareDates_IfDate2IsNULL_ShouldReturn_Minus2()
+        Szenario:
+            Datum1 ist initialisiert
+            Datum2 ist NICHT initialisiert
+        Ergebnis:
+            Es wird -2 zurueckgegeben
+
+
     void test_compareDates()
+
 
     void test_save()
 
+
     void test_read_IfListIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Die Liste ist NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_read_IfFileNameIsNULL_ShouldReturn_Minus1()
+        Szenario:
+            Die Dateiname ist NICHT initialisiert
+        Ergebnis:
+            Es wird -1 zurueckgegeben
+
+
     void test_read_IfFileNotFound_ShouldReturn_0()
+        Szenario:
+            Die Datei wurde konnte NICHT geoeffnet oder gefunden werden
+        Ergebnis:
+            Es wird 0 zurueckgegeben
+
+
     void test_read_IfSuccess_ShouldReturn_1()
+        Szenario:
+            Die Datei enthaelt Daten (im korrekten Format)
+        Ergebnis:
+            Die in der Datei gespeicherten Studierenden werden der Liste hinzugefuegt
+            Es wird 1 zurueckgegeben
+
+
     void test_read()
+    
 
     void test_createStudent_IfMatrikelNrIsNULL_ShouldReturn_NULL()
     void test_createStudent_IfLastnameIsNULL_ShouldReturn_NULL()
@@ -163,13 +502,51 @@
     void test_createStudent_IfStudentIsValid_ShouldReturn_Pointer()
     void test_createStudent()
 
+
     void menuOperationRunTests()
-    void menuOperatioAddStudent()
+        fuehrt alle Programmtests Tests aus und gibt diese in der Konsole aus.
+        Anschliessend kehrt der User wieder in das Startmenue zurueck.
+
+
+    void menuOperationAddStudent()
+        Fordert den User auf Studentendaten ueber die Tastatur einzugeben.
+        Werden invalide Daten eingetragen, wird der User aufgefordert diese zu korrigieren.
+        Andernfalls wird der Prozess abgebrochen.
+        Anschliessend kehrt der User wieder in das Startmenue zurueck.
+
+
     void menuOperationDeleteStudent()
+        Fordert den User auf eine Matrikel-Nr einzugeben und zu bestaetigen.
+        Loeschen bestaetigt:
+            Der Student mit der angegebenen Matrikel-Nr wird geloescht.
+            Anschliessend kehrt der User wieder in das Startmenue zurueck.
+        Loeschen verworfen:
+            Der Loeschvorgang wird abgebrochen.
+            Anschliessend kehrt der User wieder in das Startmenue zurueck.
+
+
     void menuOperationPrintStudent()
+        Fordert den User auf eine Matrikel-Nr einzugeben.
+        In der Konsole werden die Zugehoerigen Studentdaten ausgegeben.
+        Anschliessend kehrt der User wieder in das Startmenue zurueck.
+
+
     void menuOperationPrintAllStudents()
+        Gibt alle angelegten Studentendaten in der Konsole aus.
+        Anschliessend kehrt der User wieder in das Startmenue zurueck.
+
+
     void menuOperationPrintNumberStudents()
+        Gibt die Anahl der gespeicherten und der im Speicher befindlichen Studenten in der Konsole aus.
+        Anschliessend kehrt der User wieder in das Startmenue zurueck.
+
 
     void printMenu()
+        gibt das Usermenue in der Konsole aus
+
+
     void menu()
+        Startet das Program und stellt dem User die Funktionen bereit.
+        Ueber Tastatureingaben koennen die Jeweiligen Funktionen aufgerufen werden.
+
 */
