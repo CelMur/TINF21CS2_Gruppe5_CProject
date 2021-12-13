@@ -2809,7 +2809,10 @@ void menuOperationPrintAllStudents(){
   printf("|Operation::Print All Students:\n");
   printf("|\n");
 
-  printAllStudents(StudentList);
+  int count = printAllStudents(StudentList);
+
+  if(count == 0)
+    printf("|No Students to print.\n");
 
   printf("|\n");
   printf("|\n");
