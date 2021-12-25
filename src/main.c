@@ -257,19 +257,19 @@ int studentIsValid(Student *student){
   if(dateIsValid(&student->end) <= 0) return 0;
 
   if(compareDates(&student->birthday, &student->start) == 0){ 
-    if(!isTestMode)  printf("|Invalid Date --> Birthday = Studystart\n|\n");
+    if(!isTestMode)  printf("|Invalid Date --> Birthday = Study Start\n|\n");
     return 0;
   }
   if(compareDates(&student->birthday, &student->start) == 1){
-    if(!isTestMode)  printf("|Invalid Date --> Birthday > Studystart\n|\n");
+    if(!isTestMode)  printf("|Invalid Date --> Birthday > Study Start\n|\n");
     return 0;
   }
   if(compareDates(&student->start, &student->end) == 0){ 
-    if(!isTestMode) printf("|Invalid Date --> Studystart = Studyend\n|\n");
+    if(!isTestMode) printf("|Invalid Date --> Study Start = Study End\n|\n");
     return 0;
   }
   if(compareDates(&student->start, &student->end) == 1){
-    if(!isTestMode)  printf("|Invalid Date::Studystart > Studyend\n|\n");
+    if(!isTestMode)  printf("|Invalid Date::Study Start > Study End\n|\n");
     return 0;
   }
 
@@ -1070,6 +1070,39 @@ void test_deleteStudent_isLastNode(){
   fflush(stdout);
 }
 
+/*//test_deleteStudent_isOnlyNode//
+
+*/
+void test_deleteStudent_isOnlyNode(){
+  printf("-->%s::", __func__);
+ 
+  List *list = (List *) malloc(sizeof(List));
+  initList(list);
+  
+  Student *s0 = (Student *) malloc(sizeof(Student));
+
+  initStudent(s0);
+
+  strcpy(s0->matrikelNr, "test2");
+
+  addStudent(list, s0);
+
+  char *targetMatrikelNr = "test2";
+
+  deleteStudent(list, targetMatrikelNr);
+
+  assert(list->first_node == NULL);
+  assert(list->last_node == NULL);
+  assert(list->length == 0);
+  assert(s0 == NULL);
+
+  if (s0 != NULL) free(s0);
+  free(list);
+
+  printf("success");
+  fflush(stdout);
+}
+
 
 /*//test_deleteStudent_isNotFirst_isNotLast//
 
@@ -1133,6 +1166,9 @@ void test_deleteStudent(){
   printf("\n");
 
   test_deleteStudent_isNotFirst_isNotLast();
+  printf("\n");
+
+  test_deleteStudent_isOnlyNode();
   printf("\n");
 
   printf("END_TEST::%s::success\n\n", __func__);
@@ -2633,7 +2669,10 @@ void menuOperatioAddStudent(){
       if(strcmp(tryAgainChar, "Y") == 0){
         isTryAgainCharValid = 1;
       }
-      if(strcmp(tryAgainChar, "n") == 0) return;
+      if(strcmp(tryAgainChar, "n") == 0){
+        clearConsole();
+        return;
+      } 
     }while(isTryAgainCharValid != 1);
   
     if(isTryAgainCharValid == 0) break;
@@ -2660,7 +2699,10 @@ void menuOperatioAddStudent(){
       if(strcmp(tryAgainChar, "Y") == 0){
         isTryAgainCharValid = 1;
       }
-      if(strcmp(tryAgainChar, "n") == 0) return;
+      if(strcmp(tryAgainChar, "n") == 0){
+        clearConsole();
+        return;
+      }
     }while(isTryAgainCharValid != 1);
   
     if(isTryAgainCharValid == 0) break;
@@ -2687,11 +2729,33 @@ void menuOperatioAddStudent(){
       if(strcmp(tryAgainChar, "Y") == 0){
         isTryAgainCharValid = 1;
       }
-      if(strcmp(tryAgainChar, "n") == 0) return;
+      if(strcmp(tryAgainChar, "n") == 0){
+        clearConsole();
+        return;
+      } 
     }while(isTryAgainCharValid != 1);
   
     if(isTryAgainCharValid == 0) break;
   }while(1);
+
+  if(studentIsValid(newStudent) <= 0){
+    do{
+      fflush(stdin);
+      printf("|Do You Want to Try Again? [Y/n]: ");
+      scanf(" %c", tryAgainChar);
+      printf("|\n");
+      fflush(stdin);
+
+      if(strcmp(tryAgainChar, "Y") == 0){
+       menuOperatioAddStudent();
+       return;
+      }
+      if(strcmp(tryAgainChar, "n") == 0){
+        clearConsole();
+        return;
+      } 
+    }while(1);
+  }
   
   addResult = addStudent(StudentList, newStudent);
 
@@ -2744,7 +2808,10 @@ void menuOperationDeleteStudent(){
     if(strcmp(confirmChar, "Y") == 0){
       isConfirmCharValid = 1;
     }
-    if(strcmp(confirmChar, "n") == 0) return;
+    if(strcmp(confirmChar, "n") == 0){
+      clearConsole();
+      return;
+    } 
 
   }while(isConfirmCharValid != 1);
 
@@ -2843,6 +2910,10 @@ void menuOperationPrintNumberStudents(){
   fflush(stdin);
 }
 
+void menuOperationClearConsole(){
+  clearConsole();
+}
+
 void printMenu(){
   printf("+-------------------------------------+\n");
   printf("|menu\n");
@@ -2854,6 +2925,7 @@ void printMenu(){
   printf("|   (4)   print student::all\n");
   printf("|   (5)   print number students\n");
   printf("|\n");
+  printf("|   (c)   clear console\n");
   printf("|   (t)   run tests::all\n");
   printf("|   (x)   exit\n");
   printf("+-------------------------------------+\n");
@@ -2885,7 +2957,8 @@ void menu(){
     case '3': menuOperationPrintStudent(); break;
     case '4': menuOperationPrintAllStudents(); break;
     case '5': menuOperationPrintNumberStudents(); break;
-     
+    
+    case 'c': menuOperationClearConsole(); break;
     case 't': menuOperationRunTests(); break;
     case 'x': isRunning = 0; break;
 
