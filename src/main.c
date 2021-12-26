@@ -3005,13 +3005,14 @@ void abortHandler(){
 }
 
 int main(){
+  signal(SIGABRT, &abortHandler);
+
   StudentList = (List *) malloc(sizeof(List));
   initList(StudentList);
 
   readStudentFile(StudentList, SAVE_FILE);
 
   atexit(exitHandler_saveOnExit);
-  signal(SIGABRT, &abortHandler);
 
   menu();
 
