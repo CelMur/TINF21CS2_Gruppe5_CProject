@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <unistd.h>
+#include <signal.h>
 
 const int MIN_YEAR = 1900;
 const int MAX_YEAR = 2100;
@@ -491,15 +492,16 @@ int deleteStudent(List *list, char *matrikelNr){
 
   if(list->length == 1){
 
-    list->first_node == NULL;
-    list->last_node == NULL;
-
+    list->first_node = NULL;
+    list->last_node = NULL;
+    free(node);
 
   }else if(list->first_node == node){
 
     nextNode = node->next_node;
     nextNode->prev_node = NULL;
     list->first_node = nextNode;
+    free(node);
     
 
   }else if(list->last_node == node){
@@ -507,6 +509,7 @@ int deleteStudent(List *list, char *matrikelNr){
     prevNode = node->prev_node;
     prevNode->next_node = NULL;
     list->last_node = prevNode;
+    free(node);
 
 
   }else{
@@ -515,11 +518,13 @@ int deleteStudent(List *list, char *matrikelNr){
 
     prevNode->next_node = nextNode;
     nextNode->prev_node = prevNode;
+
+    free(node);
   }
 
   list->length--;
+  node = NULL;
 
-  free(node);
   return 1;
 }
 
@@ -1096,7 +1101,6 @@ void test_deleteStudent_isOnlyNode(){
   assert(list->length == 0);
   assert(s0 == NULL);
 
-  if (s0 != NULL) free(s0);
   free(list);
 
   printf("success");
@@ -2976,12 +2980,28 @@ void menu(){
 
 void exitHandler_saveOnExit(void){
   save(StudentList, SAVE_FILE);
+
+  fflush(stdin);
+
+    printf("|\n");
+    printf("|\n");
+    printf("|Press ANY Key to Exit\n");
+    getchar();
+    printf("|\n");
+
+    clearConsole();
 }
 
 
-void exitHandler_freeMemOnExit(void){
-  freeList(StudentList);
 
+void abortHandler(){
+  fflush(stdin);
+
+    printf("|\n");
+    printf("|\n");
+    printf("|Press ANY Key to Continue\n");
+    getchar();
+    printf("|\n");
 }
 
 int main(){
@@ -2991,6 +3011,7 @@ int main(){
   readStudentFile(StudentList, SAVE_FILE);
 
   atexit(exitHandler_saveOnExit);
+  signal(SIGABRT, &abortHandler);
 
   menu();
 

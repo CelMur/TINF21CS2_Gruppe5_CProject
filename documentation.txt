@@ -572,6 +572,15 @@
     void printMenu()
         gibt das Usermenue in der Konsole aus
 
+    exitHandler_saveOnExit()
+        wird aufgerufen, wenn das korrekt Programm beendet wird.
+        Die im Speicher befindlichen Studentendaten werden in eine Datei geschrieben.
+
+    abortHandler()
+        wird aufgerufen, wenn das Programm aborted wird.
+        Der User wird aufgefordet eine Tastatureingabe zu taetigen.
+        erst dann wird das Programm tatsaechlich geschlossen
+
 
     void menu()
         Startet das Program und stellt dem User die Funktionen bereit.
