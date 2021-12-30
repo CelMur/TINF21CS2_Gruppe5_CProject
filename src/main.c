@@ -2632,7 +2632,7 @@ void menuOperationRunTests(){
 }
 
 
-void menuOperationAddStudent(){
+void menuOperatioAddStudent(){
 
   Student *newStudent = (Student *) malloc(sizeof(Student));
   initStudent(newStudent);
@@ -2707,6 +2707,7 @@ void menuOperationAddStudent(){
     scanf("%2d/%2d/%d", &newStudent->start.month, &newStudent->start.day, &newStudent->start.year);
     
     if(dateIsValid(&newStudent->start) == 1){
+<<<<<<< HEAD
       int cmpResultBirthdayStart = compareDates(&newStudent->birthday, &newStudent->start);
 <<<<<<< HEAD
       
@@ -2719,6 +2720,9 @@ void menuOperationAddStudent(){
         break;
       }
 >>>>>>> parent of ff644a3 (update menuOperationAddStudent)
+=======
+      break;
+>>>>>>> parent of dbb0418 (menuOperationAddStudent)
     }
     printf("|\n");
 
@@ -2748,6 +2752,7 @@ void menuOperationAddStudent(){
     scanf("%2d/%2d/%d", &newStudent->end.month, &newStudent->end.day, &newStudent->end.year);
     
     if(dateIsValid(&newStudent->end) == 1){
+<<<<<<< HEAD
       int cmpResultStartEnd = compareDates(&newStudent->start, &newStudent->end);
 <<<<<<< HEAD
       if(cmpResultStartEnd == 1)  printf("|\n|Invalid Date --> 'Start of Studies' > 'End of Studies'\n");
@@ -2759,6 +2764,9 @@ void menuOperationAddStudent(){
         break;
       }
 >>>>>>> parent of ff644a3 (update menuOperationAddStudent)
+=======
+      break;
+>>>>>>> parent of dbb0418 (menuOperationAddStudent)
     }
     printf("|\n");
 
@@ -2780,7 +2788,25 @@ void menuOperationAddStudent(){
   
     if(isTryAgainCharValid == 0) break;
   }while(1);
-  
+
+  if(studentIsValid(newStudent) <= 0){
+    do{
+      fflush(stdin);
+      printf("|Do You Want to Try Again? [Y/n]: ");
+      scanf(" %c", tryAgainChar);
+      printf("|\n");
+      fflush(stdin);
+
+      if(strcmp(tryAgainChar, "Y") == 0){
+       menuOperatioAddStudent();
+       return;
+      }
+      if(strcmp(tryAgainChar, "n") == 0){
+        clearConsole();
+        return;
+      } 
+    }while(1);
+  }
   
   addResult = addStudent(StudentList, newStudent);
 
@@ -2976,7 +3002,7 @@ void menu(){
 
     switch (mode)
     {
-    case '1': menuOperationAddStudent(); break;
+    case '1': menuOperatioAddStudent(); break;
     case '2': menuOperationDeleteStudent(); break;
 
     case '3': menuOperationPrintStudent(); break;
