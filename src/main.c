@@ -217,6 +217,7 @@ int dateIsValid(Date *date){
   return 1;
 }
 
+
 /*//compareDates//
   returns 1 if date1 > date2
   returns 0 if date1 == date2
@@ -2707,7 +2708,16 @@ void menuOperatioAddStudent(){
     scanf("%2d/%2d/%d", &newStudent->start.month, &newStudent->start.day, &newStudent->start.year);
     
     if(dateIsValid(&newStudent->start) == 1){
+<<<<<<< HEAD
         break;
+=======
+      int cmpResultBirthdayStart = compareDates(&newStudent->birthday, &newStudent->start);
+      
+      if(cmpResultBirthdayStart == 1)  printf("|\n|Invalid Date --> 'Birthday' > 'Start of Studies'\n");
+      if(cmpResultBirthdayStart == 0)  printf("|\n|Invalid Date --> 'Birthday' = 'Start of Studies'\n");
+      if(cmpResultBirthdayStart == -1) break;
+      if(cmpResultBirthdayStart == -2) printf("|\n|Internal Error --> Faild Date Validation\n");
+>>>>>>> parent of d3f9346 (Update main.c)
     }
     printf("|\n");
 
@@ -2737,7 +2747,15 @@ void menuOperatioAddStudent(){
     scanf("%2d/%2d/%d", &newStudent->end.month, &newStudent->end.day, &newStudent->end.year);
     
     if(dateIsValid(&newStudent->end) == 1){
+<<<<<<< HEAD
       break;
+=======
+      int cmpResultStartEnd = compareDates(&newStudent->start, &newStudent->end);
+      if(cmpResultStartEnd == 1)  printf("|\n|Invalid Date --> 'Start of Studies' > 'End of Studies'\n");
+      if(cmpResultStartEnd == 0)  printf("|\n|Invalid Date --> 'Start of Studies' = 'End of Studies'\n");
+      if(cmpResultStartEnd == -1) break;
+      if(cmpResultStartEnd == -2) printf("|\n|Internal Error --> Faild Date Validation\n");
+>>>>>>> parent of d3f9346 (Update main.c)
     }
     printf("|\n");
 
@@ -2759,6 +2777,7 @@ void menuOperatioAddStudent(){
   
     if(isTryAgainCharValid == 0) break;
   }while(1);
+<<<<<<< HEAD
 
   if(studentIsValid(newStudent) <= 0){
     do{
@@ -2778,6 +2797,8 @@ void menuOperatioAddStudent(){
       } 
     }while(1);
   }
+=======
+>>>>>>> parent of d3f9346 (Update main.c)
   
   addResult = addStudent(StudentList, newStudent);
 
