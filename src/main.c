@@ -2614,7 +2614,7 @@ void menuOperationRunTests(){
 }
 
 
-void menuOperatioAddStudent(){
+void menuOperationAddStudent(){
 
   Student *newStudent = (Student *) malloc(sizeof(Student));
   initStudent(newStudent);
@@ -2689,7 +2689,10 @@ void menuOperatioAddStudent(){
     scanf("%2d/%2d/%d", &newStudent->start.month, &newStudent->start.day, &newStudent->start.year);
     
     if(dateIsValid(&newStudent->start) == 1){
-      break;
+      int cmpResultBirthdayStart = compareDates(&newStudent->birthday, &newStudent->start);
+      if(cmpResultBirthdayStart < 0 && cmpResultBirthdayStart > -2){
+        break;
+      }
     }
     printf("|\n");
 
@@ -2719,7 +2722,10 @@ void menuOperatioAddStudent(){
     scanf("%2d/%2d/%d", &newStudent->end.month, &newStudent->end.day, &newStudent->end.year);
     
     if(dateIsValid(&newStudent->end) == 1){
-      break;
+      int cmpResultStartEnd = compareDates(&newStudent->start, &newStudent->end);
+      if(cmpResultStartEnd < 0 && cmpResultStartEnd > -2){ 
+        break;
+      }
     }
     printf("|\n");
 
@@ -2741,25 +2747,7 @@ void menuOperatioAddStudent(){
   
     if(isTryAgainCharValid == 0) break;
   }while(1);
-
-  if(studentIsValid(newStudent) <= 0){
-    do{
-      fflush(stdin);
-      printf("|Do You Want to Try Again? [Y/n]: ");
-      scanf(" %c", tryAgainChar);
-      printf("|\n");
-      fflush(stdin);
-
-      if(strcmp(tryAgainChar, "Y") == 0){
-       menuOperatioAddStudent();
-       return;
-      }
-      if(strcmp(tryAgainChar, "n") == 0){
-        clearConsole();
-        return;
-      } 
-    }while(1);
-  }
+  
   
   addResult = addStudent(StudentList, newStudent);
 
@@ -2955,7 +2943,7 @@ void menu(){
 
     switch (mode)
     {
-    case '1': menuOperatioAddStudent(); break;
+    case '1': menuOperationAddStudent(); break;
     case '2': menuOperationDeleteStudent(); break;
 
     case '3': menuOperationPrintStudent(); break;
