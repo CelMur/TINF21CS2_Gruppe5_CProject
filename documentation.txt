@@ -46,6 +46,14 @@
             -1, Mindestens ein parameter ist invalide (z.B. date1 == NULL)
 
 
+    Date *computeDiffDates(Date *date1, Date *date2)
+        Zieht zwei Daten voneinander ab
+        Rueckgabewerte:
+            Date-Pointer, date1 wird von date2 abgezogen und das Ergebnis als neues date zurueckgegeben
+            NULL, Mindestens ein parameter ist invalide (z.B. date1 == NULL) 
+
+
+
     int studentIsValid(Student *student)
         Prueft:
             geburtsdatum valide
