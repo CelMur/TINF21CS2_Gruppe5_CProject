@@ -44,6 +44,7 @@ typedef struct List{
 List *StudentList;
 
 int isTestMode = 0;
+int cntSavedStudents = 0;
 
 
 /*//clearConsole//
@@ -198,13 +199,13 @@ int dateIsValid(Date *date){
       if(day <= 29){
         return 1;
       }
-      if(!isTestMode)  printf("|Invalid Date --> day > 29\n|\n");
+      if(!isTestMode)  printf("|Invalid Date --> day > 29 | '%d' is leap year\n|\n", year);
       return 0;
     }
     if(day <= 28){
       return 1;
     }
-    if(!isTestMode) printf("|Invalid Date --> day > 28\n|\n");
+    if(!isTestMode) printf("|Invalid Date --> day > 28 | '%d' is NOT leap year\n|\n", year);
     return 0;
   }
 
@@ -378,13 +379,11 @@ int printNumberStudents(List *list){
   //TODO: get the number Students from file
 
   int cntStudentsInMem = 0;
-  int cntStudentsSaved = 0;
 
   Student *currentNode = list->first_node;
 
   while(currentNode != NULL){
     
-    if(currentNode->isSaved == 1) cntStudentsSaved++;
     cntStudentsInMem++;
 
     currentNode = currentNode->next_node;
@@ -393,7 +392,7 @@ int printNumberStudents(List *list){
 
   printf("\n");
   printf("|Number of Students (in memory)::%d\n", cntStudentsInMem);
-  printf("|Number of Students (saved)::%d\n", cntStudentsSaved);
+  printf("|Number of Students (saved)::%d\n", cntSavedStudents);
   printf("\n");
 
   return 1;
@@ -629,12 +628,12 @@ int printStudentByMatrikelNr(List *list, char *matrikelNr){
   if(node == NULL) return -2;
   if(studentIsValid(node) != 1) return 0;
 
-  printf("|'Student'={\n");
-  printf("|'matrikelNr' = '%s',\n", node->matrikelNr);
-  printf("|'lastname' = '%s',\n", node->lastname);
-  printf("|'birthday' = '%02d/%02d/%d',\n", node->birthday.month, node->birthday.day, node->birthday.year);
-  printf("|'studyStart' = '%02d/%02d/%d',\n", node->start.month, node->start.day, node->start.year);
-  printf("|'studyEnd' = '%02d/%02d/%d'\n", node->end.month, node->end.day, node->end.year);
+  printf("|'Student' = {\n");
+  printf("| 'matrikelNr' = '%s',\n", node->matrikelNr);
+  printf("| 'lastname' = '%s',\n", node->lastname);
+  printf("| 'birthday' = '%02d/%02d/%d',\n", node->birthday.month, node->birthday.day, node->birthday.year);
+  printf("| 'studyStart' = '%02d/%02d/%d',\n", node->start.month, node->start.day, node->start.year);
+  printf("| 'studyEnd' = '%02d/%02d/%d'\n", node->end.month, node->end.day, node->end.year);
   printf("|}\n");
 
   return 1;
@@ -730,6 +729,7 @@ int readStudentFile(List *list, char *fileName){
 
   Student readResult;
   Student *currentNode = NULL;
+  int counter = 0;
 
   while((fscanf(f, "%s %s '%2d/%2d/%d' '%2d/%2d/%d' '%2d/%2d/%d'\n",
     &readResult.matrikelNr,   
@@ -748,10 +748,12 @@ int readStudentFile(List *list, char *fileName){
 
       addStudent(list, currentNode);
       initStudent(&readResult);
+      counter++;
     }
-
-
+  
   fclose(f);
+
+  if(!isTestMode) cntSavedStudents = counter;
 
   return 1;
 }
@@ -2638,9 +2640,12 @@ void menuOperatioAddStudent(){
   Student *newStudent = (Student *) malloc(sizeof(Student));
   initStudent(newStudent);
 
-  char tryAgainChar[1];
+  char tryAgainChar[2];
   int isTryAgainCharValid = 0;
   int addResult = 0;
+  int cmpResultBirthdayStart = 0;
+  int cmpResultStartEnd = 0;
+  
   
   printf("|\n");
   printf("|Operation::Add Student:\n");
@@ -2674,25 +2679,29 @@ void menuOperatioAddStudent(){
   scanf(" %s", newStudent->lastname);
 
   do{
-    printf("|'Birthday (mm/dd/YYYY)':");
+    isTryAgainCharValid = 0;
+
+    fflush(stdin);
+    printf("|'Birthday (mm/dd/YYYY)': ");
     scanf("%2d/%2d/%d", &newStudent->birthday.month, &newStudent->birthday.day, &newStudent->birthday.year);
-    
+    fflush(stdin);
+
     if(dateIsValid(&newStudent->birthday) == 1){
       break;
     }
     printf("|\n");
     
     do{
-      fflush(stdin);
+      
       printf("|Do You Want to Try Again? [Y/n]: ");
       scanf(" %c", tryAgainChar);
       printf("|\n");
-      fflush(stdin);
+      
 
-      if(strcmp(tryAgainChar, "Y") == 0){
+      if(tryAgainChar[0] == 'Y'){
         isTryAgainCharValid = 1;
       }
-      if(strcmp(tryAgainChar, "n") == 0){
+      if(tryAgainChar[0] == 'n'){
         clearConsole();
         return;
       } 
@@ -2701,23 +2710,23 @@ void menuOperatioAddStudent(){
     if(isTryAgainCharValid == 0) break;
   }while(1);
 
-  isTryAgainCharValid = 0;
+  
 
   do{
+    isTryAgainCharValid = 0;
+
+    fflush(stdin);
     printf("|'Start of Studies' (mm/dd/YYYY)':");
     scanf("%2d/%2d/%d", &newStudent->start.month, &newStudent->start.day, &newStudent->start.year);
-    
+    fflush(stdin);
+
     if(dateIsValid(&newStudent->start) == 1){
-<<<<<<< HEAD
-        break;
-=======
-      int cmpResultBirthdayStart = compareDates(&newStudent->birthday, &newStudent->start);
+      cmpResultBirthdayStart = compareDates(&newStudent->birthday, &newStudent->start);
       
       if(cmpResultBirthdayStart == 1)  printf("|\n|Invalid Date --> 'Birthday' > 'Start of Studies'\n");
       if(cmpResultBirthdayStart == 0)  printf("|\n|Invalid Date --> 'Birthday' = 'Start of Studies'\n");
       if(cmpResultBirthdayStart == -1) break;
       if(cmpResultBirthdayStart == -2) printf("|\n|Internal Error --> Faild Date Validation\n");
->>>>>>> parent of d3f9346 (Update main.c)
     }
     printf("|\n");
 
@@ -2728,10 +2737,10 @@ void menuOperatioAddStudent(){
       printf("|\n");
       fflush(stdin);
 
-      if(strcmp(tryAgainChar, "Y") == 0){
+      if(tryAgainChar[0] == 'Y'){
         isTryAgainCharValid = 1;
       }
-      if(strcmp(tryAgainChar, "n") == 0){
+      if(tryAgainChar[0] == 'n'){
         clearConsole();
         return;
       }
@@ -2740,22 +2749,20 @@ void menuOperatioAddStudent(){
     if(isTryAgainCharValid == 0) break;
   }while(1);
 
-  isTryAgainCharValid = 0;
+  
 
   do{
+    isTryAgainCharValid = 0;
+
     printf("|'End of Studies (mm/dd/YYYY)':");
     scanf("%2d/%2d/%d", &newStudent->end.month, &newStudent->end.day, &newStudent->end.year);
     
     if(dateIsValid(&newStudent->end) == 1){
-<<<<<<< HEAD
-      break;
-=======
-      int cmpResultStartEnd = compareDates(&newStudent->start, &newStudent->end);
+      cmpResultStartEnd = compareDates(&newStudent->start, &newStudent->end);
       if(cmpResultStartEnd == 1)  printf("|\n|Invalid Date --> 'Start of Studies' > 'End of Studies'\n");
       if(cmpResultStartEnd == 0)  printf("|\n|Invalid Date --> 'Start of Studies' = 'End of Studies'\n");
       if(cmpResultStartEnd == -1) break;
       if(cmpResultStartEnd == -2) printf("|\n|Internal Error --> Faild Date Validation\n");
->>>>>>> parent of d3f9346 (Update main.c)
     }
     printf("|\n");
 
@@ -2766,10 +2773,10 @@ void menuOperatioAddStudent(){
       printf("|\n");
       fflush(stdin);
 
-      if(strcmp(tryAgainChar, "Y") == 0){
+      if(tryAgainChar[0] == 'Y'){
         isTryAgainCharValid = 1;
       }
-      if(strcmp(tryAgainChar, "n") == 0){
+      if(tryAgainChar[0] == 'n'){
         clearConsole();
         return;
       } 
@@ -2777,28 +2784,6 @@ void menuOperatioAddStudent(){
   
     if(isTryAgainCharValid == 0) break;
   }while(1);
-<<<<<<< HEAD
-
-  if(studentIsValid(newStudent) <= 0){
-    do{
-      fflush(stdin);
-      printf("|Do You Want to Try Again? [Y/n]: ");
-      scanf(" %c", tryAgainChar);
-      printf("|\n");
-      fflush(stdin);
-
-      if(strcmp(tryAgainChar, "Y") == 0){
-       menuOperatioAddStudent();
-       return;
-      }
-      if(strcmp(tryAgainChar, "n") == 0){
-        clearConsole();
-        return;
-      } 
-    }while(1);
-  }
-=======
->>>>>>> parent of d3f9346 (Update main.c)
   
   addResult = addStudent(StudentList, newStudent);
 
@@ -2848,10 +2833,16 @@ void menuOperationDeleteStudent(){
     printf("|Delete Student Permanently? [Y/n]: ");
     scanf(" %c",confirmChar);
 
-    if(strcmp(confirmChar, "Y") == 0){
+    if(confirmChar[0] == 'Y'){
       isConfirmCharValid = 1;
     }
-    if(strcmp(confirmChar, "n") == 0){
+    if(confirmChar[0] == 'n'){
+      printf("|\n");
+      printf("|\n");
+      printf("|Press ANY Key to Continue\n");
+      getchar();
+      printf("|\n");
+
       clearConsole();
       return;
     } 
@@ -2910,6 +2901,8 @@ void menuOperationPrintStudent(){
   printf("|Press ANY Key to Continue\n");
   getchar();
   printf("|\n");
+
+  clearConsole();
 
   fflush(stdin);
 }
