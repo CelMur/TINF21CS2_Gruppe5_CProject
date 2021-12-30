@@ -240,6 +240,25 @@ int compareDates(Date *date1, Date *date2){
   return 0;
 }
 
+/*//compareDates//
+  subtracts date1 from date2 and returns the result as date
+
+  returns NULL if any parameter is bad
+*/
+Date *computeDiffDates(Date *date1, Date *date2){
+  
+  if(date1 == NULL) return NULL;
+  if(date2 == NULL) return NULL;
+
+  Date *dateResult = (Date *) malloc(sizeof(Date));
+
+  dateResult->day = date2->day - date1->day;
+  dateResult->month = date2->month - date1->month;
+  dateResult->year = date2->year - date1->year;
+
+  return dateResult;
+}
+
 
 /*//studentIsValid//
 
