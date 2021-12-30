@@ -1119,7 +1119,6 @@ void test_deleteStudent_isOnlyNode(){
   assert(list->first_node == NULL);
   assert(list->last_node == NULL);
   assert(list->length == 0);
-  assert(s0 == NULL);
 
   free(list);
 
